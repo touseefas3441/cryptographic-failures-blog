@@ -1,218 +1,675 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Introduction | Cryptographic Failures</title>
+    <title>When Encryption Fails</title>
 
     <style>
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-            color: #222222;
+            background: #070b14;
+            color: #e8edf7;
             line-height: 1.7;
         }
 
-        /* HEADER */
+        /* -------------------------
+           BACKGROUND GLOW
+        ------------------------- */
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #2563eb;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #9333ea;
+            filter: blur(180px);
+            opacity: 0.10;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+
+
+        /* -------------------------
+           HEADER
+        ------------------------- */
 
         header {
-            border-bottom: 1px solid #e5e5e5;
-            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(7, 11, 20, 0.82);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .header {
-            max-width: 1000px;
+            max-width: 1150px;
             margin: auto;
-            padding: 22px 25px;
+
+            padding: 18px 25px;
+
             display: flex;
             justify-content: space-between;
             align-items: center;
+
+            gap: 30px;
+        }
+
+
+        /* LOGO */
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #9333ea
+            );
+
+            box-shadow:
+                0 0 25px rgba(37,99,235,0.35);
+
+            font-size: 19px;
         }
 
         .logo {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: bold;
-            color: #222222;
+            color: white;
         }
 
         .tagline {
-            font-size: 12px;
-            color: #777777;
-            margin-top: 2px;
+            font-size: 11px;
+            color: #7f8ba3;
         }
+
+
+        /* NAVIGATION */
 
         nav {
             display: flex;
-            gap: 18px;
+            gap: 22px;
             flex-wrap: wrap;
         }
 
         nav a {
-            color: #444444;
+            color: #aeb8ca;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
+
+            transition: 0.25s;
         }
 
         nav a:hover {
-            color: #1769aa;
+            color: #60a5fa;
+
+            text-shadow:
+                0 0 12px rgba(96,165,250,0.7);
         }
 
-        /* MAIN */
+
+        /* -------------------------
+           HERO
+        ------------------------- */
+
+        .hero {
+            max-width: 1150px;
+            margin: auto;
+
+            padding: 90px 25px 70px;
+
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+
+        .hero-label {
+            color: #60a5fa;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 20px;
+        }
+
+
+        h1 {
+            font-size: 65px;
+            line-height: 1.05;
+
+            margin-bottom: 25px;
+
+            letter-spacing: -2px;
+        }
+
+
+        .gradient-text {
+            background: linear-gradient(
+                90deg,
+                #60a5fa,
+                #a855f7
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .hero-text {
+            color: #9aa7bb;
+
+            font-size: 17px;
+
+            max-width: 600px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .hero-button {
+            display: inline-block;
+
+            padding: 12px 22px;
+
+            border-radius: 8px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #7c3aed
+            );
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            box-shadow:
+                0 0 25px rgba(37,99,235,0.25);
+
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 0 35px rgba(96,165,250,0.4);
+        }
+
+
+        /* -------------------------
+           HERO IMAGE
+        ------------------------- */
+
+        .hero-image {
+            height: 390px;
+
+            border-radius: 18px;
+
+            background-image:
+                linear-gradient(
+                    rgba(4,8,20,0.25),
+                    rgba(4,8,20,0.75)
+                ),
+                url("https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1000&q=85");
+
+            background-size: cover;
+            background-position: center;
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.45);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .hero-image::after {
+            content: "ENCRYPTED";
+
+            position: absolute;
+
+            bottom: 20px;
+            left: 20px;
+
+            font-family: monospace;
+
+            font-size: 12px;
+
+            letter-spacing: 3px;
+
+            color: #60a5fa;
+
+            background: rgba(0,0,0,0.55);
+
+            padding: 8px 12px;
+
+            border-radius: 5px;
+        }
+
+
+        /* -------------------------
+           MAIN CONTENT
+        ------------------------- */
 
         main {
-            max-width: 760px;
-            margin: 0 auto;
-            padding: 60px 25px 80px;
+            max-width: 850px;
+            margin: auto;
+
+            padding: 40px 25px 100px;
         }
 
+
         .category {
-            font-size: 12px;
-            color: #1769aa;
+            color: #60a5fa;
+
+            font-size: 11px;
+
             text-transform: uppercase;
-            letter-spacing: 1px;
+
+            letter-spacing: 2px;
+
             font-weight: bold;
+
             margin-bottom: 12px;
         }
 
-        h1 {
-            font-size: 42px;
-            line-height: 1.2;
-            margin: 0 0 35px;
-            color: #1d1d1d;
-        }
 
         h2 {
-            font-size: 25px;
-            margin-top: 55px;
-            margin-bottom: 15px;
-            color: #222222;
+            font-size: 29px;
+
+            margin-top: 65px;
+
+            margin-bottom: 18px;
+
+            color: white;
         }
+
 
         p {
-            font-size: 17px;
-            margin: 0 0 18px;
+            color: #aab4c5;
+
+            font-size: 16px;
+
+            margin-bottom: 18px;
         }
 
-        a {
-            color: #1769aa;
-        }
 
-        /* SMALL INFO */
-
-        .intro-note {
-            border-left: 3px solid #1769aa;
-            padding: 5px 0 5px 18px;
-            margin: 30px 0;
-            color: #555555;
-        }
-
-        /* TABLE OF CONTENTS */
+        /* -------------------------
+           CONTENT BOX
+        ------------------------- */
 
         .contents {
-            background: #f7f7f7;
-            padding: 20px 25px;
-            margin: 30px 0 45px;
+
+            margin: 40px 0;
+
+            padding: 25px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.02)
+                );
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.2);
         }
 
+
         .contents strong {
+
             display: block;
+
+            color: white;
+
+            margin-bottom: 12px;
+        }
+
+
+        .contents a {
+
+            display: block;
+
+            color: #8fa1bd;
+
+            text-decoration: none;
+
+            margin: 7px 0;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+
+        .contents a:hover {
+
+            color: #60a5fa;
+
+            padding-left: 5px;
+        }
+
+
+        /* -------------------------
+           NOTE
+        ------------------------- */
+
+        .intro-note {
+
+            margin: 35px 0;
+
+            padding: 20px 22px;
+
+            border-radius: 10px;
+
+            background: rgba(37,99,235,0.08);
+
+            border: 1px solid rgba(96,165,250,0.18);
+
+            border-left: 3px solid #3b82f6;
+
+            color: #aebbd0;
+        }
+
+
+        .intro-note strong {
+
+            color: #60a5fa;
+        }
+
+
+        /* -------------------------
+           TOPIC CARDS
+        ------------------------- */
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+
+            margin-top: 30px;
+        }
+
+
+        .card {
+
+            padding: 25px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border: 1px solid
+                rgba(255,255,255,0.08);
+
+            transition: 0.3s;
+        }
+
+
+        .card:hover {
+
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(96,165,250,0.35);
+
+            box-shadow:
+                0 15px 40px
+                rgba(37,99,235,0.12);
+        }
+
+
+        .card-number {
+
+            font-family: monospace;
+
+            color: #60a5fa;
+
+            font-size: 12px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .card h3 {
+
+            color: white;
+
+            font-size: 18px;
+
             margin-bottom: 8px;
         }
 
-        .contents a {
-            display: block;
-            margin: 4px 0;
+
+        .card p {
+
+            font-size: 14px;
+
+            margin: 0;
+        }
+
+
+        /* -------------------------
+           SOURCES
+        ------------------------- */
+
+        .sources {
+
+            margin-top: 70px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+
+        .sources p {
+
+            font-size: 13px;
+
+            color: #8491a7;
+        }
+
+
+        .sources a {
+
+            color: #60a5fa;
+
             text-decoration: none;
         }
 
-        .contents a:hover {
-            text-decoration: underline;
-        }
 
-        /* SOURCES */
-
-        .sources {
-            border-top: 1px solid #e5e5e5;
-            margin-top: 60px;
-            padding-top: 25px;
-        }
-
-        .sources p {
-            font-size: 14px;
-            color: #555555;
-        }
-
-        /* FOOTER */
+        /* -------------------------
+           FOOTER
+        ------------------------- */
 
         footer {
-            border-top: 1px solid #e5e5e5;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
             text-align: center;
-            padding: 30px 20px;
-            color: #777777;
-            font-size: 13px;
+
+            padding: 35px 20px;
+
+            color: #657188;
+
+            font-size: 12px;
         }
 
-        /* MOBILE */
 
-        @media (max-width: 700px) {
+        /* -------------------------
+           MOBILE
+        ------------------------- */
+
+        @media (max-width: 800px) {
 
             .header {
+
                 display: block;
             }
 
             nav {
-                margin-top: 15px;
-                gap: 12px;
+
+                margin-top: 18px;
+
+                gap: 13px;
             }
 
-            main {
-                padding-top: 40px;
+            .hero {
+
+                grid-template-columns: 1fr;
+
+                padding-top: 60px;
+
+                gap: 35px;
             }
 
             h1 {
-                font-size: 34px;
+
+                font-size: 48px;
             }
 
-            h2 {
-                font-size: 23px;
+            .hero-image {
+
+                height: 300px;
             }
 
-            p {
-                font-size: 16px;
+            .cards {
+
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            h1 {
+
+                font-size: 40px;
             }
 
+            .hero {
+
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            main {
+
+                padding-left: 20px;
+                padding-right: 20px;
+            }
         }
 
     </style>
+
 </head>
 
 
 <body>
 
 
+<!-- =========================
+     HEADER
+========================= -->
+
 <header>
 
     <div class="header">
 
-        <div>
-            <div class="logo">
-                When Encryption Fails
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                🔐
             </div>
 
-            <div class="tagline">
-                A student blog about cryptographic failures
+            <div>
+
+                <div class="logo">
+                    When Encryption Fails
+                </div>
+
+                <div class="tagline">
+                    A student blog about cryptographic failures
+                </div>
+
             </div>
+
         </div>
 
 
-        <nav aria-label="Main navigation">
+        <nav>
 
             <a href="index.html">Introduction</a>
 
@@ -237,212 +694,327 @@
 </header>
 
 
-<main>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div>
+
+        <div class="hero-label">
+            Information Systems & Cybersecurity
+        </div>
 
 
-    <div class="category">
-        Information Systems & Cybersecurity
+        <h1>
+
+            When
+            <span class="gradient-text">
+                Encryption
+            </span>
+            Fails.
+
+        </h1>
+
+
+        <p class="hero-text">
+
+            A simple look at what happens when cryptography
+            is used incorrectly, why it matters, and how
+            developers can avoid common mistakes.
+
+        </p>
+
+
+        <a class="hero-button" href="#content">
+
+            Start Reading →
+
+        </a>
+
     </div>
 
 
-    <h1>
+    <div class="hero-image"></div>
+
+</section>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main id="content">
+
+
+    <div class="category">
         Introduction
-    </h1>
+    </div>
 
 
     <div class="contents">
 
-        <strong>On this page</strong>
+        <strong>
+            On this page
+        </strong>
 
         <a href="#why">
-            1. Why do cryptographic failures matter?
+            01 — Why cryptographic failures matter
         </a>
 
         <a href="#affected">
-            2. Who is affected?
+            02 — Who is affected?
         </a>
 
         <a href="#learn">
-            3. What will you learn?
-        </a>
-
-        <a href="#sources">
-            4. Sources
+            03 — What will you learn?
         </a>
 
     </div>
+
 
 
     <!-- SECTION 1 -->
 
     <h2 id="why">
-        1. Why do cryptographic failures matter?
+        Why do cryptographic failures matter?
     </h2>
 
 
     <p>
-        Most websites deal with information that should not be seen by
-        everyone. This could be a password, payment information, personal
-        details or a private message.
+
+        We use websites and applications every day
+        to send information that should remain private.
+        This can include passwords, payment details,
+        messages and personal information.
+
     </p>
 
 
     <p>
-        Cryptography is used to help protect this information. It can be
-        used to encrypt data, protect passwords and secure communication
-        between a user and a website.
+
+        Cryptography is one of the technologies used
+        to protect this information. Encryption can,
+        for example, make data unreadable to someone
+        who should not have access to it.
+
     </p>
 
 
     <p>
-        The problem is that cryptography can also be used incorrectly.
-        A website might use an old algorithm, store passwords in an unsafe
-        way, or accidentally expose a secret key.
+
+        But using cryptography does not automatically
+        make a system secure. Developers can choose
+        outdated algorithms, store passwords incorrectly
+        or accidentally expose secret keys.
+
     </p>
 
 
     <p>
-        These types of problems are known as
+
+        These kinds of problems are known as
         <strong>cryptographic failures</strong>.
+
     </p>
 
 
     <div class="intro-note">
 
-        In the current OWASP Top 10:2025,
-        Cryptographic Failures is listed as
-        <strong>A04:2025</strong>. OWASP includes issues such as weak
-        cryptography, exposed keys, poor password storage and problems
-        with random number generation in this category.
-        
+        OWASP lists Cryptographic Failures as
+        <strong>A04:2025</strong> in the OWASP Top 10:2025.
+
+        The category includes issues such as weak
+        cryptography, exposed keys and unsafe password
+        storage.
+
     </div>
+
 
 
     <!-- SECTION 2 -->
 
     <h2 id="affected">
-        2. Who is affected?
+        Who is affected?
     </h2>
 
 
-    <p>
-        The most obvious group is the users of a website. If sensitive
-        information is not properly protected, their accounts or personal
-        information could be exposed.
-    </p>
+    <div class="cards">
 
 
-    <p>
-        Developers are also involved because many cryptographic failures
-        are caused by the way security is implemented or configured.
-    </p>
+        <div class="card">
+
+            <div class="card-number">
+                01 / USERS
+            </div>
+
+            <h3>
+                Users
+            </h3>
+
+            <p>
+
+                Poor protection can expose accounts,
+                passwords or personal information.
+
+            </p>
+
+        </div>
 
 
-    <p>
-        Organizations can also be affected. A security incident involving
-        sensitive information can create financial, legal and reputational
-        problems.
-    </p>
+        <div class="card">
+
+            <div class="card-number">
+                02 / DEVELOPERS
+            </div>
+
+            <h3>
+                Developers
+            </h3>
+
+            <p>
+
+                Incorrect implementation or configuration
+                can introduce security weaknesses.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                03 / ORGANIZATIONS
+            </div>
+
+            <h3>
+                Organizations
+            </h3>
+
+            <p>
+
+                Security incidents can result in financial,
+                legal and reputational problems.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-number">
+                04 / SYSTEMS
+            </div>
+
+            <h3>
+                Applications
+            </h3>
+
+            <p>
+
+                Weak cryptographic controls can affect
+                the confidentiality and integrity of data.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
 
 
     <!-- SECTION 3 -->
 
     <h2 id="learn">
-        3. What will you learn?
+        What will you learn?
     </h2>
 
 
     <p>
-        In this blog, I will explain what cryptographic failures are and
-        show some common ways they can happen.
+
+        This blog looks at the basic idea behind
+        cryptographic failures and some common ways
+        they can happen.
+
     </p>
 
 
     <p>
-        I will also look at two real-world cases and discuss what can be
-        learned from them.
+
+        I will also look at two real-world cases
+        and discuss what can be learned from them.
+
     </p>
 
 
     <p>
-        The blog then covers some ways developers can reduce these risks.
-        There is also a small browser-based demonstration showing how a
-        cryptographic hash changes when the input changes.
+
+        The prevention section covers practical
+        ways developers can reduce these risks.
+
     </p>
 
 
     <p>
-        The demonstration is intentionally simple and does not test or
-        attack any real system.
+
+        There is also a small browser-based demonstration
+        showing how changing an input changes its
+        cryptographic hash.
+
     </p>
 
 
-    <!-- SHORT NAVIGATION -->
+    <div class="intro-note">
 
-    <h2>
-        Continue reading
-    </h2>
+        <strong>Note:</strong>
 
+        The demonstration is designed only for learning.
+        It does not attack or interact with a real system.
 
-    <p>
-        <a href="concept.html">
-            → Cryptographic Failures: The Concept
-        </a>
-    </p>
+    </div>
 
-
-    <p>
-        <a href="risk.html">
-            → Risk Analysis
-        </a>
-    </p>
-
-
-    <p>
-        <a href="cases.html">
-            → Real-World Cases
-        </a>
-    </p>
-
-
-    <p>
-        <a href="prevention.html">
-            → Prevention and Mitigation
-        </a>
-    </p>
-
-
-    <p>
-        <a href="demo.html">
-            → Safe Demonstration
-        </a>
-    </p>
 
 
     <!-- SOURCES -->
 
-    <div class="sources" id="sources">
+    <div class="sources">
 
         <h2>
-            4. Sources
+            Sources
         </h2>
 
 
         <p>
+
             [1]
+
             <a href="https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/"
                target="_blank">
-                OWASP. A04:2025 – Cryptographic Failures.
+
+                OWASP — A04:2025 Cryptographic Failures
+
             </a>
+
         </p>
 
 
         <p>
+
             [2]
+
             <a href="https://top10.owasp.org/2025/"
                target="_blank">
-                OWASP. Top 10:2025.
+
+                OWASP — Top 10:2025
+
             </a>
+
         </p>
 
     </div>
@@ -451,12 +1023,21 @@
 </main>
 
 
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
-    When Encryption Fails · Information Systems & Cybersecurity
+    When Encryption Fails
+    ·
+    Information Systems & Cybersecurity
 
 </footer>
 
 
 </body>
+
 </html>
+```
