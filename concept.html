@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cryptographic Failures Explained</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+            background: #f5f7fa;
+            color: #1f2937;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 20px;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #d1d5db;
+        }
+
+        nav {
+            background: #1f2937;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 12px;
+            display: block;
+            font-size: 14px;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            background: #374151;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        h2 {
+            color: #111827;
+            margin-bottom: 18px;
+            font-size: 30px;
+        }
+
+        h3 {
+            color: #374151;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        .diagram {
+            background: #eef2ff;
+            border-left: 5px solid #4f46e5;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .flow {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .warning {
+            background: #fff7ed;
+            border-left: 5px solid #ea580c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .good {
+            background: #ecfdf5;
+            border-left: 5px solid #059669;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        footer {
+            background: #111827;
+            color: #d1d5db;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .section {
+                padding: 25px 20px;
+            }
+
+            nav a {
+                padding: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="header-container">
+
+        <h1>When Encryption Fails</h1>
+
+        <p>
+            Understanding Cryptographic Failures in Web Security
+        </p>
+
+    </div>
+
+</header>
+
+
+<nav aria-label="Main navigation">
+
+    <div class="nav-container">
+
+        <a href="index.html">Home</a>
+
+        <a href="concept.html">Concept</a>
+
+        <a href="risk.html">Risk Analysis</a>
+
+        <a href="cases.html">Real Cases</a>
+
+        <a href="prevention.html">Prevention</a>
+
+        <a href="demo.html">Safe Demo</a>
+
+        <a href="evidence.html">Evidence</a>
+
+        <a href="conclusion.html">Conclusion</a>
+
+        <a href="references.html">References</a>
+
+        <a href="about.html">About</a>
+
+    </div>
+
+</nav>
+
+
+<main>
+
+
+<section class="section">
+
+    <h2>What Are Cryptographic Failures?</h2>
+
+    <p>
+        Cryptography is the use of mathematical techniques to protect
+        information. Web applications use cryptographic mechanisms to help
+        protect sensitive information such as passwords, personal data,
+        financial information and communications.
+    </p>
+
+    <p>
+        A cryptographic failure occurs when sensitive information is not
+        properly protected because cryptography is missing, weak,
+        incorrectly implemented, incorrectly configured or otherwise
+        unsuitable for the security requirement.
+    </p>
+
+</section>
+
+
+<section class="section">
+
+    <h2>Encryption</h2>
+
+    <p>
+        Encryption transforms readable information, known as plaintext,
+        into a protected form called ciphertext. A suitable decryption
+        process can transform the ciphertext back into readable information.
+    </p>
+
+
+    <div class="diagram"
+         role="img"
+         aria-label="Diagram showing plaintext being encrypted into ciphertext and later decrypted back into plaintext">
+
+        <strong>Plaintext</strong>
+
+        <div class="flow">↓</div>
+
+        <strong>Encryption</strong>
+
+        <div class="flow">↓</div>
+
+        <strong>Ciphertext</strong>
+
+        <div class="flow">↓</div>
+
+        <strong>Decryption</strong>
+
+        <div class="flow">↓</div>
+
+        <strong>Plaintext</strong>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <h2>Hashing</h2>
+
+    <p>
+        Hashing is different from encryption. A cryptographic hash function
+        produces a fixed-length value from input data. Proper password
+        storage normally uses a password-hashing mechanism designed for
+        password protection rather than storing the original password.
+    </p>
+
+
+    <div class="diagram"
+         role="img"
+         aria-label="Diagram showing a password being processed by a password hashing function before being stored">
+
+        <strong>Example Password</strong>
+
+        <div class="flow">↓</div>
+
+        <strong>Password Hashing</strong>
+
+        <div class="flow">↓</div>
+
+        <strong>Password Hash</strong>
+
+        <div class="flow">↓</div>
+
+        <strong>Database</strong>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <h2>Encryption vs Hashing vs Encoding</h2>
+
+    <div class="warning">
+
+        <strong>Important:</strong>
+
+        Encryption, hashing and encoding are not the same thing.
+
+    </div>
+
+
+    <h3>Encryption</h3>
+
+    <p>
+        Encryption is designed to protect information so that authorised
+        parties can recover the original information using the appropriate
+        decryption process.
+    </p>
+
+
+    <h3>Hashing</h3>
+
+    <p>
+        Hashing produces a derived value from input data. Password systems
+        use specialised password-hashing algorithms to make password
+        recovery from stored values difficult.
+    </p>
+
+
+    <h3>Encoding</h3>
+
+    <p>
+        Encoding changes data into another representation for compatibility
+        or transmission. Encoding by itself does not provide confidentiality.
+    </p>
+
+</section>
+
+
+<section class="section">
+
+    <h2>How Can Cryptographic Failures Happen?</h2>
+
+    <p>
+        Cryptographic problems can appear in many different ways.
+        Examples include:
+    </p>
+
+    <ul>
+
+        <li>Transmitting sensitive information without appropriate protection.</li>
+
+        <li>Using obsolete or inappropriate cryptographic algorithms.</li>
+
+        <li>Storing passwords in plaintext.</li>
+
+        <li>Using weak password-storage mechanisms.</li>
+
+        <li>Poor management or storage of cryptographic keys.</li>
+
+        <li>Using predictable or inappropriate random values.</li>
+
+        <li>Incorrectly configuring TLS or other security mechanisms.</li>
+
+        <li>Hard-coding sensitive cryptographic secrets into application code.</li>
+
+    </ul>
+
+</section>
+
+
+<section class="section">
+
+    <h2>Why Web Applications Are Affected</h2>
+
+    <p>
+        Web applications frequently handle information belonging to many
+        users. This makes the protection of data an important part of
+        application security.
+    </p>
+
+    <div class="good">
+
+        <strong>Key lesson:</strong>
+
+        Cryptography is not automatically secure simply because an
+        application uses an encryption library. The algorithm, implementation,
+        configuration, keys and surrounding security controls all matter.
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+    <div class="footer-container">
+
+        <p><strong>When Encryption Fails</strong></p>
+
+        <p>
+            Educational blog about Cryptographic Failures in Web Security.
+        </p>
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>
