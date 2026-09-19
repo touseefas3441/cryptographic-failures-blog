@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prevention & Mitigation | Cryptographic Failures</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #d1d5db;
+        }
+
+        nav {
+            background: #1f2937;
+            text-align: center;
+            padding: 14px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        h2 {
+            color: #111827;
+        }
+
+        h3 {
+            color: #374151;
+        }
+
+        .tip {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        .warning {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        .step {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        footer {
+            background: #111827;
+            color: #d1d5db;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 700px) {
+            nav a {
+                display: block;
+                margin: 8px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Prevention & Mitigation</h1>
+    <p>How developers can reduce the risk of cryptographic failures</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="concept.html">Concept</a>
+    <a href="risk.html">Risk Analysis</a>
+    <a href="cases.html">Real Cases</a>
+    <a href="prevention.html">Prevention</a>
+    <a href="demo.html">Safe Demo</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="conclusion.html">Conclusion</a>
+    <a href="references.html">References</a>
+    <a href="about.html">About</a>
+</nav>
+
+<div class="container">
+
+    <section class="card">
+        <h2>Why Prevention Matters</h2>
+
+        <p>
+            Cryptographic failures can often be prevented by choosing
+            appropriate cryptographic methods, protecting keys and secrets,
+            securely storing passwords, and correctly configuring systems.
+        </p>
+
+        <p>
+            Security should be considered during application design rather
+            than added only after a system has already been developed.
+        </p>
+
+        <div class="tip">
+            <strong>Main principle:</strong>
+            Do not treat cryptography as simply "adding encryption".
+            The entire process, including algorithms, keys, randomness,
+            storage and configuration, needs to be considered.
+        </div>
+    </section>
+
+
+    <section class="card">
+
+        <h2>1. Classify Sensitive Data</h2>
+
+        <p>
+            Developers should first understand what information their
+            application collects, stores and transmits.
+        </p>
+
+        <ul>
+            <li>Identify sensitive personal information.</li>
+            <li>Identify authentication information.</li>
+            <li>Identify financial or payment information.</li>
+            <li>Identify confidential business information.</li>
+            <li>Determine which information actually needs to be retained.</li>
+        </ul>
+
+        <p>
+            Data that does not need to be stored should generally not be
+            retained unnecessarily.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>2. Use Strong and Appropriate Cryptography</h2>
+
+        <p>
+            Applications should use well-established cryptographic algorithms
+            and protocols rather than creating their own cryptographic
+            algorithms.
+        </p>
+
+        <ul>
+            <li>Use trusted and well-maintained cryptographic libraries.</li>
+            <li>Avoid deprecated algorithms and protocols.</li>
+            <li>Keep cryptographic libraries updated.</li>
+            <li>Use cryptography appropriate for the security requirement.</li>
+            <li>Review cryptographic configuration regularly.</li>
+        </ul>
+
+        <div class="warning">
+            <strong>Important:</strong>
+            A strong algorithm can still be used incorrectly. Correct
+            implementation and configuration are just as important.
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>3. Protect Data in Transit</h2>
+
+        <p>
+            Sensitive information travelling between a browser and a server
+            should be protected using secure communication protocols.
+        </p>
+
+        <p>
+            Modern web applications normally use HTTPS with TLS to protect
+            information during transmission.
+        </p>
+
+        <ul>
+            <li>Use HTTPS for sensitive web traffic.</li>
+            <li>Use current secure TLS configurations.</li>
+            <li>Disable obsolete protocols and weak cipher configurations.</li>
+            <li>Configure HTTP Strict Transport Security (HSTS) where appropriate.</li>
+        </ul>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>4. Store Passwords Correctly</h2>
+
+        <p>
+            Passwords should not be stored as plaintext.
+        </p>
+
+        <p>
+            Passwords also should not normally be stored using reversible
+            encryption. Password storage requires dedicated password-hashing
+            methods designed to make large numbers of password guesses
+            expensive.
+        </p>
+
+        <div class="step">
+
+            <strong>Recommended concept:</strong>
+
+            <p>
+                User password
+                →
+                Password hashing algorithm
+                →
+                Salted password hash
+                →
+                Database
+            </p>
+
+        </div>
+
+        <p>
+            OWASP currently recommends strong adaptive password hashing
+            algorithms such as Argon2id, bcrypt, or PBKDF2, with a unique
+            salt for each password.
+        </p>
+
+        <p>
+            Fast general-purpose hashes such as SHA-256 should not be used
+            by themselves for password storage because they allow password
+            guesses to be performed very quickly.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>5. Manage Cryptographic Keys Securely</h2>
+
+        <p>
+            Encryption is only useful if the encryption keys are properly
+            protected.
+        </p>
+
+        <ul>
+            <li>Generate keys using secure cryptographic randomness.</li>
+            <li>Do not hard-code secret keys inside application source code.</li>
+            <li>Do not commit secret keys to public repositories.</li>
+            <li>Restrict access to cryptographic keys.</li>
+            <li>Rotate keys when required.</li>
+            <li>Have a process for replacing compromised keys.</li>
+            <li>Securely destroy keys when they are no longer required.</li>
+        </ul>
+
+        <p>
+            OWASP and NIST both emphasize the importance of key management
+            throughout the cryptographic key lifecycle.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>6. Use Secure Randomness</h2>
+
+        <p>
+            Cryptographic systems often depend on random values for keys,
+            tokens, nonces and other security-related values.
+        </p>
+
+        <p>
+            These values must be generated using cryptographically secure
+            random-number mechanisms rather than predictable values.
+        </p>
+
+        <div class="warning">
+            <strong>Example of a bad approach:</strong>
+            Using predictable values such as timestamps, usernames or simple
+            counters as secrets.
+        </div>
+
+        <p>
+            The Debian OpenSSL case discussed earlier demonstrates why
+            predictable cryptographic randomness can create serious security
+            problems.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>7. Secure Development Practices</h2>
+
+        <p>
+            Cryptographic security should be included throughout the
+            software development lifecycle.
+        </p>
+
+        <ul>
+            <li>Identify sensitive data during system design.</li>
+            <li>Create a threat model before implementation.</li>
+            <li>Use established cryptographic libraries.</li>
+            <li>Review cryptographic code carefully.</li>
+            <li>Keep dependencies updated.</li>
+            <li>Test security configurations.</li>
+            <li>Perform code reviews.</li>
+            <li>Monitor systems for security problems.</li>
+            <li>Have a plan for responding to compromised keys or secrets.</li>
+        </ul>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>8. Quick Prevention Checklist</h2>
+
+        <table>
+
+            <tr>
+                <th>Security Area</th>
+                <th>Recommended Practice</th>
+            </tr>
+
+            <tr>
+                <td>Sensitive data</td>
+                <td>Identify and minimize unnecessary sensitive data.</td>
+            </tr>
+
+            <tr>
+                <td>Encryption</td>
+                <td>Use trusted, current cryptographic algorithms and libraries.</td>
+            </tr>
+
+            <tr>
+                <td>Passwords</td>
+                <td>Use salted adaptive password hashing.</td>
+            </tr>
+
+            <tr>
+                <td>Keys</td>
+                <td>Generate, store, rotate and retire keys securely.</td>
+            </tr>
+
+            <tr>
+                <td>Randomness</td>
+                <td>Use cryptographically secure random-number generation.</td>
+            </tr>
+
+            <tr>
+                <td>Network traffic</td>
+                <td>Protect sensitive data using properly configured TLS.</td>
+            </tr>
+
+            <tr>
+                <td>Secrets</td>
+                <td>Keep secrets outside source code and version control.</td>
+            </tr>
+
+            <tr>
+                <td>Maintenance</td>
+                <td>Keep cryptographic libraries and security configurations updated.</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Limitations</h2>
+
+        <p>
+            Following security recommendations does not guarantee that an
+            application will never experience a security incident.
+        </p>
+
+        <p>
+            Cryptographic systems can still fail because of implementation
+            errors, configuration mistakes, compromised keys, vulnerable
+            dependencies, incorrect assumptions or weaknesses elsewhere in
+            the application.
+        </p>
+
+        <p>
+            For this reason, cryptography should be treated as one part of a
+            broader security strategy rather than as a complete solution by
+            itself.
+        </p>
+
+        <div class="tip">
+            <strong>Key lesson:</strong>
+            Good cryptography requires good implementation, configuration,
+            key management and ongoing security review.
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Sources Used</h2>
+
+        <p>
+            The recommendations on this page are based primarily on guidance
+            from the Open Worldwide Application Security Project (OWASP) and
+            the National Institute of Standards and Technology (NIST).
+        </p>
+
+        <p>
+            The next page provides a safe educational demonstration of
+            hashing using fake information. The demonstration does not test
+            or attack any real system.
+        </p>
+
+    </section>
+
+</div>
+
+<footer>
+    <p>
+        Cryptographic Failures in Web Security — Educational Student Blog
+    </p>
+</footer>
+
+</body>
+</html>
