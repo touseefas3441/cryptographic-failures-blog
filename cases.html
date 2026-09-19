@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Real-World Cases | Cryptographic Failures</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #d1d5db;
+        }
+
+        nav {
+            background: #1f2937;
+            text-align: center;
+            padding: 14px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        .case-title {
+            color: #111827;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 10px;
+        }
+
+        .year {
+            display: inline-block;
+            background: #e5e7eb;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .important {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        .lesson {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        .source {
+            background: #f9fafb;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        footer {
+            background: #111827;
+            color: #d1d5db;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 700px) {
+            nav a {
+                display: block;
+                margin: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Real-World Cases</h1>
+    <p>Documented examples of cryptographic failures and their consequences</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="concept.html">Concept</a>
+    <a href="risk.html">Risk Analysis</a>
+    <a href="cases.html">Real Cases</a>
+    <a href="prevention.html">Prevention</a>
+    <a href="demo.html">Safe Demo</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="conclusion.html">Conclusion</a>
+    <a href="references.html">References</a>
+    <a href="about.html">About</a>
+</nav>
+
+<div class="container">
+
+    <section class="card">
+
+        <h2 class="case-title">
+            Case 1: Adobe Customer Data Breach
+        </h2>
+
+        <span class="year">2013</span>
+
+        <p>
+            In October 2013, Adobe announced that attackers had gained
+            access to customer information and source code.
+        </p>
+
+        <p>
+            Adobe reported that customer IDs and encrypted passwords had
+            been accessed. Information relating to approximately 2.9 million
+            customers was also believed to have been removed, including
+            names and encrypted payment card information.
+        </p>
+
+        <div class="important">
+            <strong>Why is this relevant to cryptographic failures?</strong>
+
+            <p>
+                A later investigation by the Office of the Australian
+                Information Commissioner found serious weaknesses in the
+                protection of password information stored in an older
+                backup system.
+            </p>
+
+            <p>
+                The system used encryption for passwords rather than the
+                stronger password-hashing approach used in Adobe's newer
+                authentication system. Password hints were also stored in
+                plaintext.
+            </p>
+        </div>
+
+        <h3>What went wrong?</h3>
+
+        <ul>
+            <li>An older backup system continued to contain customer credentials.</li>
+            <li>Passwords in that system were encrypted rather than individually salted and hashed.</li>
+            <li>A single encryption key was used for the password information.</li>
+            <li>Password hints were stored in plaintext.</li>
+            <li>Some password hints could reveal the actual password or provide an obvious clue.</li>
+        </ul>
+
+        <h3>Potential impact</h3>
+
+        <p>
+            The combination of encrypted passwords and plaintext hints
+            made it possible for security researchers to identify some
+            common passwords. The exposed credentials could also create
+            additional risk when users reused the same passwords on other
+            websites.
+        </p>
+
+        <div class="lesson">
+            <strong>Lesson from the case:</strong>
+
+            <p>
+                Sensitive credentials should be protected using security
+                mechanisms appropriate for their purpose. Passwords should
+                not simply be encrypted and stored like ordinary data.
+                Secure password hashing and proper management of old
+                systems are important parts of protecting user accounts.
+            </p>
+        </div>
+
+        <div class="source">
+            <strong>Verified sources:</strong>
+
+            <p>
+                Adobe's original customer security announcement documented
+                the 2013 incident and the information accessed.
+            </p>
+
+            <p>
+                The Office of the Australian Information Commissioner later
+                investigated Adobe's security safeguards and documented the
+                password-storage weaknesses.
+            </p>
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2 class="case-title">
+            Case 2: Debian OpenSSL Predictable Randomness
+        </h2>
+
+        <span class="year">2006–2008</span>
+
+        <p>
+            A different type of cryptographic failure occurred in Debian's
+            OpenSSL package.
+        </p>
+
+        <p>
+            A Debian-specific change accidentally removed important code
+            related to OpenSSL's random number generation. As a result,
+            cryptographic random values became predictable.
+        </p>
+
+        <div class="important">
+
+            <strong>Why is this a cryptographic failure?</strong>
+
+            <p>
+                Cryptographic systems depend on unpredictable random values
+                when generating keys and other security material.
+            </p>
+
+            <p>
+                If the random values are predictable, an attacker may be
+                able to guess or identify cryptographic keys that should
+                have been secret.
+            </p>
+
+        </div>
+
+        <h3>What was affected?</h3>
+
+        <p>
+            Debian's security advisory stated that affected cryptographic
+            material included:
+        </p>
+
+        <ul>
+            <li>SSH keys</li>
+            <li>OpenVPN keys</li>
+            <li>DNSSEC keys</li>
+            <li>X.509 certificate key material</li>
+            <li>SSL/TLS session key material</li>
+        </ul>
+
+        <h3>What did Debian recommend?</h3>
+
+        <p>
+            Debian recommended upgrading the affected OpenSSL packages and
+            recreating cryptographic key material generated by vulnerable
+            versions.
+        </p>
+
+        <p>
+            The affected keys could not simply be considered safe after the
+            software was updated because keys generated using the vulnerable
+            random number generator could already be predictable.
+        </p>
+
+        <div class="lesson">
+
+            <strong>Lesson from the case:</strong>
+
+            <p>
+                Secure cryptography depends on more than selecting a strong
+                algorithm. Random-number generation and implementation
+                details are also critical. A strong algorithm can still
+                provide weak protection if the secret values used by it
+                are predictable.
+            </p>
+
+        </div>
+
+        <div class="source">
+
+            <strong>Verified source:</strong>
+
+            <p>
+                Debian Security Advisory DSA-1571-1 documents the
+                predictable random number generator vulnerability,
+                CVE-2008-0166, the affected cryptographic material,
+                and the required remediation.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>What These Cases Have in Common</h2>
+
+        <p>
+            These incidents demonstrate two different ways cryptographic
+            protection can fail.
+        </p>
+
+        <div class="important">
+
+            <p>
+                <strong>Adobe:</strong>
+                inappropriate password protection and weak handling of
+                credential information.
+            </p>
+
+            <p>
+                <strong>Debian OpenSSL:</strong>
+                predictable randomness resulted in cryptographic keys that
+                could be guessed.
+            </p>
+
+        </div>
+
+        <p>
+            These examples show why secure cryptography requires correct
+            algorithms, correct implementation, secure randomness,
+            appropriate password protection, and proper key management.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Important Distinction</h2>
+
+        <p>
+            The cases above are documented historical incidents, not
+            hypothetical examples created for this blog.
+        </p>
+
+        <p>
+            The next section of this blog will use a completely safe,
+            controlled demonstration to show the difference between a
+            normal hash operation and secure password-storage practices.
+        </p>
+
+    </section>
+
+</div>
+
+<footer>
+    <p>
+        Cryptographic Failures in Web Security — Educational Student Blog
+    </p>
+</footer>
+
+</body>
+</html>
