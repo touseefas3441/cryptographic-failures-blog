@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Conclusion | Cryptographic Failures</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        header p {
+            color: #d1d5db;
+        }
+
+        nav {
+            background: #1f2937;
+            text-align: center;
+            padding: 14px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        h2 {
+            color: #111827;
+        }
+
+        .lesson {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        .recommendation {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        footer {
+            background: #111827;
+            color: #d1d5db;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 700px) {
+
+            nav a {
+                display: block;
+                margin: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>Conclusion</h1>
+
+    <p>
+        Key lessons and recommendations from this project
+    </p>
+
+</header>
+
+
+<nav>
+
+    <a href="index.html">Home</a>
+    <a href="concept.html">Concept</a>
+    <a href="risk.html">Risk Analysis</a>
+    <a href="cases.html">Real Cases</a>
+    <a href="prevention.html">Prevention</a>
+    <a href="demo.html">Safe Demo</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="conclusion.html">Conclusion</a>
+    <a href="references.html">References</a>
+    <a href="about.html">About</a>
+
+</nav>
+
+
+<div class="container">
+
+
+    <section class="card">
+
+        <h2>What We Learned</h2>
+
+        <p>
+            Cryptographic failures occur when sensitive information is not
+            adequately protected because of missing, weak, incorrectly
+            implemented or incorrectly managed cryptographic controls.
+        </p>
+
+        <p>
+            The topic is broader than simply choosing an encryption
+            algorithm. Secure cryptography also depends on appropriate
+            protocols, secure randomness, password storage, key management,
+            configuration and software maintenance.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Lessons from Real-World Cases</h2>
+
+        <p>
+            The Adobe case demonstrated how weaknesses in password
+            protection and the handling of older stored information can
+            increase security risks.
+        </p>
+
+        <p>
+            The Debian OpenSSL incident demonstrated a different problem:
+            predictable randomness can undermine cryptographic keys even
+            when a well-known cryptographic library is being used.
+        </p>
+
+        <div class="lesson">
+
+            <strong>Main lesson:</strong>
+
+            <p>
+                Strong cryptographic algorithms alone do not guarantee a
+                secure system. The surrounding implementation and
+                management practices are equally important.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Recommendations for Developers</h2>
+
+        <div class="recommendation">
+
+            <p>
+                <strong>1.</strong>
+                Use established and well-maintained cryptographic libraries.
+            </p>
+
+            <p>
+                <strong>2.</strong>
+                Avoid deprecated or inappropriate algorithms and protocols.
+            </p>
+
+            <p>
+                <strong>3.</strong>
+                Use dedicated password-hashing algorithms rather than
+                storing passwords as plaintext or reversible encryption.
+            </p>
+
+            <p>
+                <strong>4.</strong>
+                Protect cryptographic keys throughout their lifecycle.
+            </p>
+
+            <p>
+                <strong>5.</strong>
+                Use cryptographically secure randomness for security-sensitive
+                values.
+            </p>
+
+            <p>
+                <strong>6.</strong>
+                Review cryptographic configurations and keep security
+                libraries updated.
+            </p>
+
+            <p>
+                <strong>7.</strong>
+                Minimize unnecessary storage of sensitive information.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Looking Ahead</h2>
+
+        <p>
+            Cryptographic security will continue to evolve as new
+            technologies, vulnerabilities and computing capabilities
+            develop.
+        </p>
+
+        <p>
+            Organizations also need to consider future cryptographic
+            migration, including preparation for post-quantum cryptography
+            where appropriate.
+        </p>
+
+        <p>
+            This means cryptographic security should be treated as an
+            ongoing process rather than a one-time configuration.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Final Message</h2>
+
+        <p>
+            Cryptography is one of the foundations of modern web security.
+            However, encryption and hashing only provide protection when
+            they are selected, implemented, configured and maintained
+            correctly.
+        </p>
+
+        <p>
+            Understanding common cryptographic failures helps developers
+            recognize these problems earlier and build applications that
+            protect sensitive information more effectively.
+        </p>
+
+    </section>
+
+
+</div>
+
+
+<footer>
+
+    <p>
+        Cryptographic Failures in Web Security — Educational Student Blog
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
