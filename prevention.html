@@ -1,473 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cases | When Encryption Fails</title>
+    <title>Prevention | When Encryption Fails</title>
 
     <style>
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
             background: #070b14;
-            color: #e8edf7;
-            line-height: 1.7;
+            color: #e8eefc;
+            line-height: 1.6;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            background: #2563eb;
-            filter: blur(180px);
-            opacity: 0.12;
-            top: -150px;
-            left: -150px;
-            z-index: -1;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            width: 450px;
-            height: 450px;
-            background: #9333ea;
-            filter: blur(180px);
-            opacity: 0.10;
-            bottom: -150px;
-            right: -150px;
-            z-index: -1;
-        }
-
+        /* HEADER */
         header {
             position: sticky;
             top: 0;
-            z-index: 1000;
-            background: rgba(7,11,20,0.82);
-            backdrop-filter: blur(15px);
+            z-index: 100;
+            background: rgba(7, 11, 20, 0.85);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .header {
+        nav {
             max-width: 1150px;
             margin: auto;
             padding: 18px 25px;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            gap: 30px;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 10px;
-
-            background: linear-gradient(
-                135deg,
-                #2563eb,
-                #9333ea
-            );
         }
 
         .logo {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: bold;
+            color: white;
         }
 
-        .tagline {
-            font-size: 11px;
-            color: #7f8ba3;
+        .logo span {
+            color: #6c63ff;
         }
 
-        nav {
+        nav ul {
+            list-style: none;
             display: flex;
             gap: 22px;
-            flex-wrap: wrap;
         }
 
         nav a {
-            color: #aeb8ca;
+            color: #aeb8d0;
             text-decoration: none;
-            font-size: 13px;
-        }
-
-        nav a:hover {
-            color: #60a5fa;
-        }
-
-        main {
-            max-width: 900px;
-            margin: auto;
-            padding: 75px 25px 100px;
-        }
-
-        .category {
-            color: #60a5fa;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-        }
-
-        h1 {
-            font-size: 52px;
-            line-height: 1.1;
-            margin: 12px 0 20px;
-        }
-
-        .subtitle {
-            color: #8f9bb0;
-            font-size: 16px;
-            max-width: 650px;
-            margin-bottom: 45px;
-        }
-
-        .cases {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .case {
-            min-height: 330px;
-
-            padding: 30px;
-
-            border-radius: 16px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.06),
-                    rgba(255,255,255,0.02)
-                );
-
-            border:
-                1px solid rgba(255,255,255,0.09);
-
+            font-size: 14px;
             transition: 0.3s;
         }
 
-        .case:hover {
+        nav a:hover {
+            color: #7c8cff;
+        }
+
+        /* HERO */
+        .hero {
+            max-width: 1100px;
+            margin: auto;
+            padding: 100px 25px 70px;
+        }
+
+        .number {
+            color: #6c63ff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(45px, 7vw, 80px);
+            line-height: 1;
+            margin-bottom: 25px;
+            background: linear-gradient(90deg, #ffffff, #8d8aff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro {
+            max-width: 650px;
+            color: #9da8c0;
+            font-size: 18px;
+        }
+
+        /* CONTENT */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px 25px 80px;
+        }
+
+        .section-title {
+            font-size: 30px;
+            margin: 60px 0 25px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            position: relative;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 28px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .card:hover {
             transform: translateY(-5px);
-
-            border-color:
-                rgba(96,165,250,0.35);
-
-            box-shadow:
-                0 20px 50px rgba(37,99,235,0.12);
+            border-color: rgba(108,99,255,0.5);
+            box-shadow: 0 10px 40px rgba(108,99,255,0.12);
         }
 
-        .case-label {
-            color: #60a5fa;
-
-            font-family: monospace;
-
-            font-size: 12px;
-
-            letter-spacing: 1px;
-
-            margin-bottom: 18px;
+        .card-number {
+            position: absolute;
+            right: 15px;
+            top: -10px;
+            font-size: 70px;
+            font-weight: bold;
+            color: rgba(255,255,255,0.035);
         }
 
-        .case h2 {
-            font-size: 26px;
+        .icon {
+            font-size: 30px;
             margin-bottom: 15px;
         }
 
-        .case p {
-            color: #aab4c5;
-            font-size: 15px;
-            margin-bottom: 15px;
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
         }
 
-        .lesson {
-            margin-top: 25px;
-
-            padding: 15px;
-
-            border-radius: 8px;
-
-            background:
-                rgba(37,99,235,0.08);
-
-            color: #aebbd0;
-
-            font-size: 13px;
+        .card p {
+            color: #9da8c0;
+            font-size: 14px;
         }
 
-        .lesson strong {
-            color: #60a5fa;
+        /* NOTE */
+        .note {
+            margin-top: 35px;
+            padding: 25px;
+            border-left: 3px solid #6c63ff;
+            background: rgba(108,99,255,0.07);
+            border-radius: 0 12px 12px 0;
         }
 
+        .note strong {
+            color: white;
+        }
+
+        .note p {
+            color: #aeb8d0;
+            font-size: 14px;
+            margin-top: 7px;
+        }
+
+        /* SOURCES */
         .sources {
-            margin-top: 70px;
-
-            padding-top: 25px;
-
-            border-top:
-                1px solid rgba(255,255,255,0.08);
-        }
-
-        .sources p {
-            font-size: 13px;
-            color: #8c99ae;
+            margin-top: 65px;
         }
 
         .sources a {
-            color: #60a5fa;
+            display: block;
+            color: #8290ff;
             text-decoration: none;
+            margin: 8px 0;
+            font-size: 14px;
         }
 
+        .sources a:hover {
+            color: white;
+        }
+
+        /* FOOTER */
         footer {
-            border-top:
-                1px solid rgba(255,255,255,0.08);
-
+            border-top: 1px solid rgba(255,255,255,0.08);
             text-align: center;
-
-            padding: 35px;
-
-            color: #657188;
-
-            font-size: 12px;
+            padding: 30px 20px;
+            color: #68738b;
+            font-size: 13px;
         }
 
+        /* MOBILE */
         @media (max-width: 800px) {
-
-            .header {
-                display: block;
-            }
-
             nav {
-                margin-top: 18px;
-                gap: 13px;
+                flex-direction: column;
+                gap: 15px;
             }
 
-            .cases {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            .hero {
+                padding-top: 70px;
+            }
+
+            .cards {
                 grid-template-columns: 1fr;
             }
-
-            h1 {
-                font-size: 43px;
-            }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
-    <div class="header">
-
-        <div class="logo-area">
-
-            <div class="logo-icon">
-                🔐
-            </div>
-
-            <div>
-
-                <div class="logo">
-                    When Encryption Fails
-                </div>
-
-                <div class="tagline">
-                    A student blog about cryptographic failures
-                </div>
-
-            </div>
-
+    <nav>
+        <div class="logo">
+            When <span>Encryption</span> Fails
         </div>
 
-
-        <nav>
-
-            <a href="index.html">Introduction</a>
-            <a href="concept.html">Concept</a>
-            <a href="risk.html">Risk</a>
-            <a href="cases.html">Cases</a>
-            <a href="prevention.html">Prevention</a>
-            <a href="demo.html">Demo</a>
-            <a href="references.html">References</a>
-            <a href="about.html">About</a>
-
-        </nav>
-
-    </div>
-
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="concept.html">Concept</a></li>
+            <li><a href="risk.html">Risk</a></li>
+            <li><a href="cases.html">Cases</a></li>
+            <li><a href="prevention.html">Prevention</a></li>
+            <li><a href="demo.html">Demo</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
 </header>
 
 
-<main>
+<section class="hero">
 
+    <div class="number">03 / SECURITY PRACTICES</div>
 
-    <div class="category">
-        03 / Real World
-    </div>
+    <h1>Prevention</h1>
 
-
-    <h1>
-        Real-World Cases
-    </h1>
-
-
-    <p class="subtitle">
-
-        Cryptographic and security failures are not
-        just theoretical. Similar weaknesses have
-        affected real systems.
-
+    <p class="intro">
+        Good cryptography is not only about choosing encryption.
+        It also depends on how keys, passwords and software are handled.
     </p>
 
+</section>
 
-    <div class="cases">
 
+<main class="container">
 
-        <div class="case">
+    <h2 class="section-title">How to prevent cryptographic failures</h2>
 
-            <div class="case-label">
-                CASE 01 / HEARTBLEED
-            </div>
+    <div class="cards">
 
-            <h2>
-                Heartbleed
-            </h2>
+        <div class="card">
+            <div class="card-number">01</div>
 
-            <p>
+            <div class="icon">🔐</div>
 
-                Heartbleed was a serious vulnerability
-                in OpenSSL discovered in 2014.
-
-            </p>
+            <h3>Use Modern Algorithms</h3>
 
             <p>
-
-                It could allow sensitive information
-                from a vulnerable server's memory to be exposed.
-
+                Avoid outdated algorithms and use modern, trusted
+                cryptographic standards.
             </p>
-
-            <div class="lesson">
-
-                <strong>Lesson:</strong>
-                Security software still needs testing,
-                maintenance and updates.
-
-            </div>
-
         </div>
 
 
-        <div class="case">
+        <div class="card">
+            <div class="card-number">02</div>
 
-            <div class="case-label">
-                CASE 02 / EQUIFAX
-            </div>
+            <div class="icon">🔑</div>
 
-            <h2>
-                Equifax
-            </h2>
+            <h3>Protect Secret Keys</h3>
 
             <p>
-
-                In 2017, Equifax suffered a major data
-                breach that exposed sensitive information.
-
+                Keep encryption keys private and store them securely.
+                Never expose them in source code.
             </p>
-
-            <p>
-
-                The incident involved an unpatched
-                vulnerability in a web application.
-
-            </p>
-
-            <div class="lesson">
-
-                <strong>Lesson:</strong>
-                Security depends on more than encryption.
-                Patching and maintenance also matter.
-
-            </div>
-
         </div>
 
+
+        <div class="card">
+            <div class="card-number">03</div>
+
+            <div class="icon">🔒</div>
+
+            <h3>Hash Passwords Properly</h3>
+
+            <p>
+                Passwords should be stored using secure password
+                hashing methods, not plain text.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="card-number">04</div>
+
+            <div class="icon">🎲</div>
+
+            <h3>Use Secure Randomness</h3>
+
+            <p>
+                Cryptographic systems need strong random values
+                for keys, tokens and other secrets.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="card-number">05</div>
+
+            <div class="icon">🛠️</div>
+
+            <h3>Keep Software Updated</h3>
+
+            <p>
+                Security libraries can contain vulnerabilities.
+                Regular updates help reduce this risk.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="card-number">06</div>
+
+            <div class="icon">📚</div>
+
+            <h3>Follow Trusted Guidance</h3>
+
+            <p>
+                Use established security standards instead of
+                creating your own cryptographic solutions.
+            </p>
+        </div>
 
     </div>
 
 
-    <div class="sources">
+    <div class="note">
 
-        <h2>
-            Sources
-        </h2>
+        <strong>Key idea</strong>
 
         <p>
-
-            [1]
-            <a href="https://heartbleed.com/"
-               target="_blank">
-
-                Heartbleed — Official Information
-
-            </a>
-
-        </p>
-
-        <p>
-
-            [2]
-            <a href="https://www.ftc.gov/legal-library/browse/cases-proceedings/172-3057-equifax-inc"
-               target="_blank">
-
-                FTC — Equifax
-
-            </a>
-
+            Don't create your own cryptography when tested and trusted
+            solutions already exist. Most applications should rely on
+            well-established libraries and standards.
         </p>
 
     </div>
 
+
+    <section class="sources">
+
+        <h2 class="section-title">Sources</h2>
+
+        <a href="https://owasp.org/www-project-top-ten/" target="_blank">
+            → OWASP Top 10
+        </a>
+
+        <a href="https://csrc.nist.gov/" target="_blank">
+            → NIST Cybersecurity Resources
+        </a>
+
+    </section>
 
 </main>
 
 
 <footer>
-
     When Encryption Fails · Information Systems & Cybersecurity
-
 </footer>
-
 
 </body>
 </html>
