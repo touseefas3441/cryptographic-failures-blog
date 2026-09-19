@@ -4,160 +4,298 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Safe Demonstration | Cryptographic Failures</title>
+    <title>Demo | When Encryption Fails</title>
 
     <style>
 
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #1f2937;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070b14;
+            color: #e8edf7;
             line-height: 1.7;
         }
 
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #2563eb;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #9333ea;
+            filter: blur(180px);
+            opacity: 0.10;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+
         header {
-            background: #111827;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7,11,20,0.82);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 34px;
+        .header {
+            max-width: 1150px;
+            margin: auto;
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 30px;
         }
 
-        header p {
-            color: #d1d5db;
-            margin-top: 8px;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #9333ea
+            );
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #7f8ba3;
         }
 
         nav {
-            background: #1f2937;
-            text-align: center;
-            padding: 14px;
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: white;
+            color: #aeb8ca;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #60a5fa;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+        main {
+            max-width: 850px;
+            margin: auto;
+            padding: 75px 25px 100px;
         }
 
-        .card {
-            background: white;
-            padding: 28px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        .category {
+            color: #60a5fa;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
         }
 
-        h2 {
-            color: #111827;
+        h1 {
+            font-size: 52px;
+            margin: 12px 0 20px;
         }
 
-        h3 {
-            color: #374151;
+        .subtitle {
+            color: #8f9bb0;
+            font-size: 16px;
+            max-width: 650px;
+            margin-bottom: 40px;
         }
 
         .demo-box {
-            background: #eff6ff;
-            border: 2px solid #2563eb;
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 20px;
+            padding: 30px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.02)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.09);
+
+            box-shadow:
+                0 20px 60px rgba(0,0,0,0.25);
         }
 
         label {
             display: block;
-            font-weight: bold;
+
+            color: #aeb8ca;
+
+            font-size: 13px;
+
             margin-bottom: 8px;
         }
 
         input {
             width: 100%;
-            box-sizing: border-box;
-            padding: 13px;
-            border: 1px solid #9ca3af;
-            border-radius: 7px;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
 
-        button {
-            background: #2563eb;
+            padding: 15px;
+
+            border-radius: 8px;
+
+            border:
+                1px solid rgba(255,255,255,0.1);
+
+            background: #0c1220;
+
             color: white;
-            border: none;
-            padding: 13px 20px;
-            border-radius: 7px;
-            font-size: 16px;
-            cursor: pointer;
+
+            font-size: 15px;
+
+            outline: none;
         }
 
-        button:hover {
-            background: #1d4ed8;
+        input:focus {
+            border-color: #3b82f6;
+
+            box-shadow:
+                0 0 20px rgba(37,99,235,0.15);
         }
 
-        .result {
-            background: #111827;
-            color: #f9fafb;
+        .hash-title {
+            margin-top: 25px;
+
+            color: #8f9bb0;
+
+            font-size: 13px;
+        }
+
+        .hash {
+            margin-top: 8px;
+
             padding: 18px;
+
             border-radius: 8px;
-            margin-top: 20px;
-            word-break: break-all;
+
+            background: #050810;
+
+            border:
+                1px solid rgba(96,165,250,0.15);
+
+            color: #60a5fa;
+
             font-family: monospace;
+
+            font-size: 13px;
+
+            word-break: break-all;
+
+            min-height: 55px;
         }
 
-        .warning {
-            background: #fff7ed;
-            border-left: 5px solid #f97316;
-            padding: 18px;
-            margin: 20px 0;
-        }
+        .note {
+            margin-top: 25px;
 
-        .safe {
-            background: #f0fdf4;
-            border-left: 5px solid #16a34a;
-            padding: 18px;
-            margin: 20px 0;
-        }
+            padding: 18px 20px;
 
-        .step {
-            background: #f9fafb;
-            padding: 18px;
+            border-left: 3px solid #3b82f6;
+
+            background:
+                rgba(37,99,235,0.07);
+
             border-radius: 8px;
-            margin: 15px 0;
+
+            color: #9eabc0;
+
+            font-size: 14px;
+        }
+
+        .note strong {
+            color: #60a5fa;
+        }
+
+        .sources {
+            margin-top: 70px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .sources p {
+            font-size: 13px;
+            color: #8c99ae;
+        }
+
+        .sources a {
+            color: #60a5fa;
         }
 
         footer {
-            background: #111827;
-            color: #d1d5db;
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
             text-align: center;
-            padding: 25px;
-            margin-top: 50px;
+
+            padding: 35px;
+
+            color: #657188;
+
+            font-size: 12px;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
-            nav a {
+            .header {
                 display: block;
-                margin: 8px;
+            }
+
+            nav {
+                margin-top: 18px;
+                gap: 13px;
+            }
+
+            h1 {
+                font-size: 43px;
             }
 
         }
@@ -172,349 +310,182 @@
 
 <header>
 
-    <h1>Safe Cryptographic Demonstration</h1>
+    <div class="header">
 
-    <p>
-        Understanding hashing with a local browser demonstration
-    </p>
+        <div class="logo-area">
 
-</header>
+            <div class="logo-icon">
+                🔐
+            </div>
 
+            <div>
 
-<nav>
+                <div class="logo">
+                    When Encryption Fails
+                </div>
 
-    <a href="index.html">Home</a>
-
-    <a href="concept.html">Concept</a>
-
-    <a href="risk.html">Risk Analysis</a>
-
-    <a href="cases.html">Real Cases</a>
-
-    <a href="prevention.html">Prevention</a>
-
-    <a href="demo.html">Safe Demo</a>
-
-    <a href="evidence.html">Evidence</a>
-
-    <a href="conclusion.html">Conclusion</a>
-
-    <a href="references.html">References</a>
-
-    <a href="about.html">About</a>
-
-</nav>
-
-
-<div class="container">
-
-
-    <section class="card">
-
-        <h2>About This Demonstration</h2>
-
-        <p>
-            This demonstration shows how a cryptographic hash can transform
-            input data into a fixed-length digest.
-        </p>
-
-        <p>
-            The demonstration uses the SHA-256 hashing function through the
-            browser's built-in Web Crypto API.
-        </p>
-
-        <div class="safe">
-
-            <strong>Safety notice:</strong>
-
-            <p>
-                This is a local educational demonstration. It does not
-                connect to or test another website, database, account,
-                server, or real user information.
-            </p>
-
-            <p>
-                For the demonstration, use fictional text rather than a
-                real password or other sensitive information.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>Step-by-Step Demonstration</h2>
-
-        <div class="step">
-
-            <strong>Step 1:</strong>
-
-            <p>
-                Enter some fictional text in the box below.
-            </p>
-
-        </div>
-
-
-        <div class="step">
-
-            <strong>Step 2:</strong>
-
-            <p>
-                Click the "Generate SHA-256 Hash" button.
-            </p>
-
-        </div>
-
-
-        <div class="step">
-
-            <strong>Step 3:</strong>
-
-            <p>
-                The browser calculates the SHA-256 digest and displays the
-                result.
-            </p>
-
-        </div>
-
-
-        <div class="step">
-
-            <strong>Step 4:</strong>
-
-            <p>
-                Change one character in the input and generate the hash again.
-                The resulting digest will change significantly.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>Try It Yourself</h2>
-
-        <div class="demo-box">
-
-            <label for="inputText">
-                Enter fictional text:
-            </label>
-
-            <input
-                type="text"
-                id="inputText"
-                placeholder="Example: university project"
-            >
-
-            <button onclick="generateHash()">
-                Generate SHA-256 Hash
-            </button>
-
-
-            <div
-                id="result"
-                class="result"
-                aria-live="polite"
-            >
-
-                Your hash will appear here.
+                <div class="tagline">
+                    A student blog about cryptographic failures
+                </div>
 
             </div>
 
         </div>
 
-    </section>
+
+        <nav>
+
+            <a href="index.html">Introduction</a>
+            <a href="concept.html">Concept</a>
+            <a href="risk.html">Risk</a>
+            <a href="cases.html">Cases</a>
+            <a href="prevention.html">Prevention</a>
+            <a href="demo.html">Demo</a>
+            <a href="references.html">References</a>
+            <a href="about.html">About</a>
+
+        </nav>
+
+    </div>
+
+</header>
 
 
-    <section class="card">
-
-        <h2>What Happened?</h2>
-
-        <p>
-            The browser took the text entered into the demonstration and
-            processed it using SHA-256.
-        </p>
-
-        <p>
-            SHA-256 produces a fixed-length 256-bit digest. The same input
-            will produce the same digest, while changing the input changes
-            the resulting digest.
-        </p>
-
-        <p>
-            A hash is different from encryption. Encryption is designed to
-            allow authorized parties to recover the original data using the
-            appropriate key. A cryptographic hash is designed as a one-way
-            transformation.
-        </p>
-
-    </section>
+<main>
 
 
-    <section class="card">
+    <div class="category">
+        05 / Interactive Demo
+    </div>
 
-        <h2>Important Security Lesson</h2>
 
-        <div class="warning">
+    <h1>
+        Hash Demo
+    </h1>
 
-            <strong>SHA-256 alone should NOT be used for storing passwords.</strong>
 
-            <p>
-                SHA-256 is a fast general-purpose hash function. Password
-                storage requires password-hashing algorithms designed to make
-                password guessing more expensive.
-            </p>
+    <p class="subtitle">
+
+        Change the text below and watch how even a
+        small change creates a completely different hash.
+
+    </p>
+
+
+    <div class="demo-box">
+
+
+        <label for="inputText">
+            Enter some text
+        </label>
+
+
+        <input
+            type="text"
+            id="inputText"
+            placeholder="Try: hello world"
+        >
+
+
+        <div class="hash-title">
+            SHA-256 output
+        </div>
+
+
+        <div class="hash" id="hashOutput">
+
+            Type something above...
 
         </div>
 
 
-        <p>
-            Modern password-storage guidance recommends dedicated algorithms
-            such as Argon2id, scrypt, bcrypt, or PBKDF2, together with
-            appropriate salts and configuration.
-        </p>
+    </div>
+
+
+    <div class="note">
+
+        <strong>What does this show?</strong>
+
+        Hashing produces a fixed-length value from input.
+        Changing the input changes the resulting hash.
+
+    </div>
+
+
+    <div class="sources">
+
+        <h2>
+            Sources
+        </h2>
 
         <p>
-            Therefore, this demonstration teaches the concept of hashing,
-            but it is not an example of a production password-storage
-            system.
+
+            [1]
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest"
+               target="_blank">
+
+                MDN — SubtleCrypto.digest()
+
+            </a>
+
         </p>
 
-    </section>
+    </div>
 
 
-    <section class="card">
-
-        <h2>Why This Demonstration Is Safe</h2>
-
-        <ul>
-
-            <li>
-                It uses fictional information.
-            </li>
-
-            <li>
-                It runs in the visitor's browser.
-            </li>
-
-            <li>
-                It does not attempt to access another website.
-            </li>
-
-            <li>
-                It does not test authentication systems.
-            </li>
-
-            <li>
-                It does not perform password cracking.
-            </li>
-
-            <li>
-                It does not attack or scan any external system.
-            </li>
-
-        </ul>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>Technical Explanation</h2>
-
-        <p>
-            The demonstration uses the browser's Web Crypto API.
-            The JavaScript calls the SHA-256 digest function and converts
-            the resulting bytes into hexadecimal text for display.
-        </p>
-
-        <p>
-            This allows the demonstration to show a real cryptographic
-            operation without requiring a backend server or external
-            security-testing environment.
-        </p>
-
-    </section>
-
-
-</div>
+</main>
 
 
 <footer>
 
-    <p>
-        Cryptographic Failures in Web Security — Educational Student Blog
-    </p>
+    When Encryption Fails · Information Systems & Cybersecurity
 
 </footer>
 
 
 <script>
 
-async function generateHash() {
-
-    const input =
-        document.getElementById("inputText").value;
-
-    const result =
-        document.getElementById("result");
+    const input = document.getElementById("inputText");
+    const output = document.getElementById("hashOutput");
 
 
-    if (input.length === 0) {
+    async function createHash(text) {
 
-        result.textContent =
-            "Please enter some fictional text first.";
+        const encoder = new TextEncoder();
 
-        return;
+        const data = encoder.encode(text);
+
+        const hashBuffer =
+            await crypto.subtle.digest("SHA-256", data);
+
+        const hashArray =
+            Array.from(new Uint8Array(hashBuffer));
+
+        return hashArray
+            .map(byte => byte.toString(16).padStart(2, "0"))
+            .join("");
 
     }
 
 
-    const encoder =
-        new TextEncoder();
+    input.addEventListener("input", async function () {
 
+        if (input.value === "") {
 
-    const data =
-        encoder.encode(input);
+            output.textContent =
+                "Type something above...";
 
+            return;
 
-    const hashBuffer =
-        await crypto.subtle.digest(
-            "SHA-256",
-            data
-        );
+        }
 
+        output.textContent =
+            await createHash(input.value);
 
-    const hashArray =
-        Array.from(
-            new Uint8Array(hashBuffer)
-        );
-
-
-    const hashHex =
-        hashArray
-            .map(
-                byte =>
-                    byte
-                    .toString(16)
-                    .padStart(2, "0")
-            )
-            .join("");
-
-
-    result.textContent =
-        hashHex;
-
-}
+    });
 
 </script>
 
 
 </body>
-
 </html>
