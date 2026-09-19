@@ -4,362 +4,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>When Encryption Fails | Cryptographic Failures</title>
-
-    <meta name="description"
-          content="An educational cybersecurity blog explaining cryptographic failures, their risks, real-world cases, prevention and safe demonstrations.">
+    <title>Introduction | Cryptographic Failures</title>
 
     <style>
-
-        /* ==============================
-           GLOBAL DESIGN
-        ============================== */
 
         * {
             box-sizing: border-box;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #f7f8fa;
-            color: #202124;
-            line-height: 1.75;
+            background: #ffffff;
+            color: #222222;
+            line-height: 1.7;
         }
 
-        a {
-            color: #185abc;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* ==============================
-           HEADER
-        ============================== */
+        /* HEADER */
 
         header {
+            border-bottom: 1px solid #e5e5e5;
             background: #ffffff;
-            border-bottom: 1px solid #e1e4e8;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
         }
 
-        .header-container {
-            max-width: 1150px;
+        .header {
+            max-width: 1000px;
             margin: auto;
             padding: 22px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 30px;
         }
 
-        .site-title {
-            font-size: 23px;
-            font-weight: 700;
-            color: #111827;
-            line-height: 1.2;
+        .logo {
+            font-size: 19px;
+            font-weight: bold;
+            color: #222222;
         }
 
-        .site-subtitle {
-            font-size: 13px;
-            color: #6b7280;
-            margin-top: 4px;
+        .tagline {
+            font-size: 12px;
+            color: #777777;
+            margin-top: 2px;
         }
 
         nav {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: flex-end;
             gap: 18px;
+            flex-wrap: wrap;
         }
 
         nav a {
+            color: #444444;
+            text-decoration: none;
             font-size: 14px;
-            color: #374151;
-            font-weight: 600;
         }
 
         nav a:hover {
-            color: #185abc;
-            text-decoration: none;
+            color: #1769aa;
         }
 
-        /* ==============================
-           MAIN CONTENT
-        ============================== */
+        /* MAIN */
 
         main {
-            max-width: 950px;
-            margin: auto;
-            padding: 65px 25px 80px;
-        }
-
-        /* ==============================
-           HERO
-        ============================== */
-
-        .hero {
-            background: #ffffff;
-            border: 1px solid #e1e4e8;
-            padding: 55px 55px;
-            margin-bottom: 50px;
-        }
-
-        .hero-label {
-            color: #185abc;
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .hero h1 {
-            font-size: 46px;
-            line-height: 1.12;
-            margin: 0 0 20px;
-            color: #111827;
-        }
-
-        .hero p {
-            font-size: 19px;
-            color: #4b5563;
             max-width: 760px;
+            margin: 0 auto;
+            padding: 60px 25px 80px;
         }
 
-        .hero-button {
-            display: inline-block;
-            margin-top: 15px;
-            background: #185abc;
-            color: white;
-            padding: 12px 22px;
-            font-weight: 700;
-            border-radius: 4px;
-        }
-
-        .hero-button:hover {
-            background: #124b9b;
-            text-decoration: none;
-        }
-
-        /* ==============================
-           ARTICLE SECTIONS
-        ============================== */
-
-        article {
-            background: #ffffff;
-            border: 1px solid #e1e4e8;
-            padding: 45px 55px;
-            margin-bottom: 35px;
-        }
-
-        article h2 {
-            font-size: 28px;
-            color: #111827;
-            margin-top: 0;
-            margin-bottom: 18px;
-        }
-
-        article h3 {
-            font-size: 20px;
-            margin-top: 30px;
-            color: #1f2937;
-        }
-
-        article p {
-            margin-bottom: 20px;
-        }
-
-        /* ==============================
-           CONTENT GRID
-        ============================== */
-
-        .topics {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        .topic-card {
-            border: 1px solid #e1e4e8;
-            padding: 25px;
-            background: #fafafa;
-            transition: 0.2s ease;
-        }
-
-        .topic-card:hover {
-            transform: translateY(-3px);
-            border-color: #b8c7df;
-        }
-
-        .topic-number {
+        .category {
             font-size: 12px;
-            font-weight: 700;
-            color: #185abc;
+            color: #1769aa;
+            text-transform: uppercase;
             letter-spacing: 1px;
+            font-weight: bold;
+            margin-bottom: 12px;
         }
 
-        .topic-card h3 {
-            margin-top: 8px;
+        h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin: 0 0 35px;
+            color: #1d1d1d;
+        }
+
+        h2 {
+            font-size: 25px;
+            margin-top: 55px;
+            margin-bottom: 15px;
+            color: #222222;
+        }
+
+        p {
+            font-size: 17px;
+            margin: 0 0 18px;
+        }
+
+        a {
+            color: #1769aa;
+        }
+
+        /* SMALL INFO */
+
+        .intro-note {
+            border-left: 3px solid #1769aa;
+            padding: 5px 0 5px 18px;
+            margin: 30px 0;
+            color: #555555;
+        }
+
+        /* TABLE OF CONTENTS */
+
+        .contents {
+            background: #f7f7f7;
+            padding: 20px 25px;
+            margin: 30px 0 45px;
+        }
+
+        .contents strong {
+            display: block;
             margin-bottom: 8px;
         }
 
-        .topic-card p {
-            color: #5f6368;
-            margin-bottom: 0;
+        .contents a {
+            display: block;
+            margin: 4px 0;
+            text-decoration: none;
         }
 
-        /* ==============================
-           INFORMATION BOX
-        ============================== */
-
-        .info-box {
-            border-left: 4px solid #185abc;
-            background: #f1f5fb;
-            padding: 20px 25px;
-            margin: 25px 0;
+        .contents a:hover {
+            text-decoration: underline;
         }
 
-        .warning-box {
-            border-left: 4px solid #b45309;
-            background: #fff8eb;
-            padding: 20px 25px;
-            margin: 25px 0;
+        /* SOURCES */
+
+        .sources {
+            border-top: 1px solid #e5e5e5;
+            margin-top: 60px;
+            padding-top: 25px;
         }
 
-        /* ==============================
-           SIMPLE FLOW DIAGRAM
-        ============================== */
-
-        .flow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 30px 0;
+        .sources p {
+            font-size: 14px;
+            color: #555555;
         }
 
-        .flow-item {
-            background: #f1f5fb;
-            border: 1px solid #cbd5e1;
-            padding: 15px 18px;
-            text-align: center;
-            font-weight: 600;
-            border-radius: 4px;
-        }
-
-        .arrow {
-            font-size: 22px;
-            color: #6b7280;
-        }
-
-        /* ==============================
-           FOOTER
-        ============================== */
+        /* FOOTER */
 
         footer {
-            background: #ffffff;
-            border-top: 1px solid #e1e4e8;
-            padding: 35px 25px;
+            border-top: 1px solid #e5e5e5;
             text-align: center;
-            color: #6b7280;
-            font-size: 14px;
+            padding: 30px 20px;
+            color: #777777;
+            font-size: 13px;
         }
 
-        footer a {
-            margin: 0 8px;
-        }
+        /* MOBILE */
 
-        /* ==============================
-           MOBILE
-        ============================== */
+        @media (max-width: 700px) {
 
-        @media (max-width: 800px) {
-
-            .header-container {
-                flex-direction: column;
-                align-items: flex-start;
+            .header {
+                display: block;
             }
 
             nav {
-                justify-content: flex-start;
+                margin-top: 15px;
                 gap: 12px;
             }
 
-            .hero {
-                padding: 35px 25px;
+            main {
+                padding-top: 40px;
             }
 
-            .hero h1 {
-                font-size: 35px;
+            h1 {
+                font-size: 34px;
             }
 
-            article {
-                padding: 32px 25px;
+            h2 {
+                font-size: 23px;
             }
 
-            .topics {
-                grid-template-columns: 1fr;
+            p {
+                font-size: 16px;
             }
 
-            .flow {
-                flex-direction: column;
-            }
-
-            .arrow {
-                transform: rotate(90deg);
-            }
         }
 
     </style>
 </head>
 
+
 <body>
 
-<!-- ==============================
-     HEADER
-============================== -->
 
 <header>
 
-    <div class="header-container">
+    <div class="header">
 
         <div>
-            <div class="site-title">
+            <div class="logo">
                 When Encryption Fails
             </div>
 
-            <div class="site-subtitle">
-                Understanding Cryptographic Failures in Web Security
+            <div class="tagline">
+                A student blog about cryptographic failures
             </div>
         </div>
 
+
         <nav aria-label="Main navigation">
 
-            <a href="index.html">Home</a>
+            <a href="index.html">Introduction</a>
 
             <a href="concept.html">Concept</a>
 
             <a href="risk.html">Risk</a>
 
-            <a href="cases.html">Real Cases</a>
+            <a href="cases.html">Cases</a>
 
             <a href="prevention.html">Prevention</a>
 
-            <a href="demo.html">Safe Demo</a>
+            <a href="demo.html">Demo</a>
 
-            <a href="evidence.html">Evidence</a>
+            <a href="references.html">References</a>
 
             <a href="about.html">About</a>
 
@@ -370,504 +237,226 @@
 </header>
 
 
-<!-- ==============================
-     MAIN
-============================== -->
-
 <main>
 
-    <!-- HERO -->
 
-    <section class="hero">
+    <div class="category">
+        Information Systems & Cybersecurity
+    </div>
 
-        <div class="hero-label">
-            Information Systems & Cybersecurity
-        </div>
 
-        <h1>
-            Cryptographic Failures
-        </h1>
+    <h1>
+        Introduction
+    </h1>
 
-        <p>
-            Understanding how weak, missing or incorrectly implemented
-            cryptography can expose sensitive information — and how
-            developers can prevent these failures.
-        </p>
 
-        <a class="hero-button" href="concept.html">
-            Start Reading →
+    <div class="contents">
+
+        <strong>On this page</strong>
+
+        <a href="#why">
+            1. Why do cryptographic failures matter?
         </a>
 
-    </section>
+        <a href="#affected">
+            2. Who is affected?
+        </a>
 
+        <a href="#learn">
+            3. What will you learn?
+        </a>
 
-    <!-- INTRODUCTION -->
+        <a href="#sources">
+            4. Sources
+        </a>
 
-    <article>
+    </div>
 
-        <h2>Introduction</h2>
 
-        <p>
-            Cryptography is one of the fundamental technologies used to
-            protect information in modern web applications. It helps
-            protect passwords, personal information, financial data,
-            communication and authentication credentials.
-        </p>
+    <!-- SECTION 1 -->
 
-        <p>
-            However, simply using cryptography does not automatically make
-            an application secure. Problems can occur when encryption is
-            missing, outdated algorithms are used, passwords are stored
-            incorrectly, cryptographic keys are poorly managed, or secure
-            randomness is not used.
-        </p>
+    <h2 id="why">
+        1. Why do cryptographic failures matter?
+    </h2>
 
-        <p>
-            These problems are commonly described as
-            <strong>Cryptographic Failures</strong>.
-        </p>
 
-        <div class="info-box">
+    <p>
+        Most websites deal with information that should not be seen by
+        everyone. This could be a password, payment information, personal
+        details or a private message.
+    </p>
 
-            <strong>Current OWASP classification:</strong>
 
-            Cryptographic Failures is listed as
-            <strong>A04:2025</strong> in the OWASP Top 10:2025.
-            The category includes problems such as missing encryption,
-            weak cryptographic protection, exposed keys, insecure
-            password storage and other cryptographic implementation
-            weaknesses.
+    <p>
+        Cryptography is used to help protect this information. It can be
+        used to encrypt data, protect passwords and secure communication
+        between a user and a website.
+    </p>
 
-        </div>
 
-    </article>
+    <p>
+        The problem is that cryptography can also be used incorrectly.
+        A website might use an old algorithm, store passwords in an unsafe
+        way, or accidentally expose a secret key.
+    </p>
 
 
-    <!-- WHY IT MATTERS -->
+    <p>
+        These types of problems are known as
+        <strong>cryptographic failures</strong>.
+    </p>
 
-    <article>
 
-        <h2>1. Why Do Cryptographic Failures Matter?</h2>
+    <div class="intro-note">
 
-        <p>
-            Web applications regularly process information that should not
-            be exposed to unauthorized people. Examples include passwords,
-            authentication tokens, personal information, payment
-            information and private documents.
-        </p>
+        In the current OWASP Top 10:2025,
+        Cryptographic Failures is listed as
+        <strong>A04:2025</strong>. OWASP includes issues such as weak
+        cryptography, exposed keys, poor password storage and problems
+        with random number generation in this category.
+        
+    </div>
 
-        <p>
-            When cryptographic protection fails, information that was
-            supposed to remain confidential may become accessible to
-            unauthorized users.
-        </p>
 
-        <p>
-            The consequences depend on the type of information involved
-            and the nature of the failure. Possible consequences include
-            privacy violations, account compromise, financial losses and
-            exposure of confidential information.
-        </p>
+    <!-- SECTION 2 -->
 
-    </article>
+    <h2 id="affected">
+        2. Who is affected?
+    </h2>
 
 
-    <!-- WHO IS AFFECTED -->
+    <p>
+        The most obvious group is the users of a website. If sensitive
+        information is not properly protected, their accounts or personal
+        information could be exposed.
+    </p>
 
-    <article>
 
-        <h2>2. Who Can Be Affected?</h2>
+    <p>
+        Developers are also involved because many cryptographic failures
+        are caused by the way security is implemented or configured.
+    </p>
 
-        <p>
-            Cryptographic failures can affect many different groups because
-            modern web applications handle sensitive information across
-            many services and systems.
-        </p>
 
-        <div class="topics">
+    <p>
+        Organizations can also be affected. A security incident involving
+        sensitive information can create financial, legal and reputational
+        problems.
+    </p>
 
-            <div class="topic-card">
 
-                <div class="topic-number">
-                    USERS
-                </div>
+    <!-- SECTION 3 -->
 
-                <h3>Web Users</h3>
+    <h2 id="learn">
+        3. What will you learn?
+    </h2>
 
-                <p>
-                    Users may have passwords, personal information or
-                    private communications exposed when applications fail
-                    to protect sensitive data correctly.
-                </p>
 
-            </div>
+    <p>
+        In this blog, I will explain what cryptographic failures are and
+        show some common ways they can happen.
+    </p>
 
 
-            <div class="topic-card">
+    <p>
+        I will also look at two real-world cases and discuss what can be
+        learned from them.
+    </p>
 
-                <div class="topic-number">
-                    DEVELOPERS
-                </div>
 
-                <h3>Developers</h3>
+    <p>
+        The blog then covers some ways developers can reduce these risks.
+        There is also a small browser-based demonstration showing how a
+        cryptographic hash changes when the input changes.
+    </p>
 
-                <p>
-                    Developers are responsible for selecting and correctly
-                    implementing appropriate cryptographic mechanisms.
-                </p>
 
-            </div>
+    <p>
+        The demonstration is intentionally simple and does not test or
+        attack any real system.
+    </p>
 
 
-            <div class="topic-card">
+    <!-- SHORT NAVIGATION -->
 
-                <div class="topic-number">
-                    ORGANIZATIONS
-                </div>
+    <h2>
+        Continue reading
+    </h2>
 
-                <h3>Organizations</h3>
 
-                <p>
-                    Organizations may face financial, operational,
-                    reputational or regulatory consequences when sensitive
-                    information is exposed.
-                </p>
+    <p>
+        <a href="concept.html">
+            → Cryptographic Failures: The Concept
+        </a>
+    </p>
 
-            </div>
 
+    <p>
+        <a href="risk.html">
+            → Risk Analysis
+        </a>
+    </p>
 
-            <div class="topic-card">
 
-                <div class="topic-number">
-                    SYSTEMS
-                </div>
+    <p>
+        <a href="cases.html">
+            → Real-World Cases
+        </a>
+    </p>
 
-                <h3>Web Applications</h3>
 
-                <p>
-                    Applications, databases, APIs and communication channels
-                    can all be affected by incorrect cryptographic
-                    implementation.
-                </p>
+    <p>
+        <a href="prevention.html">
+            → Prevention and Mitigation
+        </a>
+    </p>
 
-            </div>
 
-        </div>
-
-    </article>
-
-
-    <!-- WHAT READER WILL LEARN -->
-
-    <article>
-
-        <h2>3. What You Will Learn</h2>
-
-        <p>
-            This blog examines cryptographic failures from both a technical
-            and practical cybersecurity perspective.
-        </p>
-
-        <div class="topics">
-
-            <div class="topic-card">
-
-                <div class="topic-number">
-                    01
-                </div>
-
-                <h3>Understand</h3>
-
-                <p>
-                    Learn what cryptographic failures are and how they
-                    occur in web applications.
-                </p>
-
-                <a href="concept.html">
-                    Read the concept →
-                </a>
-
-            </div>
-
-
-            <div class="topic-card">
-
-                <div class="topic-number">
-                    02
-                </div>
-
-                <h3>Analyze Risk</h3>
-
-                <p>
-                    Examine assets, threat actors, causes and possible
-                    impacts.
-                </p>
-
-                <a href="risk.html">
-                    Explore the risks →
-                </a>
-
-            </div>
-
-
-            <div class="topic-card">
-
-                <div class="topic-number">
-                    03
-                </div>
-
-                <h3>Study Real Cases</h3>
-
-                <p>
-                    Explore documented incidents involving weaknesses in
-                    cryptographic protection.
-                </p>
-
-                <a href="cases.html">
-                    View real cases →
-                </a>
-
-            </div>
-
-
-            <div class="topic-card">
-
-                <div class="topic-number">
-                    04
-                </div>
-
-                <h3>Learn Prevention</h3>
-
-                <p>
-                    Learn practical defensive techniques for secure
-                    cryptographic implementation.
-                </p>
-
-                <a href="prevention.html">
-                    Learn prevention →
-                </a>
-
-            </div>
-
-        </div>
-
-    </article>
-
-
-    <!-- SIMPLE EXPLANATION -->
-
-    <article>
-
-        <h2>4. How a Cryptographic Failure Can Lead to Exposure</h2>
-
-        <p>
-            A cryptographic failure does not necessarily mean that an
-            encryption algorithm itself has been mathematically broken.
-            The problem can instead come from how cryptography is selected,
-            configured, implemented or managed.
-        </p>
-
-        <div class="flow">
-
-            <div class="flow-item">
-                Weak or Missing<br>
-                Protection
-            </div>
-
-            <div class="arrow">
-                →
-            </div>
-
-            <div class="flow-item">
-                Sensitive Data<br>
-                Exposed
-            </div>
-
-            <div class="arrow">
-                →
-            </div>
-
-            <div class="flow-item">
-                Possible<br>
-                Data Compromise
-            </div>
-
-            <div class="arrow">
-                →
-            </div>
-
-            <div class="flow-item">
-                Security &<br>
-                Privacy Impact
-            </div>
-
-        </div>
-
-    </article>
-
-
-    <!-- BLOG CONTENT -->
-
-    <article>
-
-        <h2>5. Explore the Blog</h2>
-
-        <p>
-            The remaining sections provide a deeper examination of the
-            topic.
-        </p>
-
-        <p>
-            <strong>
-                Concept:
-            </strong>
-            Learn about encryption, hashing, key management and common
-            causes of cryptographic failures.
-        </p>
-
-        <p>
-            <strong>
-                Risk Analysis:
-            </strong>
-            Examine assets, threats, causes, impacts and ethical
-            considerations.
-        </p>
-
-        <p>
-            <strong>
-                Real-World Cases:
-            </strong>
-            Study documented incidents involving Adobe and Debian OpenSSL.
-        </p>
-
-        <p>
-            <strong>
-                Prevention:
-            </strong>
-            Explore secure development practices and defensive measures.
-        </p>
-
-        <p>
-            <strong>
-                Safe Demonstration:
-            </strong>
-            Try a browser-based SHA-256 demonstration created specifically
-            for this project.
-        </p>
-
-        <p>
-            <strong>
-                Current Evidence:
-            </strong>
-            Examine current OWASP and NIST guidance and broader security
-            trends.
-        </p>
-
-    </article>
-
-
-    <!-- SAFETY -->
-
-    <article>
-
-        <h2>6. Safety and Ethics</h2>
-
-        <div class="warning-box">
-
-            <strong>Educational and defensive purpose:</strong>
-
-            <p>
-                This project is designed for cybersecurity education.
-                Demonstrations are performed using safe, isolated
-                examples and do not involve unauthorized testing,
-                exploitation, password cracking or scanning of real
-                systems.
-            </p>
-
-        </div>
-
-        <p>
-            The goal is to understand how cryptographic weaknesses occur
-            and how developers can prevent them.
-        </p>
-
+    <p>
         <a href="demo.html">
-            View the Safe Demonstration →
+            → Safe Demonstration
         </a>
+    </p>
 
-    </article>
 
+    <!-- SOURCES -->
 
-    <!-- PROJECT -->
+    <div class="sources" id="sources">
 
-    <article>
+        <h2>
+            4. Sources
+        </h2>
 
-        <h2>About This Project</h2>
-
-        <p>
-            This educational blog was created as part of the
-            <strong>Information Systems and Cybersecurity</strong>
-            coursework.
-        </p>
 
         <p>
-            The assigned topic is
-            <strong>37. Cryptographic Failures</strong>.
+            [1]
+            <a href="https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/"
+               target="_blank">
+                OWASP. A04:2025 – Cryptographic Failures.
+            </a>
         </p>
+
 
         <p>
-            The project combines technical explanations, documented
-            real-world cases, current cybersecurity guidance and an
-            original safe browser-based demonstration.
+            [2]
+            <a href="https://top10.owasp.org/2025/"
+               target="_blank">
+                OWASP. Top 10:2025.
+            </a>
         </p>
 
-        <a href="about.html">
-            Learn more about the project →
-        </a>
-
-    </article>
+    </div>
 
 
 </main>
 
 
-<!-- ==============================
-     FOOTER
-============================== -->
-
 <footer>
 
-    <p>
-        <strong>When Encryption Fails</strong>
-    </p>
-
-    <p>
-        Information Systems & Cybersecurity
-    </p>
-
-    <p>
-
-        <a href="index.html">Home</a> ·
-
-        <a href="concept.html">Concept</a> ·
-
-        <a href="cases.html">Real Cases</a> ·
-
-        <a href="prevention.html">Prevention</a> ·
-
-        <a href="demo.html">Safe Demo</a> ·
-
-        <a href="references.html">References</a> ·
-
-        <a href="about.html">About</a>
-
-    </p>
-
-    <p>
-        © 2026 Student Cybersecurity Project
-    </p>
+    When Encryption Fails · Information Systems & Cybersecurity
 
 </footer>
+
 
 </body>
 </html>
