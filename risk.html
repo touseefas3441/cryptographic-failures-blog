@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Analysis | Cryptographic Failures</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #d1d5db;
+        }
+
+        nav {
+            background: #1f2937;
+            text-align: center;
+            padding: 14px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        h2 {
+            color: #111827;
+        }
+
+        h3 {
+            color: #374151;
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        .risk-box {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        footer {
+            background: #111827;
+            color: #d1d5db;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 700px) {
+            nav a {
+                display: block;
+                margin: 8px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Risk Analysis</h1>
+    <p>Understanding the security risks caused by cryptographic failures</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="concept.html">Concept</a>
+    <a href="risk.html">Risk Analysis</a>
+    <a href="cases.html">Real Cases</a>
+    <a href="prevention.html">Prevention</a>
+    <a href="demo.html">Safe Demo</a>
+    <a href="evidence.html">Evidence</a>
+    <a href="conclusion.html">Conclusion</a>
+    <a href="references.html">References</a>
+    <a href="about.html">About</a>
+</nav>
+
+<div class="container">
+
+    <section class="card">
+        <h2>What is the Risk?</h2>
+
+        <p>
+            Cryptographic failures occur when sensitive information is not
+            properly protected by encryption, hashing, secure random numbers,
+            or appropriate key management.
+        </p>
+
+        <p>
+            The main risk is that information intended to remain confidential
+            or protected may become accessible to unauthorized people.
+        </p>
+
+        <div class="risk-box">
+            <strong>Simple idea:</strong>
+            Weak or missing cryptographic protection can turn private
+            information into exposed information.
+        </div>
+    </section>
+
+
+    <section class="card">
+        <h2>1. Important Assets at Risk</h2>
+
+        <p>
+            Cryptographic failures can affect many types of information and
+            security assets.
+        </p>
+
+        <ul>
+            <li>User passwords</li>
+            <li>Personal information</li>
+            <li>Financial and payment information</li>
+            <li>Authentication tokens and session information</li>
+            <li>Private messages and documents</li>
+            <li>Encryption keys and secrets</li>
+            <li>Business and organizational information</li>
+        </ul>
+    </section>
+
+
+    <section class="card">
+        <h2>2. Possible Threat Actors</h2>
+
+        <p>
+            Different types of attackers may try to take advantage of
+            cryptographic weaknesses.
+        </p>
+
+        <ul>
+            <li>
+                <strong>Cybercriminals:</strong>
+                may attempt to obtain valuable information for financial gain.
+            </li>
+
+            <li>
+                <strong>Opportunistic attackers:</strong>
+                may search for systems that expose sensitive information
+                because of weak security controls.
+            </li>
+
+            <li>
+                <strong>Malicious insiders:</strong>
+                authorized users may misuse information if security controls
+                are weak.
+            </li>
+
+            <li>
+                <strong>Other unauthorized users:</strong>
+                people who gain access to exposed data may attempt to use it
+                for further attacks.
+            </li>
+        </ul>
+    </section>
+
+
+    <section class="card">
+        <h2>3. Common Causes</h2>
+
+        <p>
+            Cryptographic failures can happen for several reasons.
+        </p>
+
+        <ul>
+            <li>Using outdated or inappropriate cryptographic algorithms</li>
+            <li>Sending sensitive information without adequate encryption</li>
+            <li>Storing passwords incorrectly</li>
+            <li>Using weak or predictable random numbers</li>
+            <li>Poor management of encryption keys</li>
+            <li>Incorrect TLS configuration</li>
+            <li>Hard-coded cryptographic secrets</li>
+            <li>Using encryption without properly protecting the encryption keys</li>
+        </ul>
+    </section>
+
+
+    <section class="card">
+        <h2>4. Potential Impact</h2>
+
+        <table>
+            <tr>
+                <th>Impact Area</th>
+                <th>Possible Consequence</th>
+            </tr>
+
+            <tr>
+                <td>Confidentiality</td>
+                <td>Sensitive information may be exposed to unauthorized people.</td>
+            </tr>
+
+            <tr>
+                <td>Privacy</td>
+                <td>Personal information may be disclosed.</td>
+            </tr>
+
+            <tr>
+                <td>Financial Security</td>
+                <td>Exposed financial information may contribute to fraud or financial loss.</td>
+            </tr>
+
+            <tr>
+                <td>Account Security</td>
+                <td>Weak password protection may make unauthorized account access easier.</td>
+            </tr>
+
+            <tr>
+                <td>Reputation</td>
+                <td>An organization may lose customer trust after a security incident.</td>
+            </tr>
+
+            <tr>
+                <td>Legal and Regulatory</td>
+                <td>Organizations may face obligations or consequences related to protecting personal or regulated information.</td>
+            </tr>
+        </table>
+    </section>
+
+
+    <section class="card">
+        <h2>5. Risk Chain</h2>
+
+        <p>
+            A cryptographic failure can be understood as a chain of events:
+        </p>
+
+        <div class="risk-box">
+            <strong>Cryptographic weakness</strong>
+            →
+            <strong>Information becomes insufficiently protected</strong>
+            →
+            <strong>Unauthorized access or disclosure</strong>
+            →
+            <strong>Potential security, privacy or financial impact</strong>
+        </div>
+    </section>
+
+
+    <section class="card">
+        <h2>6. Ethical Considerations</h2>
+
+        <p>
+            Studying cryptographic failures is important for improving
+            security, but security testing must be performed responsibly.
+        </p>
+
+        <p>
+            A security researcher or student should not test cryptographic
+            weaknesses against systems without permission. Demonstrations
+            should use intentionally created examples, local environments,
+            fake information, or purpose-built security laboratories.
+        </p>
+
+        <p>
+            This project therefore uses safe educational demonstrations rather
+            than testing real organizations or real users.
+        </p>
+    </section>
+
+
+    <section class="card">
+        <h2>Key Lesson</h2>
+
+        <p>
+            Cryptography is not only about choosing an encryption algorithm.
+            Secure systems also require appropriate algorithms, secure
+            implementation, strong key management, safe password storage,
+            secure random values, and correct configuration.
+        </p>
+    </section>
+
+</div>
+
+<footer>
+    <p>Cryptographic Failures in Web Security — Educational Student Blog</p>
+</footer>
+
+</body>
+</html>
