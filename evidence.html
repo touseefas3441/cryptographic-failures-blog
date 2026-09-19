@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Current Evidence | Cryptographic Failures</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 34px;
+        }
+
+        header p {
+            color: #d1d5db;
+            margin-top: 8px;
+        }
+
+        nav {
+            background: #1f2937;
+            text-align: center;
+            padding: 14px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+
+        h2 {
+            color: #111827;
+        }
+
+        h3 {
+            color: #374151;
+        }
+
+        .evidence {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        .important {
+            background: #f0fdf4;
+            border-left: 5px solid #16a34a;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        .note {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 18px;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #d1d5db;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #e5e7eb;
+        }
+
+        footer {
+            background: #111827;
+            color: #d1d5db;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 700px) {
+
+            nav a {
+                display: block;
+                margin: 8px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>Current Evidence & Trends</h1>
+
+    <p>
+        What current security guidance and evidence show about
+        cryptographic failures
+    </p>
+
+</header>
+
+
+<nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="concept.html">Concept</a>
+
+    <a href="risk.html">Risk Analysis</a>
+
+    <a href="cases.html">Real Cases</a>
+
+    <a href="prevention.html">Prevention</a>
+
+    <a href="demo.html">Safe Demo</a>
+
+    <a href="evidence.html">Evidence</a>
+
+    <a href="conclusion.html">Conclusion</a>
+
+    <a href="references.html">References</a>
+
+    <a href="about.html">About</a>
+
+</nav>
+
+
+<div class="container">
+
+
+    <section class="card">
+
+        <h2>Why Current Evidence Matters</h2>
+
+        <p>
+            Cryptographic security is not a fixed topic. Algorithms,
+            protocols, libraries, attack techniques and security standards
+            change over time.
+        </p>
+
+        <p>
+            For this reason, developers need to use current security guidance
+            instead of relying only on older recommendations.
+        </p>
+
+        <div class="evidence">
+
+            <strong>Evidence used in this section:</strong>
+
+            <p>
+                The main sources used are the OWASP Top 10:2025 and guidance
+                from the National Institute of Standards and Technology
+                (NIST).
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>1. OWASP Top 10:2025</h2>
+
+        <p>
+            The current OWASP Top 10:2025 identifies Cryptographic Failures
+            as category <strong>A04:2025</strong>.
+        </p>
+
+        <p>
+            OWASP describes this category as covering failures related to
+            missing cryptography, insufficiently strong cryptography,
+            cryptographic key exposure and related errors.
+        </p>
+
+        <div class="evidence">
+
+            <strong>Current OWASP evidence:</strong>
+
+            <p>
+                The 2025 OWASP data maps 32 Common Weakness Enumerations
+                (CWEs) to Cryptographic Failures.
+            </p>
+
+            <p>
+                The dataset reported by OWASP contains more than 1.6 million
+                total occurrences across the mapped CWEs and 2,185 CVEs.
+            </p>
+
+        </div>
+
+        <p>
+            These figures describe the dataset used by OWASP for the
+            2025 category. They should not be interpreted as meaning that
+            1.6 million individual web applications experienced a
+            cryptographic failure.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>2. Common Technical Problems</h2>
+
+        <p>
+            The current OWASP category includes several different types of
+            cryptographic weaknesses.
+        </p>
+
+        <table>
+
+            <tr>
+                <th>Problem</th>
+                <th>Example</th>
+            </tr>
+
+            <tr>
+                <td>Weak algorithms</td>
+                <td>Using obsolete or risky cryptographic algorithms.</td>
+            </tr>
+
+            <tr>
+                <td>Weak randomness</td>
+                <td>Using predictable random values when cryptographic randomness is required.</td>
+            </tr>
+
+            <tr>
+                <td>Key management errors</td>
+                <td>Keys are poorly stored, reused, exposed or not properly managed.</td>
+            </tr>
+
+            <tr>
+                <td>Unprotected transmission</td>
+                <td>Sensitive information is transmitted without adequate transport protection.</td>
+            </tr>
+
+            <tr>
+                <td>Weak password storage</td>
+                <td>Passwords are stored using unsuitable hashing or encryption methods.</td>
+            </tr>
+
+            <tr>
+                <td>Hard-coded secrets</td>
+                <td>Cryptographic keys or other secrets are placed directly in source code.</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>3. NIST and Cryptographic Key Management</h2>
+
+        <p>
+            NIST describes cryptographic key management as the handling of
+            keys and related security information throughout their lifecycle.
+        </p>
+
+        <p>
+            This includes activities such as:
+        </p>
+
+        <ul>
+
+            <li>Key generation</li>
+
+            <li>Key storage</li>
+
+            <li>Key distribution or establishment</li>
+
+            <li>Key use</li>
+
+            <li>Key protection</li>
+
+            <li>Key destruction</li>
+
+        </ul>
+
+        <div class="important">
+
+            <strong>Why this matters:</strong>
+
+            <p>
+                A strong cryptographic algorithm cannot protect information
+                properly if its keys are exposed or badly managed.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>4. A Changing Security Environment</h2>
+
+        <p>
+            Current cryptographic guidance increasingly considers the need
+            to prepare systems for future cryptographic changes.
+        </p>
+
+        <p>
+            OWASP's 2025 guidance specifically recommends that organizations
+            prepare for post-quantum cryptography and consider the migration
+            requirements of systems with long security lifetimes.
+        </p>
+
+        <p>
+            This demonstrates an important principle: cryptographic security
+            requires long-term planning rather than simply selecting an
+            algorithm once and never reviewing it again.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>5. Comparison of Current Guidance</h2>
+
+        <table>
+
+            <tr>
+
+                <th>Source</th>
+
+                <th>Main Focus</th>
+
+                <th>Key Message</th>
+
+            </tr>
+
+            <tr>
+
+                <td>OWASP Top 10:2025</td>
+
+                <td>
+                    Web application security
+                </td>
+
+                <td>
+                    Avoid weak or missing cryptographic protection and
+                    manage keys, randomness, passwords and protocols securely.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>NIST</td>
+
+                <td>
+                    Cryptographic key management
+                </td>
+
+                <td>
+                    Keys need protection throughout their complete lifecycle.
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>Real-world incidents</td>
+
+                <td>
+                    Practical consequences
+                </td>
+
+                <td>
+                    Incorrect implementation or configuration can turn
+                    cryptographic mechanisms into security weaknesses.
+                </td>
+
+            </tr>
+
+        </table>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>6. What the Evidence Suggests</h2>
+
+        <p>
+            The available guidance and documented cases show that
+            cryptographic failures are not limited to choosing a weak
+            encryption algorithm.
+        </p>
+
+        <p>
+            They can occur because of poor randomness, inappropriate
+            algorithms, exposed keys, weak password storage, incorrect
+            configuration or missing protection for sensitive data.
+        </p>
+
+        <div class="note">
+
+            <strong>Reasoned observation:</strong>
+
+            <p>
+                Effective cryptographic security therefore depends on the
+                complete system around the cryptographic algorithm, including
+                implementation, configuration, key management and maintenance.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Important Limitations of the Evidence</h2>
+
+        <p>
+            Security datasets do not measure every security problem in the
+            world.
+        </p>
+
+        <p>
+            Different organizations collect data using different methods,
+            and vulnerability datasets can contain duplicate or differently
+            classified records.
+        </p>
+
+        <p>
+            Therefore, statistics should be interpreted according to the
+            population and methodology used by the source rather than being
+            treated as a complete measurement of all cryptographic failures.
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Sources</h2>
+
+        <p>
+            OWASP Top 10:2025 — A04: Cryptographic Failures
+        </p>
+
+        <p>
+            NIST — Cryptographic Key Management
+        </p>
+
+        <p>
+            NIST SP 800-57 — Recommendation for Key Management
+        </p>
+
+        <p>
+            These sources will be provided as clickable links on the
+            References page.
+        </p>
+
+    </section>
+
+
+</div>
+
+
+<footer>
+
+    <p>
+        Cryptographic Failures in Web Security — Educational Student Blog
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
