@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>When Encryption Fails | Cryptographic Failures</title>
+
+    <meta name="description" content="An educational blog explaining cryptographic failures in web security, their risks, real-world cases, and prevention.">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.7;
+            background: #f5f7fa;
+            color: #1f2937;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 20px;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #d1d5db;
+            font-size: 16px;
+        }
+
+        nav {
+            background: #1f2937;
+            border-top: 1px solid #374151;
+        }
+
+        nav .nav-container {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 16px;
+            display: block;
+            font-size: 14px;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            background: #374151;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .hero h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+            color: #111827;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+        }
+
+        .section {
+            background: white;
+            padding: 35px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        h2 {
+            color: #111827;
+            margin-bottom: 18px;
+            font-size: 28px;
+        }
+
+        h3 {
+            color: #374151;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        .diagram {
+            background: #eef2ff;
+            border-left: 5px solid #4f46e5;
+            padding: 25px;
+            margin: 25px 0;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .diagram strong {
+            font-size: 20px;
+        }
+
+        .flow {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .card {
+            border: 1px solid #d1d5db;
+            padding: 22px;
+            border-radius: 10px;
+            background: #f9fafb;
+        }
+
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .button {
+            display: inline-block;
+            background: #4f46e5;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .button:hover,
+        .button:focus {
+            background: #3730a3;
+        }
+
+        footer {
+            background: #111827;
+            color: #d1d5db;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        footer a {
+            color: white;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 25px;
+            }
+
+            .hero {
+                padding: 30px 20px;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+
+            .section {
+                padding: 25px 20px;
+            }
+
+            nav a {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-container">
+        <h1>When Encryption Fails</h1>
+        <p>Understanding Cryptographic Failures in Web Security</p>
+    </div>
+</header>
+
+<nav aria-label="Main navigation">
+    <div class="nav-container">
+        <a href="index.html">Home</a>
+        <a href="concept.html">Concept</a>
+        <a href="risk.html">Risk Analysis</a>
+        <a href="cases.html">Real Cases</a>
+        <a href="prevention.html">Prevention</a>
+        <a href="demo.html">Safe Demo</a>
+        <a href="evidence.html">Evidence</a>
+        <a href="conclusion.html">Conclusion</a>
+        <a href="references.html">References</a>
+        <a href="about.html">About</a>
+    </div>
+</nav>
+
+<main>
+
+    <section class="hero">
+        <h2>Cryptographic Failures in Web Security</h2>
+
+        <p>
+            Cryptography is one of the foundations of modern web security.
+            It helps protect passwords, personal information, financial data
+            and communications. However, cryptography can fail when it is
+            missing, incorrectly implemented, poorly configured or used with
+            inappropriate algorithms.
+        </p>
+
+        <a class="button" href="concept.html">
+            Start Learning
+        </a>
+    </section>
+
+
+    <section class="section">
+
+        <h2>Why Does This Matter?</h2>
+
+        <p>
+            Web applications process large amounts of sensitive information.
+            If this information is not properly protected, attackers may be
+            able to access or misuse it. Cryptographic failures can therefore
+            contribute to data exposure, privacy violations, account
+            compromise and other security consequences.
+        </p>
+
+        <p>
+            This educational blog explains the concept of cryptographic
+            failures, examines common causes, discusses real-world cases and
+            presents practical defensive measures.
+        </p>
+
+    </section>
+
+
+    <section class="section">
+
+        <h2>What You Will Learn</h2>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>🔐 Cryptography</h3>
+                <p>
+                    Learn the basic difference between encryption, hashing
+                    and other cryptographic mechanisms.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>⚠️ Risks</h3>
+                <p>
+                    Understand what assets can be affected, who may attack
+                    them and what the potential consequences are.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🌍 Real Cases</h3>
+                <p>
+                    Examine verified real-world incidents and the security
+                    lessons they provide.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🛡️ Prevention</h3>
+                <p>
+                    Learn practical measures developers can use to reduce
+                    cryptographic security problems.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <h2>How a Cryptographic Failure Can Lead to Data Exposure</h2>
+
+        <div class="diagram" role="img" aria-label="Flow diagram showing how a cryptographic failure can lead to sensitive data exposure">
+
+            <strong>Cryptographic Failure</strong>
+
+            <div class="flow">↓</div>
+
+            Weak, missing or incorrectly implemented protection
+
+            <div class="flow">↓</div>
+
+            Sensitive information becomes more exposed
+
+            <div class="flow">↓</div>
+
+            Possible data compromise
+
+            <div class="flow">↓</div>
+
+            Privacy, financial or security impact
+
+        </div>
+
+    </section>
+
+
+    <section class="section">
+
+        <h2>About This Project</h2>
+
+        <p>
+            This website was created as an individual educational project
+            about web security. The project focuses on cryptographic failures
+            and their relationship to the protection of sensitive information
+            in web applications.
+        </p>
+
+        <p>
+            The website will combine research from authoritative sources,
+            verified real-world cases, current evidence and an original safe
+            demonstration carried out in an isolated environment.
+        </p>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <div class="footer-container">
+        <p><strong>When Encryption Fails</strong></p>
+
+        <p>
+            Educational blog about Cryptographic Failures in Web Security.
+        </p>
+
+        <p>
+            Created for educational purposes.
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
