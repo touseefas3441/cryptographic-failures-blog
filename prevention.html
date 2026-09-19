@@ -1,493 +1,473 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Prevention & Mitigation | Cryptographic Failures</title>
+    <title>Cases | When Encryption Fails</title>
 
     <style>
-        body {
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #1f2937;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070b14;
+            color: #e8edf7;
             line-height: 1.7;
         }
 
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #2563eb;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #9333ea;
+            filter: blur(180px);
+            opacity: 0.10;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+
         header {
-            background: #111827;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7,11,20,0.82);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 34px;
+        .header {
+            max-width: 1150px;
+            margin: auto;
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 30px;
         }
 
-        header p {
-            margin-top: 8px;
-            color: #d1d5db;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #9333ea
+            );
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #7f8ba3;
         }
 
         nav {
-            background: #1f2937;
-            text-align: center;
-            padding: 14px;
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: white;
+            color: #aeb8ca;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #60a5fa;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+        main {
+            max-width: 900px;
+            margin: auto;
+            padding: 75px 25px 100px;
         }
 
-        .card {
-            background: white;
-            padding: 28px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        .category {
+            color: #60a5fa;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
         }
 
-        h2 {
-            color: #111827;
+        h1 {
+            font-size: 52px;
+            line-height: 1.1;
+            margin: 12px 0 20px;
         }
 
-        h3 {
-            color: #374151;
+        .subtitle {
+            color: #8f9bb0;
+            font-size: 16px;
+            max-width: 650px;
+            margin-bottom: 45px;
         }
 
-        .tip {
-            background: #f0fdf4;
-            border-left: 5px solid #16a34a;
-            padding: 18px;
-            margin: 20px 0;
+        .cases {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
-        .warning {
-            background: #fff7ed;
-            border-left: 5px solid #f97316;
-            padding: 18px;
-            margin: 20px 0;
+        .case {
+            min-height: 330px;
+
+            padding: 30px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.02)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.09);
+
+            transition: 0.3s;
         }
 
-        .step {
-            background: #eff6ff;
-            border-left: 5px solid #2563eb;
-            padding: 18px;
-            margin: 20px 0;
+        .case:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(96,165,250,0.35);
+
+            box-shadow:
+                0 20px 50px rgba(37,99,235,0.12);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .case-label {
+            color: #60a5fa;
+
+            font-family: monospace;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 18px;
         }
 
-        th, td {
-            border: 1px solid #d1d5db;
-            padding: 12px;
-            text-align: left;
+        .case h2 {
+            font-size: 26px;
+            margin-bottom: 15px;
         }
 
-        th {
-            background: #e5e7eb;
+        .case p {
+            color: #aab4c5;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .lesson {
+            margin-top: 25px;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            background:
+                rgba(37,99,235,0.08);
+
+            color: #aebbd0;
+
+            font-size: 13px;
+        }
+
+        .lesson strong {
+            color: #60a5fa;
+        }
+
+        .sources {
+            margin-top: 70px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .sources p {
+            font-size: 13px;
+            color: #8c99ae;
+        }
+
+        .sources a {
+            color: #60a5fa;
+            text-decoration: none;
         }
 
         footer {
-            background: #111827;
-            color: #d1d5db;
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
             text-align: center;
-            padding: 25px;
-            margin-top: 50px;
+
+            padding: 35px;
+
+            color: #657188;
+
+            font-size: 12px;
         }
 
-        @media (max-width: 700px) {
-            nav a {
+        @media (max-width: 800px) {
+
+            .header {
                 display: block;
-                margin: 8px;
             }
 
-            table {
-                font-size: 14px;
+            nav {
+                margin-top: 18px;
+                gap: 13px;
             }
+
+            .cases {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 43px;
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-    <h1>Prevention & Mitigation</h1>
-    <p>How developers can reduce the risk of cryptographic failures</p>
+
+    <div class="header">
+
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <div class="logo">
+                    When Encryption Fails
+                </div>
+
+                <div class="tagline">
+                    A student blog about cryptographic failures
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">Introduction</a>
+            <a href="concept.html">Concept</a>
+            <a href="risk.html">Risk</a>
+            <a href="cases.html">Cases</a>
+            <a href="prevention.html">Prevention</a>
+            <a href="demo.html">Demo</a>
+            <a href="references.html">References</a>
+            <a href="about.html">About</a>
+
+        </nav>
+
+    </div>
+
 </header>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="concept.html">Concept</a>
-    <a href="risk.html">Risk Analysis</a>
-    <a href="cases.html">Real Cases</a>
-    <a href="prevention.html">Prevention</a>
-    <a href="demo.html">Safe Demo</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="conclusion.html">Conclusion</a>
-    <a href="references.html">References</a>
-    <a href="about.html">About</a>
-</nav>
 
-<div class="container">
-
-    <section class="card">
-        <h2>Why Prevention Matters</h2>
-
-        <p>
-            Cryptographic failures can often be prevented by choosing
-            appropriate cryptographic methods, protecting keys and secrets,
-            securely storing passwords, and correctly configuring systems.
-        </p>
-
-        <p>
-            Security should be considered during application design rather
-            than added only after a system has already been developed.
-        </p>
-
-        <div class="tip">
-            <strong>Main principle:</strong>
-            Do not treat cryptography as simply "adding encryption".
-            The entire process, including algorithms, keys, randomness,
-            storage and configuration, needs to be considered.
-        </div>
-    </section>
+<main>
 
 
-    <section class="card">
-
-        <h2>1. Classify Sensitive Data</h2>
-
-        <p>
-            Developers should first understand what information their
-            application collects, stores and transmits.
-        </p>
-
-        <ul>
-            <li>Identify sensitive personal information.</li>
-            <li>Identify authentication information.</li>
-            <li>Identify financial or payment information.</li>
-            <li>Identify confidential business information.</li>
-            <li>Determine which information actually needs to be retained.</li>
-        </ul>
-
-        <p>
-            Data that does not need to be stored should generally not be
-            retained unnecessarily.
-        </p>
-
-    </section>
+    <div class="category">
+        03 / Real World
+    </div>
 
 
-    <section class="card">
-
-        <h2>2. Use Strong and Appropriate Cryptography</h2>
-
-        <p>
-            Applications should use well-established cryptographic algorithms
-            and protocols rather than creating their own cryptographic
-            algorithms.
-        </p>
-
-        <ul>
-            <li>Use trusted and well-maintained cryptographic libraries.</li>
-            <li>Avoid deprecated algorithms and protocols.</li>
-            <li>Keep cryptographic libraries updated.</li>
-            <li>Use cryptography appropriate for the security requirement.</li>
-            <li>Review cryptographic configuration regularly.</li>
-        </ul>
-
-        <div class="warning">
-            <strong>Important:</strong>
-            A strong algorithm can still be used incorrectly. Correct
-            implementation and configuration are just as important.
-        </div>
-
-    </section>
+    <h1>
+        Real-World Cases
+    </h1>
 
 
-    <section class="card">
+    <p class="subtitle">
 
-        <h2>3. Protect Data in Transit</h2>
+        Cryptographic and security failures are not
+        just theoretical. Similar weaknesses have
+        affected real systems.
 
-        <p>
-            Sensitive information travelling between a browser and a server
-            should be protected using secure communication protocols.
-        </p>
-
-        <p>
-            Modern web applications normally use HTTPS with TLS to protect
-            information during transmission.
-        </p>
-
-        <ul>
-            <li>Use HTTPS for sensitive web traffic.</li>
-            <li>Use current secure TLS configurations.</li>
-            <li>Disable obsolete protocols and weak cipher configurations.</li>
-            <li>Configure HTTP Strict Transport Security (HSTS) where appropriate.</li>
-        </ul>
-
-    </section>
+    </p>
 
 
-    <section class="card">
+    <div class="cases">
 
-        <h2>4. Store Passwords Correctly</h2>
 
-        <p>
-            Passwords should not be stored as plaintext.
-        </p>
+        <div class="case">
 
-        <p>
-            Passwords also should not normally be stored using reversible
-            encryption. Password storage requires dedicated password-hashing
-            methods designed to make large numbers of password guesses
-            expensive.
-        </p>
+            <div class="case-label">
+                CASE 01 / HEARTBLEED
+            </div>
 
-        <div class="step">
-
-            <strong>Recommended concept:</strong>
+            <h2>
+                Heartbleed
+            </h2>
 
             <p>
-                User password
-                →
-                Password hashing algorithm
-                →
-                Salted password hash
-                →
-                Database
+
+                Heartbleed was a serious vulnerability
+                in OpenSSL discovered in 2014.
+
             </p>
 
+            <p>
+
+                It could allow sensitive information
+                from a vulnerable server's memory to be exposed.
+
+            </p>
+
+            <div class="lesson">
+
+                <strong>Lesson:</strong>
+                Security software still needs testing,
+                maintenance and updates.
+
+            </div>
+
         </div>
 
-        <p>
-            OWASP currently recommends strong adaptive password hashing
-            algorithms such as Argon2id, bcrypt, or PBKDF2, with a unique
-            salt for each password.
-        </p>
 
-        <p>
-            Fast general-purpose hashes such as SHA-256 should not be used
-            by themselves for password storage because they allow password
-            guesses to be performed very quickly.
-        </p>
+        <div class="case">
 
-    </section>
+            <div class="case-label">
+                CASE 02 / EQUIFAX
+            </div>
 
+            <h2>
+                Equifax
+            </h2>
 
-    <section class="card">
+            <p>
 
-        <h2>5. Manage Cryptographic Keys Securely</h2>
+                In 2017, Equifax suffered a major data
+                breach that exposed sensitive information.
 
-        <p>
-            Encryption is only useful if the encryption keys are properly
-            protected.
-        </p>
+            </p>
 
-        <ul>
-            <li>Generate keys using secure cryptographic randomness.</li>
-            <li>Do not hard-code secret keys inside application source code.</li>
-            <li>Do not commit secret keys to public repositories.</li>
-            <li>Restrict access to cryptographic keys.</li>
-            <li>Rotate keys when required.</li>
-            <li>Have a process for replacing compromised keys.</li>
-            <li>Securely destroy keys when they are no longer required.</li>
-        </ul>
+            <p>
 
-        <p>
-            OWASP and NIST both emphasize the importance of key management
-            throughout the cryptographic key lifecycle.
-        </p>
+                The incident involved an unpatched
+                vulnerability in a web application.
 
-    </section>
+            </p>
 
+            <div class="lesson">
 
-    <section class="card">
+                <strong>Lesson:</strong>
+                Security depends on more than encryption.
+                Patching and maintenance also matter.
 
-        <h2>6. Use Secure Randomness</h2>
+            </div>
 
-        <p>
-            Cryptographic systems often depend on random values for keys,
-            tokens, nonces and other security-related values.
-        </p>
-
-        <p>
-            These values must be generated using cryptographically secure
-            random-number mechanisms rather than predictable values.
-        </p>
-
-        <div class="warning">
-            <strong>Example of a bad approach:</strong>
-            Using predictable values such as timestamps, usernames or simple
-            counters as secrets.
         </div>
 
-        <p>
-            The Debian OpenSSL case discussed earlier demonstrates why
-            predictable cryptographic randomness can create serious security
-            problems.
-        </p>
 
-    </section>
+    </div>
 
 
-    <section class="card">
+    <div class="sources">
 
-        <h2>7. Secure Development Practices</h2>
+        <h2>
+            Sources
+        </h2>
 
         <p>
-            Cryptographic security should be included throughout the
-            software development lifecycle.
-        </p>
 
-        <ul>
-            <li>Identify sensitive data during system design.</li>
-            <li>Create a threat model before implementation.</li>
-            <li>Use established cryptographic libraries.</li>
-            <li>Review cryptographic code carefully.</li>
-            <li>Keep dependencies updated.</li>
-            <li>Test security configurations.</li>
-            <li>Perform code reviews.</li>
-            <li>Monitor systems for security problems.</li>
-            <li>Have a plan for responding to compromised keys or secrets.</li>
-        </ul>
+            [1]
+            <a href="https://heartbleed.com/"
+               target="_blank">
 
-    </section>
+                Heartbleed — Official Information
 
+            </a>
 
-    <section class="card">
-
-        <h2>8. Quick Prevention Checklist</h2>
-
-        <table>
-
-            <tr>
-                <th>Security Area</th>
-                <th>Recommended Practice</th>
-            </tr>
-
-            <tr>
-                <td>Sensitive data</td>
-                <td>Identify and minimize unnecessary sensitive data.</td>
-            </tr>
-
-            <tr>
-                <td>Encryption</td>
-                <td>Use trusted, current cryptographic algorithms and libraries.</td>
-            </tr>
-
-            <tr>
-                <td>Passwords</td>
-                <td>Use salted adaptive password hashing.</td>
-            </tr>
-
-            <tr>
-                <td>Keys</td>
-                <td>Generate, store, rotate and retire keys securely.</td>
-            </tr>
-
-            <tr>
-                <td>Randomness</td>
-                <td>Use cryptographically secure random-number generation.</td>
-            </tr>
-
-            <tr>
-                <td>Network traffic</td>
-                <td>Protect sensitive data using properly configured TLS.</td>
-            </tr>
-
-            <tr>
-                <td>Secrets</td>
-                <td>Keep secrets outside source code and version control.</td>
-            </tr>
-
-            <tr>
-                <td>Maintenance</td>
-                <td>Keep cryptographic libraries and security configurations updated.</td>
-            </tr>
-
-        </table>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>Limitations</h2>
-
-        <p>
-            Following security recommendations does not guarantee that an
-            application will never experience a security incident.
         </p>
 
         <p>
-            Cryptographic systems can still fail because of implementation
-            errors, configuration mistakes, compromised keys, vulnerable
-            dependencies, incorrect assumptions or weaknesses elsewhere in
-            the application.
+
+            [2]
+            <a href="https://www.ftc.gov/legal-library/browse/cases-proceedings/172-3057-equifax-inc"
+               target="_blank">
+
+                FTC — Equifax
+
+            </a>
+
         </p>
 
-        <p>
-            For this reason, cryptography should be treated as one part of a
-            broader security strategy rather than as a complete solution by
-            itself.
-        </p>
-
-        <div class="tip">
-            <strong>Key lesson:</strong>
-            Good cryptography requires good implementation, configuration,
-            key management and ongoing security review.
-        </div>
-
-    </section>
+    </div>
 
 
-    <section class="card">
+</main>
 
-        <h2>Sources Used</h2>
-
-        <p>
-            The recommendations on this page are based primarily on guidance
-            from the Open Worldwide Application Security Project (OWASP) and
-            the National Institute of Standards and Technology (NIST).
-        </p>
-
-        <p>
-            The next page provides a safe educational demonstration of
-            hashing using fake information. The demonstration does not test
-            or attack any real system.
-        </p>
-
-    </section>
-
-</div>
 
 <footer>
-    <p>
-        Cryptographic Failures in Web Security — Educational Student Blog
-    </p>
+
+    When Encryption Fails · Information Systems & Cybersecurity
+
 </footer>
+
 
 </body>
 </html>
