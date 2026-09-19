@@ -49,18 +49,25 @@
             z-index: -1;
         }
 
+
+        /* HEADER */
+
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(7,11,20,0.82);
+
+            background: rgba(7, 11, 20, 0.82);
             backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
         }
 
         .header {
             max-width: 1150px;
             margin: auto;
+
             padding: 18px 25px;
 
             display: flex;
@@ -86,11 +93,15 @@
 
             border-radius: 10px;
 
-            background: linear-gradient(
-                135deg,
-                #2563eb,
-                #9333ea
-            );
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #9333ea
+                );
+
+            box-shadow:
+                0 0 25px rgba(37,99,235,0.35);
         }
 
         .logo {
@@ -113,73 +124,126 @@
             color: #aeb8ca;
             text-decoration: none;
             font-size: 13px;
+
+            transition: 0.25s;
         }
 
         nav a:hover {
             color: #60a5fa;
+
+            text-shadow:
+                0 0 10px rgba(96,165,250,0.5);
         }
 
+
+        /* MAIN */
+
         main {
-            max-width: 900px;
+            max-width: 1000px;
             margin: auto;
-            padding: 75px 25px 100px;
+
+            padding:
+                75px 25px 100px;
         }
 
         .category {
             color: #60a5fa;
+
             font-size: 11px;
+
             text-transform: uppercase;
+
             letter-spacing: 2px;
+
             font-weight: bold;
         }
 
         h1 {
             font-size: 52px;
+
             line-height: 1.1;
-            margin: 12px 0 20px;
+
+            margin:
+                12px 0 18px;
         }
 
         .subtitle {
             color: #8f9bb0;
+
             font-size: 16px;
+
             max-width: 650px;
-            margin-bottom: 45px;
+
+            margin-bottom: 50px;
         }
 
-        .cases {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
+
+        /* CASE CARDS */
 
         .case {
-            min-height: 330px;
+            position: relative;
 
-            padding: 30px;
+            margin-bottom: 25px;
 
-            border-radius: 16px;
+            padding: 32px;
+
+            min-height: 350px;
+
+            border-radius: 18px;
+
+            overflow: hidden;
 
             background:
                 linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.06),
-                    rgba(255,255,255,0.02)
+                    135deg,
+                    rgba(255,255,255,0.065),
+                    rgba(255,255,255,0.018)
                 );
 
             border:
                 1px solid rgba(255,255,255,0.09);
 
-            transition: 0.3s;
+            transition:
+                transform 0.3s,
+                border-color 0.3s,
+                box-shadow 0.3s;
         }
 
         .case:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
 
             border-color:
-                rgba(96,165,250,0.35);
+                rgba(96,165,250,0.4);
 
             box-shadow:
-                0 20px 50px rgba(37,99,235,0.12);
+                0 25px 70px rgba(37,99,235,0.14);
+        }
+
+
+        /* BACKGROUND NUMBER */
+
+        .case-number {
+            position: absolute;
+
+            right: 25px;
+            top: 5px;
+
+            font-size: 130px;
+
+            font-weight: bold;
+
+            color: rgba(255,255,255,0.025);
+
+            pointer-events: none;
+        }
+
+
+        .case-content {
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 700px;
         }
 
         .case-label {
@@ -189,31 +253,74 @@
 
             font-size: 12px;
 
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
 
-            margin-bottom: 18px;
+            margin-bottom: 12px;
         }
 
         .case h2 {
-            font-size: 26px;
+            font-size: 30px;
+
             margin-bottom: 15px;
+
+            color: white;
         }
 
         .case p {
             color: #aab4c5;
+
             font-size: 15px;
+
             margin-bottom: 15px;
         }
+
+
+        /* TECHNICAL DETAILS */
+
+        .details {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 22px;
+        }
+
+        .tag {
+            padding:
+                6px 10px;
+
+            border-radius: 6px;
+
+            background:
+                rgba(37,99,235,0.10);
+
+            border:
+                1px solid rgba(96,165,250,0.15);
+
+            color: #91bfff;
+
+            font-family: monospace;
+
+            font-size: 11px;
+        }
+
+
+        /* LESSON */
 
         .lesson {
             margin-top: 25px;
 
-            padding: 15px;
+            padding: 15px 18px;
 
-            border-radius: 8px;
+            border-left:
+                3px solid #3b82f6;
 
             background:
-                rgba(37,99,235,0.08);
+                rgba(37,99,235,0.07);
+
+            border-radius: 7px;
 
             color: #aebbd0;
 
@@ -224,8 +331,11 @@
             color: #60a5fa;
         }
 
+
+        /* SOURCES */
+
         .sources {
-            margin-top: 70px;
+            margin-top: 65px;
 
             padding-top: 25px;
 
@@ -233,15 +343,32 @@
                 1px solid rgba(255,255,255,0.08);
         }
 
+        .sources h2 {
+            font-size: 24px;
+
+            margin-bottom: 15px;
+        }
+
         .sources p {
+            color: #8f9bb0;
+
             font-size: 13px;
-            color: #8c99ae;
+
+            margin-bottom: 8px;
         }
 
         .sources a {
             color: #60a5fa;
+
             text-decoration: none;
         }
+
+        .sources a:hover {
+            text-decoration: underline;
+        }
+
+
+        /* FOOTER */
 
         footer {
             border-top:
@@ -256,6 +383,9 @@
             font-size: 12px;
         }
 
+
+        /* MOBILE */
+
         @media (max-width: 800px) {
 
             .header {
@@ -264,15 +394,24 @@
 
             nav {
                 margin-top: 18px;
-                gap: 13px;
-            }
 
-            .cases {
-                grid-template-columns: 1fr;
+                gap: 13px;
             }
 
             h1 {
                 font-size: 43px;
+            }
+
+            .case {
+                padding: 25px;
+            }
+
+            .case h2 {
+                font-size: 25px;
+            }
+
+            .case-number {
+                font-size: 90px;
             }
 
         }
@@ -284,6 +423,8 @@
 
 <body>
 
+
+<!-- HEADER -->
 
 <header>
 
@@ -313,12 +454,19 @@
         <nav>
 
             <a href="index.html">Introduction</a>
+
             <a href="concept.html">Concept</a>
+
             <a href="risk.html">Risk</a>
+
             <a href="cases.html">Cases</a>
+
             <a href="prevention.html">Prevention</a>
+
             <a href="demo.html">Demo</a>
+
             <a href="references.html">References</a>
+
             <a href="about.html">About</a>
 
         </nav>
@@ -327,6 +475,9 @@
 
 </header>
 
+
+
+<!-- MAIN -->
 
 <main>
 
@@ -343,88 +494,165 @@
 
     <p class="subtitle">
 
-        Cryptographic and security failures are not
-        just theoretical. Similar weaknesses have
-        affected real systems.
+        These cases show how mistakes in cryptographic
+        software or key generation can affect real systems.
 
     </p>
 
 
-    <div class="cases">
+
+    <!-- CASE 01 -->
+
+    <section class="case">
+
+        <div class="case-number">
+            01
+        </div>
 
 
-        <div class="case">
+        <div class="case-content">
 
             <div class="case-label">
-                CASE 01 / HEARTBLEED
+                CASE 01 / 2014
             </div>
+
 
             <h2>
                 Heartbleed
             </h2>
 
-            <p>
-
-                Heartbleed was a serious vulnerability
-                in OpenSSL discovered in 2014.
-
-            </p>
 
             <p>
 
-                It could allow sensitive information
-                from a vulnerable server's memory to be exposed.
+                Heartbleed was a vulnerability in the
+                OpenSSL cryptographic library.
 
             </p>
+
+
+            <p>
+
+                It allowed attackers to read parts of
+                a vulnerable system's memory. This could
+                expose passwords, private keys and other
+                sensitive information.
+
+            </p>
+
+
+            <div class="details">
+
+                <span class="tag">
+                    OpenSSL
+                </span>
+
+                <span class="tag">
+                    CVE-2014-0160
+                </span>
+
+                <span class="tag">
+                    TLS
+                </span>
+
+                <span class="tag">
+                    Memory Leak
+                </span>
+
+            </div>
+
 
             <div class="lesson">
 
                 <strong>Lesson:</strong>
-                Security software still needs testing,
-                maintenance and updates.
+
+                Even when strong encryption is being used,
+                a vulnerability in its implementation can
+                expose the information it is supposed to protect.
 
             </div>
 
         </div>
 
+    </section>
 
-        <div class="case">
+
+
+    <!-- CASE 02 -->
+
+    <section class="case">
+
+        <div class="case-number">
+            02
+        </div>
+
+
+        <div class="case-content">
 
             <div class="case-label">
-                CASE 02 / EQUIFAX
+                CASE 02 / 2008
             </div>
 
+
             <h2>
-                Equifax
+                Debian OpenSSL Bug
             </h2>
 
-            <p>
-
-                In 2017, Equifax suffered a major data
-                breach that exposed sensitive information.
-
-            </p>
 
             <p>
 
-                The incident involved an unpatched
-                vulnerability in a web application.
+                A change made to Debian's OpenSSL package
+                accidentally removed important sources of
+                randomness.
 
             </p>
+
+
+            <p>
+
+                This made many cryptographic keys predictable.
+                The problem affected keys used for services
+                such as SSH and SSL.
+
+            </p>
+
+
+            <div class="details">
+
+                <span class="tag">
+                    OpenSSL
+                </span>
+
+                <span class="tag">
+                    CVE-2008-0166
+                </span>
+
+                <span class="tag">
+                    Weak Randomness
+                </span>
+
+                <span class="tag">
+                    Predictable Keys
+                </span>
+
+            </div>
+
 
             <div class="lesson">
 
                 <strong>Lesson:</strong>
-                Security depends on more than encryption.
-                Patching and maintenance also matter.
+
+                Cryptography depends not only on the algorithm,
+                but also on secure key generation and randomness.
 
             </div>
 
         </div>
 
+    </section>
 
-    </div>
 
+
+    <!-- SOURCES -->
 
     <div class="sources">
 
@@ -432,11 +660,15 @@
             Sources
         </h2>
 
+
         <p>
 
             [1]
-            <a href="https://heartbleed.com/"
-               target="_blank">
+
+            <a
+                href="https://heartbleed.com/"
+                target="_blank"
+            >
 
                 Heartbleed — Official Information
 
@@ -444,13 +676,33 @@
 
         </p>
 
+
         <p>
 
             [2]
-            <a href="https://www.ftc.gov/legal-library/browse/cases-proceedings/172-3057-equifax-inc"
-               target="_blank">
 
-                FTC — Equifax
+            <a
+                href="https://wiki.debian.org/SSLkeys"
+                target="_blank"
+            >
+
+                Debian — SSL Keys and CVE-2008-0166
+
+            </a>
+
+        </p>
+
+
+        <p>
+
+            [3]
+
+            <a
+                href="https://owasp.org/www-project-web-security-testing-guide/latest/4-Web_Application_Security_Testing/09-Weak_Cryptography/01-Weak_Transport_Layer_Security"
+                target="_blank"
+            >
+
+                OWASP — Weak Cryptography
 
             </a>
 
@@ -462,6 +714,9 @@
 </main>
 
 
+
+<!-- FOOTER -->
+
 <footer>
 
     When Encryption Fails · Information Systems & Cybersecurity
@@ -470,4 +725,5 @@
 
 
 </body>
+
 </html>
