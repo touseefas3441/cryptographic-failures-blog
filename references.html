@@ -4,104 +4,268 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>References | Cryptographic Failures</title>
+    <title>References | When Encryption Fails</title>
 
     <style>
 
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #1f2937;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070b14;
+            color: #e8edf7;
             line-height: 1.7;
         }
 
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #2563eb;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #9333ea;
+            filter: blur(180px);
+            opacity: 0.10;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+
         header {
-            background: #111827;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(7,11,20,0.82);
+
+            backdrop-filter: blur(15px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 34px;
+        .header {
+            max-width: 1150px;
+            margin: auto;
+
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 30px;
         }
 
-        header p {
-            color: #d1d5db;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #9333ea
+                );
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #7f8ba3;
         }
 
         nav {
-            background: #1f2937;
-            text-align: center;
-            padding: 14px;
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: white;
+            color: #aeb8ca;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #60a5fa;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+        main {
+            max-width: 850px;
+            margin: auto;
+
+            padding: 75px 25px 100px;
         }
 
-        .card {
-            background: white;
-            padding: 28px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        .category {
+            color: #60a5fa;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            font-weight: bold;
         }
 
-        h2 {
-            color: #111827;
+        h1 {
+            font-size: 52px;
+
+            margin:
+                12px 0 20px;
+        }
+
+        .subtitle {
+            color: #8f9bb0;
+
+            font-size: 16px;
+
+            max-width: 650px;
+
+            margin-bottom: 45px;
+        }
+
+        .references {
+            display: grid;
+
+            gap: 15px;
         }
 
         .reference {
-            background: #f9fafb;
-            padding: 18px;
-            margin: 15px 0;
-            border-radius: 8px;
+            padding: 22px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            transition: 0.3s;
+        }
+
+        .reference:hover {
+            transform: translateY(-3px);
+
+            border-color:
+                rgba(96,165,250,0.35);
+        }
+
+        .number {
+            color: #60a5fa;
+
+            font-family: monospace;
+
+            font-size: 12px;
+
+            margin-bottom: 8px;
+        }
+
+        .reference h3 {
+            color: white;
+
+            font-size: 17px;
+
+            margin-bottom: 5px;
+        }
+
+        .reference p {
+            color: #8f9bb0;
+
+            font-size: 13px;
+
+            margin-bottom: 8px;
         }
 
         .reference a {
-            color: #2563eb;
-            word-break: break-word;
+            color: #60a5fa;
+
+            font-size: 13px;
+
+            text-decoration: none;
         }
 
-        .ai {
-            background: #eff6ff;
-            border-left: 5px solid #2563eb;
-            padding: 18px;
+        .note {
+            margin-top: 35px;
+
+            padding: 18px 20px;
+
+            border-left: 3px solid #3b82f6;
+
+            background:
+                rgba(37,99,235,0.07);
+
+            border-radius: 8px;
+
+            color: #9eabc0;
+
+            font-size: 14px;
         }
 
         footer {
-            background: #111827;
-            color: #d1d5db;
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
             text-align: center;
-            padding: 25px;
-            margin-top: 50px;
+
+            padding: 35px;
+
+            color: #657188;
+
+            font-size: 12px;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
-            nav a {
+            .header {
                 display: block;
-                margin: 8px;
+            }
+
+            nav {
+                margin-top: 18px;
+
+                gap: 13px;
+            }
+
+            h1 {
+                font-size: 43px;
             }
 
         }
@@ -116,53 +280,89 @@
 
 <header>
 
-    <h1>References & Media Credits</h1>
+    <div class="header">
 
-    <p>
-        Sources used to research and develop this educational blog
-    </p>
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <div class="logo">
+                    When Encryption Fails
+                </div>
+
+                <div class="tagline">
+                    A student blog about cryptographic failures
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">Introduction</a>
+            <a href="concept.html">Concept</a>
+            <a href="risk.html">Risk</a>
+            <a href="cases.html">Cases</a>
+            <a href="prevention.html">Prevention</a>
+            <a href="demo.html">Demo</a>
+            <a href="references.html">References</a>
+            <a href="about.html">About</a>
+
+        </nav>
+
+    </div>
 
 </header>
 
 
-<nav>
-
-    <a href="index.html">Home</a>
-    <a href="concept.html">Concept</a>
-    <a href="risk.html">Risk Analysis</a>
-    <a href="cases.html">Real Cases</a>
-    <a href="prevention.html">Prevention</a>
-    <a href="demo.html">Safe Demo</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="conclusion.html">Conclusion</a>
-    <a href="references.html">References</a>
-    <a href="about.html">About</a>
-
-</nav>
+<main>
 
 
-<div class="container">
+    <div class="category">
+        06 / Sources
+    </div>
 
 
-    <section class="card">
+    <h1>
+        References
+    </h1>
 
-        <h2>Primary Security Sources</h2>
+
+    <p class="subtitle">
+
+        The main sources used while researching
+        cryptographic failures and cybersecurity.
+
+    </p>
+
+
+    <div class="references">
 
 
         <div class="reference">
 
-            <strong>OWASP Top 10:2025 — A04: Cryptographic Failures</strong>
+            <div class="number">
+                REF 01
+            </div>
+
+            <h3>
+                OWASP — Cryptographic Failures
+            </h3>
 
             <p>
-                Open Worldwide Application Security Project (OWASP).
+                OWASP Top 10:2025, A04.
             </p>
 
-            <a
-                href="https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/"
-                target="_blank"
-                rel="noopener noreferrer">
+            <a href="https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/"
+               target="_blank">
 
-                View OWASP A04:2025
+                Open source →
 
             </a>
 
@@ -171,18 +371,23 @@
 
         <div class="reference">
 
-            <strong>OWASP Top 10:2025</strong>
+            <div class="number">
+                REF 02
+            </div>
+
+            <h3>
+                OWASP Top 10
+            </h3>
 
             <p>
-                Open Worldwide Application Security Project (OWASP).
+                Overview of the major web application
+                security risks.
             </p>
 
-            <a
-                href="https://top10.owasp.org/2025/"
-                target="_blank"
-                rel="noopener noreferrer">
+            <a href="https://top10.owasp.org/2025/"
+               target="_blank">
 
-                View OWASP Top 10:2025
+                Open source →
 
             </a>
 
@@ -191,21 +396,23 @@
 
         <div class="reference">
 
-            <strong>
-                NIST SP 800-57 Part 1 Revision 5 —
-                Recommendation for Key Management
-            </strong>
+            <div class="number">
+                REF 03
+            </div>
+
+            <h3>
+                NIST Cybersecurity Resources
+            </h3>
 
             <p>
-                National Institute of Standards and Technology (NIST).
+                Technical guidance and cybersecurity
+                standards.
             </p>
 
-            <a
-                href="https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final"
-                target="_blank"
-                rel="noopener noreferrer">
+            <a href="https://csrc.nist.gov/"
+               target="_blank">
 
-                View NIST publication
+                Open source →
 
             </a>
 
@@ -214,21 +421,23 @@
 
         <div class="reference">
 
-            <strong>
-                OWASP Password Storage Cheat Sheet
-            </strong>
+            <div class="number">
+                REF 04
+            </div>
+
+            <h3>
+                Heartbleed
+            </h3>
 
             <p>
-                Guidance on password hashing, salts and password-storage
-                algorithms.
+                Information about the OpenSSL Heartbleed
+                vulnerability.
             </p>
 
-            <a
-                href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
-                target="_blank"
-                rel="noopener noreferrer">
+            <a href="https://heartbleed.com/"
+               target="_blank">
 
-                View Password Storage guidance
+                Open source →
 
             </a>
 
@@ -237,50 +446,23 @@
 
         <div class="reference">
 
-            <strong>
-                MDN Web Crypto API — SubtleCrypto.digest()
-            </strong>
+            <div class="number">
+                REF 05
+            </div>
+
+            <h3>
+                Federal Trade Commission — Equifax
+            </h3>
 
             <p>
-                Documentation used for the SHA-256 browser demonstration.
+                Official information about the Equifax
+                security incident.
             </p>
 
-            <a
-                href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest"
-                target="_blank"
-                rel="noopener noreferrer">
+            <a href="https://www.ftc.gov/legal-library/browse/cases-proceedings/172-3057-equifax-inc"
+               target="_blank">
 
-                View MDN documentation
-
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>Real-World Case Sources</h2>
-
-
-        <div class="reference">
-
-            <strong>
-                Adobe — Important Customer Security Announcement
-            </strong>
-
-            <p>
-                Adobe's original announcement concerning the 2013 security
-                incident.
-            </p>
-
-            <a
-                href="https://blog.adobe.com/en/publish/2013/10/03/important-customer-security-announcement"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                View Adobe announcement
+                Open source →
 
             </a>
 
@@ -289,111 +471,49 @@
 
         <div class="reference">
 
-            <strong>
-                Office of the Australian Information Commissioner —
-                Adobe investigation
-            </strong>
+            <div class="number">
+                REF 06
+            </div>
+
+            <h3>
+                MDN Web Docs
+            </h3>
 
             <p>
-                Regulatory investigation concerning Adobe's information
-                security practices.
+                Documentation used for the browser-based
+                hashing demonstration.
             </p>
 
-            <a
-                href="https://www.oaic.gov.au/privacy/privacy-assessments-and-decisions/privacy-decisions/Investigation-inquiry-reports/adobe-systems-software-ireland-ltd-own-motion-investigation-report"
-                target="_blank"
-                rel="noopener noreferrer">
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest"
+               target="_blank">
 
-                View investigation report
+                Open source →
 
             </a>
 
         </div>
 
 
-        <div class="reference">
-
-            <strong>
-                Debian Security Advisory DSA-1571-1
-            </strong>
-
-            <p>
-                Documentation concerning the Debian OpenSSL predictable
-                random-number-generation vulnerability.
-            </p>
-
-            <a
-                href="https://lists.debian.org/debian-security-announce/2008/msg00152.html"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                View Debian advisory
-
-            </a>
-
-        </div>
-
-    </section>
+    </div>
 
 
-    <section class="card">
+    <div class="note">
 
-        <h2>Media Credits</h2>
+        These sources were used for the background
+        information and demonstration included in this blog.
 
-        <p>
-            The diagrams and interactive demonstration used in this blog
-            were created specifically for this student project.
-        </p>
-
-        <p>
-            No third-party photographs or copyrighted media are required
-            for the current version of the blog.
-        </p>
-
-    </section>
+    </div>
 
 
-    <section class="card">
-
-        <h2>Generative AI Declaration</h2>
-
-        <div class="ai">
-
-            <p>
-                <strong>AI assistance declaration:</strong>
-            </p>
-
-            <p>
-                Generative AI tools were used as an assistance tool during
-                the development of this educational blog. AI assistance was
-                used for brainstorming, explaining technical concepts,
-                organizing content, drafting HTML/CSS and JavaScript,
-                and improving wording.
-            </p>
-
-            <p>
-                The student reviewed and adapted the material, checked
-                important factual claims against external sources, and
-                tested the website and demonstration before publication.
-            </p>
-
-        </div>
-
-    </section>
-
-
-</div>
+</main>
 
 
 <footer>
 
-    <p>
-        Cryptographic Failures in Web Security — Educational Student Blog
-    </p>
+    When Encryption Fails · Information Systems & Cybersecurity
 
 </footer>
 
 
 </body>
-
 </html>
