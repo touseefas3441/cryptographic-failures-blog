@@ -4,121 +4,304 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>About This Project | Cryptographic Failures</title>
+    <title>About | When Encryption Fails</title>
 
     <style>
 
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #1f2937;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070b14;
+            color: #e8edf7;
             line-height: 1.7;
         }
 
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #2563eb;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #9333ea;
+            filter: blur(180px);
+            opacity: 0.10;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+
         header {
-            background: #111827;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background:
+                rgba(7,11,20,0.82);
+
+            backdrop-filter:
+                blur(15px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 34px;
+        .header {
+            max-width: 1150px;
+            margin: auto;
+
+            padding: 18px 25px;
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            gap: 30px;
         }
 
-        header p {
-            color: #d1d5db;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #9333ea
+                );
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #7f8ba3;
         }
 
         nav {
-            background: #1f2937;
-            text-align: center;
-            padding: 14px;
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: white;
+            color: #aeb8ca;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #60a5fa;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+        main {
+            max-width: 850px;
+
+            margin: auto;
+
+            padding:
+                75px 25px 100px;
         }
 
-        .card {
-            background: white;
-            padding: 28px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        .category {
+            color: #60a5fa;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            font-weight: bold;
         }
 
-        h2 {
-            color: #111827;
+        h1 {
+            font-size: 52px;
+
+            margin:
+                12px 0 20px;
         }
 
-        .info {
-            background: #eff6ff;
-            border-left: 5px solid #2563eb;
-            padding: 18px;
-            margin: 20px 0;
+        .subtitle {
+            color: #8f9bb0;
+
+            font-size: 16px;
+
+            max-width: 650px;
+
+            margin-bottom: 45px;
         }
 
-        .selected {
-            background: #f0fdf4;
-            border-left: 5px solid #16a34a;
-            padding: 18px;
-            margin: 20px 0;
+        .about-box {
+            padding: 30px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.02)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.09);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .about-box h2 {
+            font-size: 24px;
+
+            margin-bottom: 15px;
+        }
+
+        .about-box p {
+            color: #aab4c5;
+
+            font-size: 15px;
+
+            margin-bottom: 16px;
+        }
+
+        .student-card {
             margin-top: 20px;
+
+            padding: 22px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(37,99,235,0.07);
+
+            border:
+                1px solid rgba(96,165,250,0.15);
         }
 
-        th,
-        td {
-            border: 1px solid #d1d5db;
-            padding: 12px;
-            text-align: left;
+        .student-card h3 {
+            color: white;
+
+            font-size: 17px;
+
+            margin-bottom: 5px;
         }
 
-        th {
-            background: #e5e7eb;
+        .student-card p {
+            margin: 0;
+
+            font-size: 14px;
+        }
+
+        .topics {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+        .topic {
+            padding: 20px;
+
+            text-align: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .topic-icon {
+            font-size: 25px;
+
+            margin-bottom: 8px;
+        }
+
+        .topic h3 {
+            font-size: 15px;
+
+            color: white;
+        }
+
+        .topic p {
+            color: #8794aa;
+
+            font-size: 12px;
+
+            margin-top: 4px;
         }
 
         footer {
-            background: #111827;
-            color: #d1d5db;
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
             text-align: center;
-            padding: 25px;
-            margin-top: 50px;
+
+            padding: 35px;
+
+            color: #657188;
+
+            font-size: 12px;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
-            nav a {
+            .header {
                 display: block;
-                margin: 8px;
             }
 
-            table {
-                font-size: 13px;
+            nav {
+                margin-top: 18px;
+                gap: 13px;
+            }
+
+            h1 {
+                font-size: 43px;
+            }
+
+            .topics {
+                grid-template-columns: 1fr;
             }
 
         }
@@ -133,365 +316,189 @@
 
 <header>
 
-    <h1>About This Project</h1>
+    <div class="header">
 
-    <p>
-        Project information, platform selection and development process
-    </p>
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <div class="logo">
+                    When Encryption Fails
+                </div>
+
+                <div class="tagline">
+                    A student blog about cryptographic failures
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">Introduction</a>
+            <a href="concept.html">Concept</a>
+            <a href="risk.html">Risk</a>
+            <a href="cases.html">Cases</a>
+            <a href="prevention.html">Prevention</a>
+            <a href="demo.html">Demo</a>
+            <a href="references.html">References</a>
+            <a href="about.html">About</a>
+
+        </nav>
+
+    </div>
 
 </header>
 
 
-<nav>
-
-    <a href="index.html">Home</a>
-    <a href="concept.html">Concept</a>
-    <a href="risk.html">Risk Analysis</a>
-    <a href="cases.html">Real Cases</a>
-    <a href="prevention.html">Prevention</a>
-    <a href="demo.html">Safe Demo</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="conclusion.html">Conclusion</a>
-    <a href="references.html">References</a>
-    <a href="about.html">About</a>
-
-</nav>
+<main>
 
 
-<div class="container">
+    <div class="category">
+        07 / About
+    </div>
 
 
-    <section class="card">
-
-        <h2>Student Information</h2>
-
-        <div class="info">
-
-            <p>
-                <strong>Student:</strong>
-                T.M.
-            </p>
-
-            <p>
-                <strong>Course:</strong>
-                Information Systems and Cybersecurity
-            </p>
-
-            <p>
-                <strong>Project Topic:</strong>
-                37. Cryptographic Failures
-            </p>
-
-            <p>
-                <strong>Blog Title:</strong>
-                When Encryption Fails: Understanding Cryptographic Failures
-                in Web Security
-            </p>
-
-        </div>
-
-    </section>
+    <h1>
+        About This Blog
+    </h1>
 
 
-    <section class="card">
+    <p class="subtitle">
 
-        <h2>Platform Comparison</h2>
+        A small student project exploring one of
+        the common problems in application security.
+
+    </p>
+
+
+    <div class="about-box">
+
+
+        <h2>
+            Why this project?
+        </h2>
+
 
         <p>
-            Before developing the blog, three publishing platforms were
-            considered using the following criteria:
+
+            This blog was created as part of an
+            Information Systems and Cybersecurity
+            project.
+
         </p>
 
-        <ul>
 
-            <li>Availability of a free option</li>
+        <p>
 
-            <li>Ease of publishing</li>
+            The goal is to explain cryptographic failures
+            in a simple way instead of using only
+            technical definitions.
 
-            <li>Control over HTML/CSS</li>
-
-            <li>Ability to include an interactive demonstration</li>
-
-            <li>Suitable URL for an academic project</li>
-
-        </ul>
+        </p>
 
 
-        <table>
+        <p>
 
-            <tr>
+            The website combines research, real-world
+            examples and a small interactive demonstration.
 
-                <th>Platform</th>
-
-                <th>Free Option</th>
-
-                <th>Customization</th>
-
-                <th>Interactive Demo</th>
-
-                <th>Notes</th>
-
-            </tr>
+        </p>
 
 
-            <tr>
+        <div class="student-card">
 
-                <td>WordPress.com</td>
-
-                <td>Yes</td>
-
-                <td>Good, but some features depend on the plan</td>
-
-                <td>Possible with suitable features/code</td>
-
-                <td>
-                    Designed for blogging and provides many publishing
-                    features.
-                </td>
-
-            </tr>
-
-
-            <tr>
-
-                <td>Blogger</td>
-
-                <td>Yes</td>
-
-                <td>Moderate</td>
-
-                <td>Possible with HTML/JavaScript</td>
-
-                <td>
-                    Simple blogging platform with Google integration.
-                </td>
-
-            </tr>
-
-
-            <tr>
-
-                <td>GitHub Pages</td>
-
-                <td>Yes</td>
-
-                <td>High control over static HTML/CSS/JavaScript</td>
-
-                <td>Yes</td>
-
-                <td>
-                    Suitable for a technical student project and static
-                    educational website.
-                </td>
-
-            </tr>
-
-        </table>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>Why GitHub Pages Was Selected</h2>
-
-        <div class="selected">
+            <h3>
+                Student Cybersecurity Project
+            </h3>
 
             <p>
-                GitHub Pages was selected based on the project criteria
-                because it allows the student to directly create and publish
-                HTML, CSS and JavaScript files.
-            </p>
-
-            <p>
-                This is particularly useful for this topic because the blog
-                includes an original interactive cryptographic demonstration.
-            </p>
-
-            <p>
-                GitHub Pages is also available for public repositories on
-                GitHub Free, making it suitable for this student project.
+                Information Systems & Cybersecurity
             </p>
 
         </div>
 
-        <p>
-            The selection is based on the requirements and needs of this
-            project rather than claiming that one publishing platform is
-            universally better than all others.
-        </p>
 
-    </section>
+    </div>
 
 
-    <section class="card">
+    <h2 style="margin-top:60px;">
+        What is covered?
+    </h2>
 
-        <h2>Content Structure</h2>
 
-        <p>
-            The blog was organized into separate pages so that readers can
-            move from basic concepts toward practical security guidance.
-        </p>
+    <div class="topics">
 
-        <ol>
 
-            <li>Introduction</li>
+        <div class="topic">
 
-            <li>Concept and operation</li>
+            <div class="topic-icon">
+                🔐
+            </div>
 
-            <li>Risk analysis</li>
+            <h3>
+                Cryptography
+            </h3>
 
-            <li>Real-world cases</li>
+            <p>
+                Basic concepts
+            </p>
 
-            <li>Prevention and mitigation</li>
+        </div>
 
-            <li>Safe demonstration</li>
 
-            <li>Current evidence and trends</li>
+        <div class="topic">
 
-            <li>Conclusion</li>
+            <div class="topic-icon">
+                ⚠️
+            </div>
 
-            <li>References and credits</li>
+            <h3>
+                Security Risks
+            </h3>
 
-            <li>About the project</li>
+            <p>
+                Common failures
+            </p>
 
-        </ol>
+        </div>
 
-    </section>
 
+        <div class="topic">
 
-    <section class="card">
+            <div class="topic-icon">
+                💻
+            </div>
 
-        <h2>Publication Schedule</h2>
+            <h3>
+                Practical Demo
+            </h3>
 
-        <table>
+            <p>
+                SHA-256 hashing
+            </p>
 
-            <tr>
+        </div>
 
-                <th>Stage</th>
 
-                <th>Activity</th>
+    </div>
 
-            </tr>
 
-            <tr>
-
-                <td>Stage 1</td>
-
-                <td>Topic selection and platform comparison</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Stage 2</td>
-
-                <td>Research and content planning</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Stage 3</td>
-
-                <td>Development of the blog pages</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Stage 4</td>
-
-                <td>Creation and testing of the safe demonstration</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Stage 5</td>
-
-                <td>Review, peer feedback and corrections</td>
-
-            </tr>
-
-            <tr>
-
-                <td>Stage 6</td>
-
-                <td>Final publication and presentation</td>
-
-            </tr>
-
-        </table>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>Audience Feedback</h2>
-
-        <p>
-            Feedback will be collected from classmates using a short
-            informal review.
-        </p>
-
-        <p>
-            Reviewers can comment on:
-        </p>
-
-        <ul>
-
-            <li>Clarity of explanations</li>
-
-            <li>Ease of navigation</li>
-
-            <li>Visual readability</li>
-
-            <li>Understanding of the safe demonstration</li>
-
-            <li>Broken links or technical problems</li>
-
-        </ul>
-
-        <p>
-            Feedback will be used to identify unclear sections and correct
-            technical or navigation problems before the final presentation.
-        </p>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>Safety Approach</h2>
-
-        <p>
-            This project does not perform unauthorized testing against real
-            systems.
-        </p>
-
-        <p>
-            The demonstration uses fictional input and browser-based
-            cryptographic functionality. No real accounts, passwords or
-            external systems are attacked or tested.
-        </p>
-
-    </section>
-
-
-</div>
+</main>
 
 
 <footer>
 
-    <p>
-        Cryptographic Failures in Web Security — Educational Student Blog
-    </p>
+    When Encryption Fails · Information Systems & Cybersecurity
 
 </footer>
 
 
 </body>
-
 </html>
