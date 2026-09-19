@@ -1,341 +1,794 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Risk Analysis | Cryptographic Failures</title>
+
+    <title>Risk | When Encryption Fails</title>
 
     <style>
-        body {
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #1f2937;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070b14;
+            color: #e8edf7;
             line-height: 1.7;
         }
 
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #2563eb;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #9333ea;
+            filter: blur(180px);
+            opacity: 0.10;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+
+
+        /* HEADER */
+
         header {
-            background: #111827;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            background: rgba(7, 11, 20, 0.82);
+            backdrop-filter: blur(15px);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 34px;
+        .header {
+            max-width: 1150px;
+            margin: auto;
+
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 30px;
         }
 
-        header p {
-            margin-top: 8px;
-            color: #d1d5db;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #9333ea
+                );
+
+            box-shadow:
+                0 0 25px rgba(37,99,235,0.35);
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #7f8ba3;
         }
 
         nav {
-            background: #1f2937;
-            text-align: center;
-            padding: 14px;
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
         }
 
         nav a {
-            color: white;
+            color: #aeb8ca;
             text-decoration: none;
-            margin: 0 10px;
-            font-size: 14px;
+            font-size: 13px;
+
+            transition: 0.25s;
         }
 
         nav a:hover {
+            color: #60a5fa;
+
+            text-shadow:
+                0 0 10px rgba(96,165,250,0.5);
+        }
+
+
+        /* MAIN */
+
+        main {
+            max-width: 1000px;
+            margin: auto;
+
+            padding:
+                75px 25px 100px;
+        }
+
+        .category {
+            color: #60a5fa;
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 52px;
+
+            line-height: 1.1;
+
+            margin:
+                12px 0 18px;
+        }
+
+        .subtitle {
+            color: #8f9bb0;
+
+            font-size: 16px;
+
+            max-width: 650px;
+
+            margin-bottom: 50px;
+        }
+
+
+        /* RISK GRID */
+
+        .risk-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+
+        /* RISK CARD */
+
+        .risk-card {
+            position: relative;
+
+            padding: 27px;
+
+            min-height: 220px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.06),
+                    rgba(255,255,255,0.018)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.09);
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s,
+                border-color 0.3s,
+                box-shadow 0.3s;
+        }
+
+        .risk-card:hover {
+            transform: translateY(-5px);
+
+            border-color:
+                rgba(96,165,250,0.4);
+
+            box-shadow:
+                0 20px 55px rgba(37,99,235,0.13);
+        }
+
+
+        /* LARGE BACKGROUND NUMBER */
+
+        .risk-number {
+            position: absolute;
+
+            right: 15px;
+            top: -15px;
+
+            font-size: 100px;
+
+            font-weight: bold;
+
+            color:
+                rgba(255,255,255,0.025);
+
+            pointer-events: none;
+        }
+
+
+        .risk-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .risk-icon {
+            font-size: 27px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .risk-card h2 {
+            font-size: 21px;
+
+            color: white;
+
+            margin-bottom: 8px;
+        }
+
+
+        .risk-card p {
+            color: #aab4c5;
+
+            font-size: 14px;
+
+            margin: 0;
+        }
+
+
+        /* SECOND SECTION */
+
+        .section-title {
+            margin-top: 65px;
+
+            margin-bottom: 22px;
+
+            font-size: 27px;
+        }
+
+
+        .warning-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .warning {
+            padding: 20px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+
+        .warning h3 {
+            color: white;
+
+            font-size: 15px;
+
+            margin-bottom: 6px;
+        }
+
+
+        .warning p {
+            color: #8794aa;
+
+            font-size: 13px;
+        }
+
+
+        /* NOTE */
+
+        .note {
+            margin-top: 30px;
+
+            padding: 18px 20px;
+
+            border-left:
+                3px solid #3b82f6;
+
+            background:
+                rgba(37,99,235,0.07);
+
+            border-radius: 8px;
+
+            color: #9eabc0;
+
+            font-size: 14px;
+        }
+
+        .note strong {
+            color: #60a5fa;
+        }
+
+
+        /* SOURCES */
+
+        .sources {
+            margin-top: 65px;
+
+            padding-top: 25px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .sources h2 {
+            font-size: 24px;
+
+            margin-bottom: 15px;
+        }
+
+        .sources p {
+            color: #8f9bb0;
+
+            font-size: 13px;
+
+            margin-bottom: 8px;
+        }
+
+        .sources a {
+            color: #60a5fa;
+
+            text-decoration: none;
+        }
+
+        .sources a:hover {
             text-decoration: underline;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
 
-        .card {
-            background: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        }
-
-        h2 {
-            color: #111827;
-        }
-
-        h3 {
-            color: #374151;
-        }
-
-        ul {
-            padding-left: 25px;
-        }
-
-        .risk-box {
-            background: #fff7ed;
-            border-left: 5px solid #f97316;
-            padding: 18px;
-            margin: 20px 0;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #d1d5db;
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
-            background: #e5e7eb;
-        }
+        /* FOOTER */
 
         footer {
-            background: #111827;
-            color: #d1d5db;
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
             text-align: center;
-            padding: 25px;
-            margin-top: 50px;
+
+            padding: 35px;
+
+            color: #657188;
+
+            font-size: 12px;
         }
 
-        @media (max-width: 700px) {
-            nav a {
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .header {
                 display: block;
-                margin: 8px;
             }
 
-            table {
-                font-size: 14px;
+            nav {
+                margin-top: 18px;
+
+                gap: 13px;
             }
+
+            h1 {
+                font-size: 43px;
+            }
+
+            .risk-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .warning-grid {
+                grid-template-columns: 1fr;
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
+<!-- HEADER -->
+
 <header>
-    <h1>Risk Analysis</h1>
-    <p>Understanding the security risks caused by cryptographic failures</p>
+
+    <div class="header">
+
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <div class="logo">
+                    When Encryption Fails
+                </div>
+
+                <div class="tagline">
+                    A student blog about cryptographic failures
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">Introduction</a>
+
+            <a href="concept.html">Concept</a>
+
+            <a href="risk.html">Risk</a>
+
+            <a href="cases.html">Cases</a>
+
+            <a href="prevention.html">Prevention</a>
+
+            <a href="demo.html">Demo</a>
+
+            <a href="references.html">References</a>
+
+            <a href="about.html">About</a>
+
+        </nav>
+
+    </div>
+
 </header>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="concept.html">Concept</a>
-    <a href="risk.html">Risk Analysis</a>
-    <a href="cases.html">Real Cases</a>
-    <a href="prevention.html">Prevention</a>
-    <a href="demo.html">Safe Demo</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="conclusion.html">Conclusion</a>
-    <a href="references.html">References</a>
-    <a href="about.html">About</a>
-</nav>
 
-<div class="container">
 
-    <section class="card">
-        <h2>What is the Risk?</h2>
+<!-- MAIN -->
 
-        <p>
-            Cryptographic failures occur when sensitive information is not
-            properly protected by encryption, hashing, secure random numbers,
-            or appropriate key management.
-        </p>
+<main>
 
-        <p>
-            The main risk is that information intended to remain confidential
-            or protected may become accessible to unauthorized people.
-        </p>
 
-        <div class="risk-box">
-            <strong>Simple idea:</strong>
-            Weak or missing cryptographic protection can turn private
-            information into exposed information.
+    <div class="category">
+        02 / Security Impact
+    </div>
+
+
+    <h1>
+        Risk Analysis
+    </h1>
+
+
+    <p class="subtitle">
+
+        When cryptography is weak or implemented incorrectly,
+        the damage can go far beyond the original mistake.
+
+    </p>
+
+
+
+    <!-- MAIN RISKS -->
+
+    <div class="risk-grid">
+
+
+        <!-- CARD 01 -->
+
+        <div class="risk-card">
+
+            <div class="risk-number">
+                01
+            </div>
+
+            <div class="risk-content">
+
+                <div class="risk-icon">
+                    🔓
+                </div>
+
+                <h2>
+                    Data Exposure
+                </h2>
+
+                <p>
+
+                    Weak encryption or poor key management
+                    can expose personal, financial or
+                    business information.
+
+                </p>
+
+            </div>
+
         </div>
-    </section>
 
 
-    <section class="card">
-        <h2>1. Important Assets at Risk</h2>
 
-        <p>
-            Cryptographic failures can affect many types of information and
-            security assets.
-        </p>
+        <!-- CARD 02 -->
 
-        <ul>
-            <li>User passwords</li>
-            <li>Personal information</li>
-            <li>Financial and payment information</li>
-            <li>Authentication tokens and session information</li>
-            <li>Private messages and documents</li>
-            <li>Encryption keys and secrets</li>
-            <li>Business and organizational information</li>
-        </ul>
-    </section>
+        <div class="risk-card">
 
+            <div class="risk-number">
+                02
+            </div>
 
-    <section class="card">
-        <h2>2. Possible Threat Actors</h2>
+            <div class="risk-content">
 
-        <p>
-            Different types of attackers may try to take advantage of
-            cryptographic weaknesses.
-        </p>
+                <div class="risk-icon">
+                    👤
+                </div>
 
-        <ul>
-            <li>
-                <strong>Cybercriminals:</strong>
-                may attempt to obtain valuable information for financial gain.
-            </li>
+                <h2>
+                    Account Theft
+                </h2>
 
-            <li>
-                <strong>Opportunistic attackers:</strong>
-                may search for systems that expose sensitive information
-                because of weak security controls.
-            </li>
+                <p>
 
-            <li>
-                <strong>Malicious insiders:</strong>
-                authorized users may misuse information if security controls
-                are weak.
-            </li>
+                    Poor password hashing or exposed
+                    credentials can make it easier for
+                    attackers to access accounts.
 
-            <li>
-                <strong>Other unauthorized users:</strong>
-                people who gain access to exposed data may attempt to use it
-                for further attacks.
-            </li>
-        </ul>
-    </section>
+                </p>
 
+            </div>
 
-    <section class="card">
-        <h2>3. Common Causes</h2>
-
-        <p>
-            Cryptographic failures can happen for several reasons.
-        </p>
-
-        <ul>
-            <li>Using outdated or inappropriate cryptographic algorithms</li>
-            <li>Sending sensitive information without adequate encryption</li>
-            <li>Storing passwords incorrectly</li>
-            <li>Using weak or predictable random numbers</li>
-            <li>Poor management of encryption keys</li>
-            <li>Incorrect TLS configuration</li>
-            <li>Hard-coded cryptographic secrets</li>
-            <li>Using encryption without properly protecting the encryption keys</li>
-        </ul>
-    </section>
-
-
-    <section class="card">
-        <h2>4. Potential Impact</h2>
-
-        <table>
-            <tr>
-                <th>Impact Area</th>
-                <th>Possible Consequence</th>
-            </tr>
-
-            <tr>
-                <td>Confidentiality</td>
-                <td>Sensitive information may be exposed to unauthorized people.</td>
-            </tr>
-
-            <tr>
-                <td>Privacy</td>
-                <td>Personal information may be disclosed.</td>
-            </tr>
-
-            <tr>
-                <td>Financial Security</td>
-                <td>Exposed financial information may contribute to fraud or financial loss.</td>
-            </tr>
-
-            <tr>
-                <td>Account Security</td>
-                <td>Weak password protection may make unauthorized account access easier.</td>
-            </tr>
-
-            <tr>
-                <td>Reputation</td>
-                <td>An organization may lose customer trust after a security incident.</td>
-            </tr>
-
-            <tr>
-                <td>Legal and Regulatory</td>
-                <td>Organizations may face obligations or consequences related to protecting personal or regulated information.</td>
-            </tr>
-        </table>
-    </section>
-
-
-    <section class="card">
-        <h2>5. Risk Chain</h2>
-
-        <p>
-            A cryptographic failure can be understood as a chain of events:
-        </p>
-
-        <div class="risk-box">
-            <strong>Cryptographic weakness</strong>
-            →
-            <strong>Information becomes insufficiently protected</strong>
-            →
-            <strong>Unauthorized access or disclosure</strong>
-            →
-            <strong>Potential security, privacy or financial impact</strong>
         </div>
-    </section>
 
 
-    <section class="card">
-        <h2>6. Ethical Considerations</h2>
+
+        <!-- CARD 03 -->
+
+        <div class="risk-card">
+
+            <div class="risk-number">
+                03
+            </div>
+
+            <div class="risk-content">
+
+                <div class="risk-icon">
+                    💳
+                </div>
+
+                <h2>
+                    Financial Loss
+                </h2>
+
+                <p>
+
+                    Exposed payment information or
+                    compromised accounts can lead to
+                    financial damage.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CARD 04 -->
+
+        <div class="risk-card">
+
+            <div class="risk-number">
+                04
+            </div>
+
+            <div class="risk-content">
+
+                <div class="risk-icon">
+                    ⚠️
+                </div>
+
+                <h2>
+                    Loss of Trust
+                </h2>
+
+                <p>
+
+                    A security incident can damage the
+                    trust users have in an application
+                    or organization.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- COMMON PROBLEMS -->
+
+    <h2 class="section-title">
+        What increases the risk?
+    </h2>
+
+
+    <div class="warning-grid">
+
+
+        <div class="warning">
+
+            <h3>
+                Old Algorithms
+            </h3>
+
+            <p>
+
+                Older algorithms may no longer provide
+                enough protection against modern attacks.
+
+            </p>
+
+        </div>
+
+
+        <div class="warning">
+
+            <h3>
+                Weak Password Storage
+            </h3>
+
+            <p>
+
+                Storing passwords incorrectly can make
+                stolen databases much more dangerous.
+
+            </p>
+
+        </div>
+
+
+        <div class="warning">
+
+            <h3>
+                Exposed Keys
+            </h3>
+
+            <p>
+
+                Secret keys should not be stored in
+                public repositories or exposed systems.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- NOTE -->
+
+    <div class="note">
+
+        <strong>Important:</strong>
+
+        Encryption by itself does not guarantee security.
+        The algorithm, implementation, keys and configuration
+        all matter.
+
+    </div>
+
+
+
+    <!-- SOURCES -->
+
+    <div class="sources">
+
+        <h2>
+            Sources
+        </h2>
+
 
         <p>
-            Studying cryptographic failures is important for improving
-            security, but security testing must be performed responsibly.
+
+            [1]
+
+            <a
+                href="https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/"
+                target="_blank"
+            >
+
+                OWASP — A04:2025 Cryptographic Failures
+
+            </a>
+
         </p>
+
 
         <p>
-            A security researcher or student should not test cryptographic
-            weaknesses against systems without permission. Demonstrations
-            should use intentionally created examples, local environments,
-            fake information, or purpose-built security laboratories.
+
+            [2]
+
+            <a
+                href="https://csrc.nist.gov/"
+                target="_blank"
+            >
+
+                NIST — Cybersecurity Resources
+
+            </a>
+
         </p>
 
-        <p>
-            This project therefore uses safe educational demonstrations rather
-            than testing real organizations or real users.
-        </p>
-    </section>
+    </div>
 
 
-    <section class="card">
-        <h2>Key Lesson</h2>
+</main>
 
-        <p>
-            Cryptography is not only about choosing an encryption algorithm.
-            Secure systems also require appropriate algorithms, secure
-            implementation, strong key management, safe password storage,
-            secure random values, and correct configuration.
-        </p>
-    </section>
 
-</div>
+
+<!-- FOOTER -->
 
 <footer>
-    <p>Cryptographic Failures in Web Security — Educational Student Blog</p>
+
+    When Encryption Fails · Information Systems & Cybersecurity
+
 </footer>
 
+
 </body>
+
 </html>
