@@ -1,11 +1,13 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Cryptographic Failures Explained</title>
+    <title>Concept | When Encryption Fails</title>
 
     <style>
 
@@ -15,403 +17,701 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: Arial, Helvetica, sans-serif;
+            background: #070b14;
+            color: #e8edf7;
             line-height: 1.7;
-            background: #f5f7fa;
-            color: #1f2937;
         }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #2563eb;
+            filter: blur(180px);
+            opacity: 0.12;
+            top: -150px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            background: #9333ea;
+            filter: blur(180px);
+            opacity: 0.10;
+            bottom: -150px;
+            right: -150px;
+            z-index: -1;
+        }
+
+        /* HEADER */
 
         header {
-            background: #111827;
-            color: white;
-            padding: 25px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(7, 11, 20, 0.82);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .header-container {
-            max-width: 1100px;
+        .header {
+            max-width: 1150px;
             margin: auto;
+            padding: 18px 25px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 30px;
         }
 
-        header h1 {
-            font-size: 32px;
-            margin-bottom: 5px;
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        header p {
-            color: #d1d5db;
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #9333ea
+            );
+
+            box-shadow:
+                0 0 25px rgba(37,99,235,0.35);
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .tagline {
+            font-size: 11px;
+            color: #7f8ba3;
         }
 
         nav {
-            background: #1f2937;
-        }
-
-        .nav-container {
-            max-width: 1100px;
-            margin: auto;
             display: flex;
+            gap: 22px;
             flex-wrap: wrap;
         }
 
         nav a {
-            color: white;
+            color: #aeb8ca;
             text-decoration: none;
-            padding: 14px 12px;
-            display: block;
-            font-size: 14px;
+            font-size: 13px;
+            transition: 0.25s;
         }
 
-        nav a:hover,
-        nav a:focus {
-            background: #374151;
+        nav a:hover {
+            color: #60a5fa;
         }
+
+        /* MAIN */
 
         main {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
+            max-width: 850px;
+            margin: auto;
+            padding: 75px 25px 100px;
         }
 
-        .section {
-            background: white;
-            padding: 35px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        .category {
+            color: #60a5fa;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: 52px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            color: #8f9bb0;
+            font-size: 16px;
+            max-width: 650px;
+            margin-bottom: 45px;
         }
 
         h2 {
-            color: #111827;
-            margin-bottom: 18px;
-            font-size: 30px;
-        }
-
-        h3 {
-            color: #374151;
-            margin-top: 25px;
-            margin-bottom: 10px;
-        }
-
-        p {
+            font-size: 27px;
+            margin-top: 60px;
             margin-bottom: 15px;
         }
 
-        .diagram {
-            background: #eef2ff;
-            border-left: 5px solid #4f46e5;
-            padding: 25px;
+        p {
+            color: #aab4c5;
+            font-size: 16px;
+            margin-bottom: 16px;
+        }
+
+        /* CONTENTS */
+
+        .contents {
+            padding: 23px 25px;
+            margin-bottom: 50px;
+
+            border-radius: 14px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .contents strong {
+            display: block;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .contents a {
+            display: block;
+            color: #8fa1bd;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 6px 0;
+        }
+
+        .contents a:hover {
+            color: #60a5fa;
+        }
+
+        /* CRYPTO CARDS */
+
+        .crypto-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
             margin: 25px 0;
-            text-align: center;
-            border-radius: 8px;
         }
 
-        .flow {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 10px 0;
+        .crypto-card {
+            padding: 22px;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.055),
+                    rgba(255,255,255,0.02)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            transition: 0.3s;
         }
 
-        .warning {
-            background: #fff7ed;
-            border-left: 5px solid #ea580c;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
+        .crypto-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(96,165,250,0.35);
         }
 
-        .good {
-            background: #ecfdf5;
-            border-left: 5px solid #059669;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
+        .icon {
+            font-size: 25px;
+            margin-bottom: 12px;
         }
+
+        .crypto-card h3 {
+            font-size: 17px;
+            margin-bottom: 7px;
+            color: white;
+        }
+
+        .crypto-card p {
+            font-size: 13px;
+            margin: 0;
+        }
+
+        /* FAILURE EXAMPLES */
+
+        .failure-list {
+            margin-top: 25px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .failure {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            padding: 17px 20px;
+
+            background:
+                rgba(255,255,255,0.035);
+
+            border:
+                1px solid rgba(255,255,255,0.07);
+
+            border-radius: 10px;
+        }
+
+        .failure-number {
+            color: #60a5fa;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        .failure-text {
+            color: #aab4c5;
+            font-size: 14px;
+        }
+
+        /* NOTE */
+
+        .note {
+            margin-top: 30px;
+
+            padding: 18px 20px;
+
+            border-left: 3px solid #3b82f6;
+
+            background:
+                rgba(37,99,235,0.07);
+
+            border-radius: 8px;
+
+            color: #9eabc0;
+
+            font-size: 14px;
+        }
+
+        .note strong {
+            color: #60a5fa;
+        }
+
+        /* SOURCES */
+
+        .sources {
+            margin-top: 70px;
+            padding-top: 25px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .sources p {
+            font-size: 13px;
+        }
+
+        .sources a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+        /* FOOTER */
 
         footer {
-            background: #111827;
-            color: #d1d5db;
-            padding: 30px 20px;
-            margin-top: 50px;
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            text-align: center;
+
+            padding: 35px 20px;
+
+            color: #657188;
+
+            font-size: 12px;
         }
 
-        .footer-container {
-            max-width: 1100px;
-            margin: auto;
-        }
+        /* MOBILE */
 
-        @media (max-width: 600px) {
+        @media (max-width: 800px) {
 
-            header h1 {
-                font-size: 25px;
+            .header {
+                display: block;
             }
 
-            .section {
-                padding: 25px 20px;
+            nav {
+                margin-top: 18px;
+                gap: 13px;
             }
 
-            nav a {
-                padding: 10px;
+            h1 {
+                font-size: 43px;
             }
 
+            .crypto-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
     </style>
 
 </head>
 
+
 <body>
+
+
+<!-- HEADER -->
 
 <header>
 
-    <div class="header-container">
+    <div class="header">
 
-        <h1>When Encryption Fails</h1>
+        <div class="logo-area">
 
-        <p>
-            Understanding Cryptographic Failures in Web Security
-        </p>
+            <div class="logo-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <div class="logo">
+                    When Encryption Fails
+                </div>
+
+                <div class="tagline">
+                    A student blog about cryptographic failures
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <a href="index.html">Introduction</a>
+            <a href="concept.html">Concept</a>
+            <a href="risk.html">Risk</a>
+            <a href="cases.html">Cases</a>
+            <a href="prevention.html">Prevention</a>
+            <a href="demo.html">Demo</a>
+            <a href="references.html">References</a>
+            <a href="about.html">About</a>
+
+        </nav>
 
     </div>
 
 </header>
 
 
-<nav aria-label="Main navigation">
 
-    <div class="nav-container">
-
-        <a href="index.html">Home</a>
-
-        <a href="concept.html">Concept</a>
-
-        <a href="risk.html">Risk Analysis</a>
-
-        <a href="cases.html">Real Cases</a>
-
-        <a href="prevention.html">Prevention</a>
-
-        <a href="demo.html">Safe Demo</a>
-
-        <a href="evidence.html">Evidence</a>
-
-        <a href="conclusion.html">Conclusion</a>
-
-        <a href="references.html">References</a>
-
-        <a href="about.html">About</a>
-
-    </div>
-
-</nav>
-
+<!-- MAIN -->
 
 <main>
 
 
-<section class="section">
-
-    <h2>What Are Cryptographic Failures?</h2>
-
-    <p>
-        Cryptography is the use of mathematical techniques to protect
-        information. Web applications use cryptographic mechanisms to help
-        protect sensitive information such as passwords, personal data,
-        financial information and communications.
-    </p>
-
-    <p>
-        A cryptographic failure occurs when sensitive information is not
-        properly protected because cryptography is missing, weak,
-        incorrectly implemented, incorrectly configured or otherwise
-        unsuitable for the security requirement.
-    </p>
-
-</section>
-
-
-<section class="section">
-
-    <h2>Encryption</h2>
-
-    <p>
-        Encryption transforms readable information, known as plaintext,
-        into a protected form called ciphertext. A suitable decryption
-        process can transform the ciphertext back into readable information.
-    </p>
-
-
-    <div class="diagram"
-         role="img"
-         aria-label="Diagram showing plaintext being encrypted into ciphertext and later decrypted back into plaintext">
-
-        <strong>Plaintext</strong>
-
-        <div class="flow">↓</div>
-
-        <strong>Encryption</strong>
-
-        <div class="flow">↓</div>
-
-        <strong>Ciphertext</strong>
-
-        <div class="flow">↓</div>
-
-        <strong>Decryption</strong>
-
-        <div class="flow">↓</div>
-
-        <strong>Plaintext</strong>
-
+    <div class="category">
+        01 / The Basics
     </div>
 
-</section>
+
+    <h1>
+        The Concept
+    </h1>
 
 
-<section class="section">
+    <p class="subtitle">
 
-    <h2>Hashing</h2>
+        Cryptography is meant to protect information.
+        A cryptographic failure happens when that protection
+        is weak, missing or used incorrectly.
 
-    <p>
-        Hashing is different from encryption. A cryptographic hash function
-        produces a fixed-length value from input data. Proper password
-        storage normally uses a password-hashing mechanism designed for
-        password protection rather than storing the original password.
     </p>
 
 
-    <div class="diagram"
-         role="img"
-         aria-label="Diagram showing a password being processed by a password hashing function before being stored">
+    <!-- CONTENTS -->
 
-        <strong>Example Password</strong>
+    <div class="contents">
 
-        <div class="flow">↓</div>
+        <strong>
+            On this page
+        </strong>
 
-        <strong>Password Hashing</strong>
+        <a href="#crypto">
+            01 — What is cryptography?
+        </a>
 
-        <div class="flow">↓</div>
+        <a href="#failure">
+            02 — What is a cryptographic failure?
+        </a>
 
-        <strong>Password Hash</strong>
-
-        <div class="flow">↓</div>
-
-        <strong>Database</strong>
-
-    </div>
-
-</section>
-
-
-<section class="section">
-
-    <h2>Encryption vs Hashing vs Encoding</h2>
-
-    <div class="warning">
-
-        <strong>Important:</strong>
-
-        Encryption, hashing and encoding are not the same thing.
+        <a href="#examples">
+            03 — Common examples
+        </a>
 
     </div>
 
 
-    <h3>Encryption</h3>
+
+    <!-- SECTION 1 -->
+
+    <h2 id="crypto">
+        What is cryptography?
+    </h2>
+
 
     <p>
-        Encryption is designed to protect information so that authorised
-        parties can recover the original information using the appropriate
-        decryption process.
+
+        Cryptography is a way of protecting information
+        using mathematical techniques.
+
     </p>
 
 
-    <h3>Hashing</h3>
-
     <p>
-        Hashing produces a derived value from input data. Password systems
-        use specialised password-hashing algorithms to make password
-        recovery from stored values difficult.
+
+        It is commonly used to protect data while it is
+        stored or being sent between systems.
+
     </p>
 
 
-    <h3>Encoding</h3>
-
-    <p>
-        Encoding changes data into another representation for compatibility
-        or transmission. Encoding by itself does not provide confidentiality.
-    </p>
-
-</section>
+    <div class="crypto-grid">
 
 
-<section class="section">
+        <div class="crypto-card">
 
-    <h2>How Can Cryptographic Failures Happen?</h2>
+            <div class="icon">
+                🔒
+            </div>
 
-    <p>
-        Cryptographic problems can appear in many different ways.
-        Examples include:
-    </p>
+            <h3>
+                Encryption
+            </h3>
 
-    <ul>
+            <p>
+                Turns readable information into protected data.
+            </p>
 
-        <li>Transmitting sensitive information without appropriate protection.</li>
-
-        <li>Using obsolete or inappropriate cryptographic algorithms.</li>
-
-        <li>Storing passwords in plaintext.</li>
-
-        <li>Using weak password-storage mechanisms.</li>
-
-        <li>Poor management or storage of cryptographic keys.</li>
-
-        <li>Using predictable or inappropriate random values.</li>
-
-        <li>Incorrectly configuring TLS or other security mechanisms.</li>
-
-        <li>Hard-coding sensitive cryptographic secrets into application code.</li>
-
-    </ul>
-
-</section>
+        </div>
 
 
-<section class="section">
+        <div class="crypto-card">
 
-    <h2>Why Web Applications Are Affected</h2>
+            <div class="icon">
+                #️⃣
+            </div>
 
-    <p>
-        Web applications frequently handle information belonging to many
-        users. This makes the protection of data an important part of
-        application security.
-    </p>
+            <h3>
+                Hashing
+            </h3>
 
-    <div class="good">
+            <p>
+                Creates a fixed-length value from input data.
+            </p>
 
-        <strong>Key lesson:</strong>
+        </div>
 
-        Cryptography is not automatically secure simply because an
-        application uses an encryption library. The algorithm, implementation,
-        configuration, keys and surrounding security controls all matter.
+
+        <div class="crypto-card">
+
+            <div class="icon">
+                🔑
+            </div>
+
+            <h3>
+                Keys
+            </h3>
+
+            <p>
+                Secret values used by many cryptographic systems.
+            </p>
+
+        </div>
+
 
     </div>
 
-</section>
+
+
+    <!-- SECTION 2 -->
+
+    <h2 id="failure">
+        What is a cryptographic failure?
+    </h2>
+
+
+    <p>
+
+        A cryptographic failure does not necessarily mean
+        that the encryption algorithm itself is broken.
+
+    </p>
+
+
+    <p>
+
+        The problem can come from choosing the wrong
+        algorithm, using it incorrectly or protecting
+        the cryptographic keys badly.
+
+    </p>
+
+
+    <div class="note">
+
+        <strong>Simple idea:</strong>
+
+        Strong cryptography can still lead to a weak
+        system if it is implemented badly.
+
+    </div>
+
+
+
+    <!-- SECTION 3 -->
+
+    <h2 id="examples">
+        Common examples
+    </h2>
+
+
+    <div class="failure-list">
+
+
+        <div class="failure">
+
+            <div class="failure-number">
+                01
+            </div>
+
+            <div class="failure-text">
+                Using outdated or weak cryptographic algorithms.
+            </div>
+
+        </div>
+
+
+        <div class="failure">
+
+            <div class="failure-number">
+                02
+            </div>
+
+            <div class="failure-text">
+                Storing passwords without proper hashing.
+            </div>
+
+        </div>
+
+
+        <div class="failure">
+
+            <div class="failure-number">
+                03
+            </div>
+
+            <div class="failure-text">
+                Exposing private or secret cryptographic keys.
+            </div>
+
+        </div>
+
+
+        <div class="failure">
+
+            <div class="failure-number">
+                04
+            </div>
+
+            <div class="failure-text">
+                Using predictable random values where security requires randomness.
+            </div>
+
+        </div>
+
+
+        <div class="failure">
+
+            <div class="failure-number">
+                05
+            </div>
+
+            <div class="failure-text">
+                Using encryption incorrectly or with unsafe settings.
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- SOURCES -->
+
+    <div class="sources">
+
+        <h2>
+            Sources
+        </h2>
+
+
+        <p>
+
+            [1]
+            <a
+                href="https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/"
+                target="_blank">
+
+                OWASP — A04:2025 Cryptographic Failures
+
+            </a>
+
+        </p>
+
+
+        <p>
+
+            [2]
+            <a
+                href="https://csrc.nist.gov/glossary/term/cryptography"
+                target="_blank">
+
+                NIST — Cryptography
+
+            </a>
+
+        </p>
+
+    </div>
 
 
 </main>
 
 
+
 <footer>
 
-    <div class="footer-container">
-
-        <p><strong>When Encryption Fails</strong></p>
-
-        <p>
-            Educational blog about Cryptographic Failures in Web Security.
-        </p>
-
-    </div>
+    When Encryption Fails
+    ·
+    Information Systems & Cybersecurity
 
 </footer>
 
@@ -419,3 +719,4 @@
 </body>
 
 </html>
+```
