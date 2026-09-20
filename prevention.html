@@ -8,216 +8,180 @@
 
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: Arial, sans-serif;
             background: #070b14;
             color: #e8eefc;
             line-height: 1.6;
         }
 
-        /* HEADER */
-        header {
+        nav {
             position: sticky;
             top: 0;
-            z-index: 100;
-            background: rgba(7, 11, 20, 0.85);
+            z-index: 1000;
+            background: rgba(7, 11, 20, 0.9);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        nav {
-            max-width: 1150px;
+        .nav-container {
+            max-width: 1200px;
             margin: auto;
             padding: 18px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 20px;
         }
 
         .logo {
-            font-size: 20px;
             font-weight: bold;
-            color: white;
-        }
-
-        .logo span {
-            color: #6c63ff;
+            color: #6ea8ff;
+            white-space: nowrap;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 22px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 18px;
         }
 
         nav a {
-            color: #aeb8d0;
+            color: #b9c4da;
             text-decoration: none;
             font-size: 14px;
             transition: 0.3s;
         }
 
         nav a:hover {
-            color: #7c8cff;
+            color: #ffffff;
         }
 
-        /* HERO */
         .hero {
             max-width: 1100px;
             margin: auto;
-            padding: 100px 25px 70px;
+            padding: 90px 25px 50px;
         }
 
-        .number {
-            color: #6c63ff;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 3px;
-            margin-bottom: 12px;
+        .tag {
+            color: #7aa9ff;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
         }
 
         h1 {
-            font-size: clamp(45px, 7vw, 80px);
+            font-size: clamp(45px, 7vw, 75px);
             line-height: 1;
             margin-bottom: 25px;
-            background: linear-gradient(90deg, #ffffff, #8d8aff);
+            background: linear-gradient(90deg, #ffffff, #7aa9ff, #a978ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .intro {
-            max-width: 650px;
-            color: #9da8c0;
+        .hero p {
+            max-width: 720px;
+            color: #9da9bf;
             font-size: 18px;
         }
 
-        /* CONTENT */
-        .container {
+        .section {
             max-width: 1100px;
             margin: auto;
-            padding: 20px 25px 80px;
-        }
-
-        .section-title {
-            font-size: 30px;
-            margin: 60px 0 25px;
+            padding: 30px 25px 90px;
         }
 
         .cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
         .card {
-            position: relative;
             background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 18px;
             padding: 28px;
-            overflow: hidden;
-            transition: 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(108,99,255,0.5);
-            box-shadow: 0 10px 40px rgba(108,99,255,0.12);
+        .number {
+            color: #6ea8ff;
+            font-size: 13px;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
         }
 
-        .card-number {
-            position: absolute;
-            right: 15px;
-            top: -10px;
-            font-size: 70px;
-            font-weight: bold;
-            color: rgba(255,255,255,0.035);
-        }
-
-        .icon {
-            font-size: 30px;
-            margin-bottom: 15px;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 10px;
+        .card h2 {
+            color: #ffffff;
+            margin-bottom: 12px;
         }
 
         .card p {
-            color: #9da8c0;
-            font-size: 14px;
+            color: #9da9bf;
         }
 
-        /* NOTE */
         .note {
-            margin-top: 35px;
-            padding: 25px;
-            border-left: 3px solid #6c63ff;
-            background: rgba(108,99,255,0.07);
-            border-radius: 0 12px 12px 0;
+            margin-top: 45px;
+            padding: 30px;
+            border-left: 3px solid #6ea8ff;
+            background: rgba(255,255,255,0.03);
         }
 
-        .note strong {
-            color: white;
+        .note h2 {
+            margin-bottom: 12px;
         }
 
         .note p {
-            color: #aeb8d0;
-            font-size: 14px;
-            margin-top: 7px;
+            color: #9da9bf;
         }
 
-        /* SOURCES */
         .sources {
-            margin-top: 65px;
+            margin-top: 45px;
+            padding: 25px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sources h2 {
+            margin-bottom: 15px;
+        }
+
+        .sources p {
+            margin: 8px 0;
+            color: #9da9bf;
         }
 
         .sources a {
-            display: block;
-            color: #8290ff;
+            color: #7aa9ff;
             text-decoration: none;
-            margin: 8px 0;
-            font-size: 14px;
         }
 
         .sources a:hover {
-            color: white;
+            text-decoration: underline;
         }
 
-        /* FOOTER */
         footer {
-            border-top: 1px solid rgba(255,255,255,0.08);
             text-align: center;
-            padding: 30px 20px;
-            color: #68738b;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            color: #71809b;
             font-size: 13px;
         }
 
-        /* MOBILE */
-        @media (max-width: 800px) {
-            nav {
+        @media (max-width: 850px) {
+            .nav-container {
                 flex-direction: column;
-                gap: 15px;
             }
 
             nav ul {
-                flex-wrap: wrap;
                 justify-content: center;
-                gap: 12px;
-            }
-
-            .hero {
-                padding-top: 70px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -225,135 +189,104 @@
 
 <body>
 
-<header>
-    <nav>
+<nav>
+    <div class="nav-container">
+
         <div class="logo">
-            When <span>Encryption</span> Fails
+            When Encryption Fails
         </div>
 
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="concept.html">Concept</a></li>
-            <li><a href="risk.html">Risk</a></li>
             <li><a href="cases.html">Cases</a></li>
             <li><a href="prevention.html">Prevention</a></li>
             <li><a href="demo.html">Demo</a></li>
+            <li><a href="evidence.html">Evidence</a></li>
+            <li><a href="conclusion.html">Conclusion</a></li>
             <li><a href="references.html">References</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
-    </nav>
-</header>
 
+    </div>
+</nav>
 
 <section class="hero">
 
-    <div class="number">03 / SECURITY PRACTICES</div>
+    <div class="tag">03 / Security Practices</div>
 
     <h1>Prevention</h1>
 
-    <p class="intro">
+    <p>
         Good cryptography is not only about choosing encryption.
         It also depends on how keys, passwords and software are handled.
     </p>
 
 </section>
 
-
-<main class="container">
-
-    <h2 class="section-title">How to prevent cryptographic failures</h2>
+<section class="section">
 
     <div class="cards">
 
         <div class="card">
-            <div class="card-number">01</div>
-
-            <div class="icon">🔐</div>
-
-            <h3>Use Modern Algorithms</h3>
-
+            <div class="number">01</div>
+            <h2>Use Modern Algorithms</h2>
             <p>
-                Avoid outdated algorithms and use modern, trusted
-                cryptographic standards.
+                Use established algorithms and protocols that are
+                currently considered secure. Avoid outdated or broken methods.
             </p>
         </div>
 
-
         <div class="card">
-            <div class="card-number">02</div>
-
-            <div class="icon">🔑</div>
-
-            <h3>Protect Secret Keys</h3>
-
+            <div class="number">02</div>
+            <h2>Protect Secret Keys</h2>
             <p>
-                Keep encryption keys private and store them securely.
-                Never expose them in source code.
+                Encryption keys should be protected and should not be
+                exposed in source code, public repositories or unsecured files.
             </p>
         </div>
 
-
         <div class="card">
-            <div class="card-number">03</div>
-
-            <div class="icon">🔒</div>
-
-            <h3>Hash Passwords Properly</h3>
-
+            <div class="number">03</div>
+            <h2>Hash Passwords Properly</h2>
             <p>
-                Passwords should be stored using secure password
-                hashing methods, not plain text.
+                Passwords should not be stored as plaintext.
+                Use password hashing methods designed to resist cracking.
             </p>
         </div>
 
-
         <div class="card">
-            <div class="card-number">04</div>
-
-            <div class="icon">🎲</div>
-
-            <h3>Use Secure Randomness</h3>
-
+            <div class="number">04</div>
+            <h2>Use Secure Randomness</h2>
             <p>
-                Cryptographic systems need strong random values
-                for keys, tokens and other secrets.
+                Cryptographic keys, tokens and other security values
+                should be generated using secure random number generators.
             </p>
         </div>
 
-
         <div class="card">
-            <div class="card-number">05</div>
-
-            <div class="icon">🛠️</div>
-
-            <h3>Keep Software Updated</h3>
-
+            <div class="number">05</div>
+            <h2>Keep Software Updated</h2>
             <p>
-                Security libraries can contain vulnerabilities.
-                Regular updates help reduce this risk.
+                Security vulnerabilities can exist inside cryptographic
+                libraries. Regular updates help reduce exposure to known bugs.
             </p>
         </div>
 
-
         <div class="card">
-            <div class="card-number">06</div>
-
-            <div class="icon">📚</div>
-
-            <h3>Follow Trusted Guidance</h3>
-
+            <div class="number">06</div>
+            <h2>Follow Trusted Guidance</h2>
             <p>
-                Use established security standards instead of
-                creating your own cryptographic solutions.
+                Use recognised standards and security guidance instead
+                of creating custom cryptographic solutions.
             </p>
         </div>
 
     </div>
 
-
     <div class="note">
 
-        <strong>Key idea</strong>
+        <h2>One important rule</h2>
 
         <p>
             Don't create your own cryptography when tested and trusted
@@ -363,23 +296,27 @@
 
     </div>
 
+    <div class="sources">
 
-    <section class="sources">
+        <h2>Sources</h2>
 
-        <h2 class="section-title">Sources</h2>
+        <p>
+            OWASP Top 10 – Cryptographic Failures:
+            <a href="https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/" target="_blank">
+                OWASP
+            </a>
+        </p>
 
-        <a href="https://owasp.org/www-project-top-ten/" target="_blank">
-            → OWASP Top 10
-        </a>
+        <p>
+            NIST Cryptographic Standards:
+            <a href="https://csrc.nist.gov/" target="_blank">
+                NIST
+            </a>
+        </p>
 
-        <a href="https://csrc.nist.gov/" target="_blank">
-            → NIST Cybersecurity Resources
-        </a>
+    </div>
 
-    </section>
-
-</main>
-
+</section>
 
 <footer>
     When Encryption Fails · Information Systems & Cybersecurity
