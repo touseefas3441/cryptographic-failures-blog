@@ -249,7 +249,10 @@
 
 <header>
     <nav>
-        <div class="logo">When <span>Encryption</span> Fails</div>
+
+        <div class="logo">
+            When <span>Encryption</span> Fails
+        </div>
 
         <ul>
             <li><a href="index.html">Home</a></li>
@@ -262,8 +265,10 @@
             <li><a href="references.html">References</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
+
     </nav>
 </header>
+
 
 <main>
 
@@ -272,8 +277,8 @@
     <h1>SHA-256 Test</h1>
 
     <p class="intro">
-        A simple practical test showing how a small change in data
-        can completely change its hash.
+        A simple test showing how a small change in data can completely
+        change its hash.
     </p>
 
 
@@ -282,8 +287,7 @@
         <h2>Try It Yourself</h2>
 
         <p>
-            Type something below. The page will calculate its SHA-256
-            hash using the browser's built-in cryptographic function.
+            Type something below and the page will calculate its SHA-256 hash.
         </p>
 
         <div class="hash-box">
@@ -313,7 +317,7 @@
                 <div class="step-number">01</div>
                 <h3>Input</h3>
                 <p>
-                    The user enters text into the input box.
+                    Text is entered into the input box.
                 </p>
             </div>
 
@@ -321,7 +325,7 @@
                 <div class="step-number">02</div>
                 <h3>Hashing</h3>
                 <p>
-                    SHA-256 processes the text and produces a fixed-length hash.
+                    SHA-256 processes the text and creates a hash.
                 </p>
             </div>
 
@@ -329,7 +333,7 @@
                 <div class="step-number">03</div>
                 <h3>Result</h3>
                 <p>
-                    Even a small change in the input produces a different hash.
+                    Changing the input creates a different hash.
                 </p>
             </div>
 
@@ -343,9 +347,9 @@
         <h2>My Practical Test</h2>
 
         <p>
-            I tested SHA-256 using PowerShell. First, I created a text file
-            containing "Hello World". I then changed the text to
-            "Hello world" and calculated the hash again.
+            I also tested SHA-256 using PowerShell. First I created a file
+            containing "Hello World". Then I changed it to "Hello world"
+            and calculated the hash again.
         </p>
 
         <div class="screenshots">
@@ -354,11 +358,11 @@
 
                 <img
                     src="sha256-first-test.png"
-                    alt="First SHA-256 test using Hello World"
+                    alt="First SHA-256 test"
                 >
 
                 <p class="caption">
-                    Test 1 — SHA-256 hash of "Hello World"
+                    Test 1 — "Hello World"
                 </p>
 
             </div>
@@ -367,11 +371,11 @@
 
                 <img
                     src="sha256-comparison.png"
-                    alt="Comparison of SHA-256 hashes"
+                    alt="SHA-256 hash comparison"
                 >
 
                 <p class="caption">
-                    Test 2 — Comparing the hashes after changing one character
+                    Test 2 — Hash comparison
                 </p>
 
             </div>
@@ -379,9 +383,8 @@
         </div>
 
         <div class="note">
-            Only one character was changed, but the whole SHA-256 hash changed.
-            This shows how sensitive cryptographic hash functions are to changes
-            in data.
+            Only one character was changed, but the hash changed completely.
+            This shows how sensitive a hash function is to changes in data.
         </div>
 
     </section>
@@ -392,9 +395,8 @@
         <h2>Why Is This Useful?</h2>
 
         <p>
-            Hash functions can be used to detect changes in data.
-            They are commonly used for file integrity checks and are also
-            part of systems that securely store passwords.
+            Hashes can be used to check if data has changed. They are also
+            used in areas such as file integrity checks and password storage.
         </p>
 
         <p class="source">
@@ -405,20 +407,6 @@
             >
                 MDN Web Docs — SubtleCrypto.digest()
             </a>
-        </p>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>AI Usage Declaration</h2>
-
-        <p>
-            AI tools were used during the development of this project to help
-            with brainstorming, explaining technical concepts, improving some
-            wording, and assisting with HTML, CSS and JavaScript code.
-            The final content was reviewed, edited and tested by the student.
         </p>
 
     </section>
