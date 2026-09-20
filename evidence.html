@@ -109,7 +109,7 @@
         }
 
         .card h2 {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             color: white;
         }
 
@@ -227,20 +227,19 @@
 
 <main>
 
-    <div class="label">05 / Supporting Evidence</div>
+    <div class="label">05 / Evidence</div>
 
     <h1>Evidence</h1>
 
     <p class="intro">
-        The examples and explanations in this project are supported by
-        security organisations, technical documentation and documented
-        real-world incidents.
+        This section shows some of the real examples and practical evidence
+        used in this project.
     </p>
 
 
     <section class="card">
 
-        <h2>What The Evidence Shows</h2>
+        <h2>Real Examples</h2>
 
         <div class="evidence-grid">
 
@@ -251,10 +250,9 @@
                 <h3>Heartbleed</h3>
 
                 <p>
-                    The Heartbleed vulnerability affected OpenSSL and could
-                    allow attackers to read data from the memory of vulnerable
-                    systems. This could include sensitive information such as
-                    passwords and session data.
+                    Heartbleed was a vulnerability in OpenSSL. It could allow
+                    an attacker to read parts of a vulnerable server's memory,
+                    which could contain sensitive information.
                 </p>
 
             </div>
@@ -267,10 +265,9 @@
                 <h3>Debian OpenSSL Bug</h3>
 
                 <p>
-                    A change made to Debian's OpenSSL package affected the
-                    generation of random numbers. This resulted in predictable
-                    cryptographic keys being generated during the affected
-                    period.
+                    A change in Debian's OpenSSL package affected random
+                    number generation. This made some cryptographic keys
+                    predictable.
                 </p>
 
             </div>
@@ -283,9 +280,8 @@
                 <h3>SHA-256 Test</h3>
 
                 <p>
-                    The practical test in this project shows that changing
-                    one character in an input produces a completely different
-                    SHA-256 hash.
+                    My practical test shows that changing one character in
+                    the input creates a completely different SHA-256 hash.
                 </p>
 
             </div>
@@ -298,9 +294,8 @@
                 <h3>OWASP Guidance</h3>
 
                 <p>
-                    OWASP identifies cryptographic failures as a security
-                    risk and provides guidance on protecting sensitive data,
-                    passwords, keys and cryptographic implementations.
+                    OWASP explains common cryptographic failures and gives
+                    guidance on protecting sensitive information.
                 </p>
 
             </div>
@@ -352,15 +347,6 @@
                 </a>
             </li>
 
-            <li>
-                <a
-                    href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest"
-                    target="_blank"
-                >
-                    MDN Web Docs — SubtleCrypto.digest()
-                </a>
-            </li>
-
         </ul>
 
     </section>
@@ -371,35 +357,14 @@
         <h2>My Practical Evidence</h2>
 
         <p>
-            The SHA-256 experiment was performed as part of this project.
-            The results were recorded using PowerShell and then added to
-            the Demo page as screenshots.
+            I tested SHA-256 using PowerShell and saved screenshots of the
+            results. These screenshots are shown on the Demo page.
         </p>
 
         <div class="note">
-            The practical test is included to demonstrate the concept
-            rather than to represent a complete security assessment.
+            The test is a simple demonstration of how hashing reacts to
+            changes in data. It is not meant to be a complete security test.
         </div>
-
-    </section>
-
-
-    <section class="card">
-
-        <h2>AI Usage Declaration</h2>
-
-        <p>
-            AI tools were used as an assistance tool during the development
-            of this project. They helped with brainstorming, explaining
-            technical concepts, improving wording and assisting with
-            HTML, CSS and JavaScript.
-        </p>
-
-        <p style="margin-top: 15px;">
-            The student reviewed, edited and tested the final website content.
-            External technical information was checked against the sources
-            listed on the References page.
-        </p>
 
     </section>
 
