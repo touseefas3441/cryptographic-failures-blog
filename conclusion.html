@@ -1,160 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>Conclusion | Cryptographic Failures</title>
+    <title>Conclusion | When Encryption Fails</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f7fb;
-            color: #1f2937;
-            line-height: 1.7;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #070b14;
+            color: #e8edf7;
+            line-height: 1.6;
         }
 
         header {
-            background: #111827;
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 34px;
-        }
-
-        header p {
-            color: #d1d5db;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(7, 11, 20, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         nav {
-            background: #1f2937;
-            text-align: center;
-            padding: 14px;
+            max-width: 1200px;
+            margin: auto;
+            padding: 18px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #6c8cff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
         }
 
         nav a {
-            color: white;
+            color: #aeb8cc;
             text-decoration: none;
-            margin: 0 10px;
             font-size: 14px;
+            transition: 0.3s;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: white;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+        main {
+            max-width: 1050px;
+            margin: auto;
+            padding: 90px 25px;
+        }
+
+        .label {
+            color: #7d91ff;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1;
+            margin-bottom: 25px;
+            background: linear-gradient(90deg, #ffffff, #8da3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro {
+            max-width: 720px;
+            color: #aeb8cc;
+            font-size: 18px;
+            margin-bottom: 55px;
         }
 
         .card {
-            background: white;
-            padding: 28px;
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 30px;
             margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
         }
 
-        h2 {
-            color: #111827;
+        .card h2 {
+            margin-bottom: 15px;
+            color: white;
         }
 
-        .lesson {
-            background: #eff6ff;
-            border-left: 5px solid #2563eb;
-            padding: 18px;
-            margin: 20px 0;
+        .card p {
+            color: #aeb8cc;
         }
 
-        .recommendation {
-            background: #f0fdf4;
-            border-left: 5px solid #16a34a;
-            padding: 18px;
-            margin: 20px 0;
+        .points {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .point {
+            padding: 25px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .number {
+            color: #7188ff;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .point h3 {
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .point p {
+            font-size: 14px;
+        }
+
+        .final-note {
+            margin-top: 25px;
+            padding: 25px;
+            border-left: 3px solid #7188ff;
+            background: rgba(113,136,255,0.06);
+            color: #c2cbe0;
+            border-radius: 8px;
+            font-size: 17px;
         }
 
         footer {
-            background: #111827;
-            color: #d1d5db;
+            border-top: 1px solid rgba(255,255,255,0.08);
             text-align: center;
-            padding: 25px;
-            margin-top: 50px;
+            padding: 30px 20px;
+            color: #707b91;
+            font-size: 13px;
         }
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
-            nav a {
-                display: block;
-                margin: 8px;
+            nav {
+                flex-direction: column;
             }
 
+            nav ul {
+                gap: 12px;
+            }
+
+            .points {
+                grid-template-columns: 1fr;
+            }
+
+            main {
+                padding-top: 60px;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
 <header>
 
-    <h1>Conclusion</h1>
+    <nav>
 
-    <p>
-        Key lessons and recommendations from this project
-    </p>
+        <div class="logo">
+            When <span>Encryption</span> Fails
+        </div>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="concept.html">Concept</a></li>
+            <li><a href="cases.html">Cases</a></li>
+            <li><a href="prevention.html">Prevention</a></li>
+            <li><a href="demo.html">Demo</a></li>
+            <li><a href="evidence.html">Evidence</a></li>
+            <li><a href="conclusion.html">Conclusion</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+
+    </nav>
 
 </header>
 
 
-<nav>
+<main>
 
-    <a href="index.html">Home</a>
-    <a href="concept.html">Concept</a>
-    <a href="risk.html">Risk Analysis</a>
-    <a href="cases.html">Real Cases</a>
-    <a href="prevention.html">Prevention</a>
-    <a href="demo.html">Safe Demo</a>
-    <a href="evidence.html">Evidence</a>
-    <a href="conclusion.html">Conclusion</a>
-    <a href="references.html">References</a>
-    <a href="about.html">About</a>
+    <div class="label">06 / Final Thoughts</div>
 
-</nav>
+    <h1>Conclusion</h1>
 
-
-<div class="container">
+    <p class="intro">
+        Cryptography is an important part of cybersecurity, but simply
+        using encryption does not automatically make a system secure.
+    </p>
 
 
     <section class="card">
 
-        <h2>What We Learned</h2>
+        <h2>What I Learned</h2>
 
         <p>
-            Cryptographic failures occur when sensitive information is not
-            adequately protected because of missing, weak, incorrectly
-            implemented or incorrectly managed cryptographic controls.
-        </p>
-
-        <p>
-            The topic is broader than simply choosing an encryption
-            algorithm. Secure cryptography also depends on appropriate
-            protocols, secure randomness, password storage, key management,
-            configuration and software maintenance.
+            During this project, I learned that cryptographic security
+            depends on more than just choosing an algorithm. Passwords,
+            keys, random number generation, software libraries and
+            implementation choices can all affect security.
         </p>
 
     </section>
@@ -162,29 +240,64 @@
 
     <section class="card">
 
-        <h2>Lessons from Real-World Cases</h2>
+        <h2>Main Points</h2>
 
-        <p>
-            The Adobe case demonstrated how weaknesses in password
-            protection and the handling of older stored information can
-            increase security risks.
-        </p>
+        <div class="points">
 
-        <p>
-            The Debian OpenSSL incident demonstrated a different problem:
-            predictable randomness can undermine cryptographic keys even
-            when a well-known cryptographic library is being used.
-        </p>
+            <div class="point">
 
-        <div class="lesson">
+                <div class="number">01</div>
 
-            <strong>Main lesson:</strong>
+                <h3>Strong Algorithms</h3>
 
-            <p>
-                Strong cryptographic algorithms alone do not guarantee a
-                secure system. The surrounding implementation and
-                management practices are equally important.
-            </p>
+                <p>
+                    Modern and well-tested cryptographic algorithms should
+                    be used instead of outdated or weak methods.
+                </p>
+
+            </div>
+
+
+            <div class="point">
+
+                <div class="number">02</div>
+
+                <h3>Key Protection</h3>
+
+                <p>
+                    Encryption can become ineffective if secret keys are
+                    exposed, poorly stored or incorrectly managed.
+                </p>
+
+            </div>
+
+
+            <div class="point">
+
+                <div class="number">03</div>
+
+                <h3>Password Security</h3>
+
+                <p>
+                    Passwords should not be stored as plain text. Password
+                    storage should use appropriate password hashing methods.
+                </p>
+
+            </div>
+
+
+            <div class="point">
+
+                <div class="number">04</div>
+
+                <h3>Implementation Matters</h3>
+
+                <p>
+                    Even a strong cryptographic algorithm can become unsafe
+                    when it is implemented or configured incorrectly.
+                </p>
+
+            </div>
 
         </div>
 
@@ -193,48 +306,18 @@
 
     <section class="card">
 
-        <h2>Recommendations for Developers</h2>
+        <h2>Final Thought</h2>
 
-        <div class="recommendation">
+        <p>
+            The real lesson from cryptographic failures is that security
+            is not only about having encryption. It is also about using
+            cryptography correctly and maintaining the systems that depend
+            on it.
+        </p>
 
-            <p>
-                <strong>1.</strong>
-                Use established and well-maintained cryptographic libraries.
-            </p>
-
-            <p>
-                <strong>2.</strong>
-                Avoid deprecated or inappropriate algorithms and protocols.
-            </p>
-
-            <p>
-                <strong>3.</strong>
-                Use dedicated password-hashing algorithms rather than
-                storing passwords as plaintext or reversible encryption.
-            </p>
-
-            <p>
-                <strong>4.</strong>
-                Protect cryptographic keys throughout their lifecycle.
-            </p>
-
-            <p>
-                <strong>5.</strong>
-                Use cryptographically secure randomness for security-sensitive
-                values.
-            </p>
-
-            <p>
-                <strong>6.</strong>
-                Review cryptographic configurations and keep security
-                libraries updated.
-            </p>
-
-            <p>
-                <strong>7.</strong>
-                Minimize unnecessary storage of sensitive information.
-            </p>
-
+        <div class="final-note">
+            Good cryptography + good implementation + good security practices
+            are all needed to protect sensitive information.
         </div>
 
     </section>
@@ -242,60 +325,28 @@
 
     <section class="card">
 
-        <h2>Looking Ahead</h2>
+        <h2>AI Usage Declaration</h2>
 
         <p>
-            Cryptographic security will continue to evolve as new
-            technologies, vulnerabilities and computing capabilities
-            develop.
+            AI tools were used during the development of this project for
+            brainstorming, explaining technical concepts, improving some
+            wording and assisting with website code.
         </p>
 
-        <p>
-            Organizations also need to consider future cryptographic
-            migration, including preparation for post-quantum cryptography
-            where appropriate.
-        </p>
-
-        <p>
-            This means cryptographic security should be treated as an
-            ongoing process rather than a one-time configuration.
+        <p style="margin-top: 15px;">
+            The final website was reviewed, edited and tested by the student.
+            Sources used for the technical information are listed on the
+            References page.
         </p>
 
     </section>
 
-
-    <section class="card">
-
-        <h2>Final Message</h2>
-
-        <p>
-            Cryptography is one of the foundations of modern web security.
-            However, encryption and hashing only provide protection when
-            they are selected, implemented, configured and maintained
-            correctly.
-        </p>
-
-        <p>
-            Understanding common cryptographic failures helps developers
-            recognize these problems earlier and build applications that
-            protect sensitive information more effectively.
-        </p>
-
-    </section>
-
-
-</div>
+</main>
 
 
 <footer>
-
-    <p>
-        Cryptographic Failures in Web Security — Educational Student Blog
-    </p>
-
+    When Encryption Fails · Information Systems &amp; Cybersecurity
 </footer>
 
-
 </body>
-
 </html>
