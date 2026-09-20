@@ -4,272 +4,242 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Demo | When Encryption Fails</title>
+    <title>SHA-256 Test | When Encryption Fails</title>
 
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
             font-family: Arial, Helvetica, sans-serif;
             background: #070b14;
-            color: #e8eefc;
+            color: #e8edf7;
             line-height: 1.6;
         }
 
-        /* HEADER */
         header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(7, 11, 20, 0.85);
+            background: rgba(7, 11, 20, 0.88);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         nav {
-            max-width: 1150px;
+            max-width: 1200px;
             margin: auto;
             padding: 18px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 25px;
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: white;
+            white-space: nowrap;
         }
 
         .logo span {
-            color: #6c63ff;
+            color: #6c8cff;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 22px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
         }
 
         nav a {
-            color: #aeb8d0;
+            color: #aeb8cc;
             text-decoration: none;
             font-size: 14px;
             transition: 0.3s;
         }
 
         nav a:hover {
-            color: #7c8cff;
+            color: white;
         }
 
-        /* HERO */
-        .hero {
-            max-width: 1100px;
+        main {
+            max-width: 1050px;
             margin: auto;
-            padding: 100px 25px 65px;
+            padding: 90px 25px;
         }
 
-        .number {
-            color: #6c63ff;
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 3px;
+        .label {
+            color: #7d91ff;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             margin-bottom: 12px;
         }
 
         h1 {
-            font-size: clamp(45px, 7vw, 80px);
+            font-size: clamp(42px, 7vw, 76px);
             line-height: 1;
             margin-bottom: 25px;
-            background: linear-gradient(90deg, #ffffff, #8d8aff);
+            background: linear-gradient(90deg, #ffffff, #8da3ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .intro {
-            max-width: 680px;
-            color: #9da8c0;
+            max-width: 720px;
+            color: #aeb8cc;
             font-size: 18px;
+            margin-bottom: 55px;
         }
 
-        /* MAIN */
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 20px 25px 80px;
-        }
-
-        .section-title {
-            font-size: 30px;
-            margin: 55px 0 20px;
-        }
-
-        /* INTERACTIVE DEMO */
-        .demo-box {
-            background: rgba(255,255,255,0.04);
+        .card {
+            background: rgba(255,255,255,0.035);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 18px;
-            padding: 28px;
-            margin-top: 25px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
         }
 
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: #c8d0e3;
+        .card h2 {
+            margin-bottom: 12px;
+            color: white;
+        }
+
+        .card p {
+            color: #aeb8cc;
+        }
+
+        .hash-box {
+            margin-top: 25px;
         }
 
         input {
             width: 100%;
-            padding: 15px;
+            padding: 17px;
             border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.12);
-            background: #0b1120;
+            background: #0c1220;
             color: white;
+            font-size: 16px;
             outline: none;
-            font-size: 15px;
         }
 
         input:focus {
-            border-color: #6c63ff;
+            border-color: #7188ff;
+            box-shadow: 0 0 20px rgba(90,110,255,0.15);
         }
 
-        .hash {
-            margin-top: 18px;
-            padding: 18px;
+        .hash-output {
+            margin-top: 15px;
+            padding: 20px;
             border-radius: 10px;
             background: #050811;
-            border: 1px solid rgba(108,99,255,0.25);
-            color: #9da8ff;
-            font-family: Consolas, monospace;
-            font-size: 13px;
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #8da3ff;
+            font-family: monospace;
             word-break: break-all;
+            min-height: 60px;
         }
 
-        /* HOW IT WORKS */
-        .info-grid {
+        .steps {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin-top: 25px;
         }
 
-        .info-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 18px;
-            padding: 28px;
+        .step {
+            padding: 25px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.07);
         }
 
-        .info-card h3 {
+        .step-number {
+            font-size: 13px;
+            color: #7188ff;
             margin-bottom: 10px;
-            font-size: 19px;
         }
 
-        .info-card p {
-            color: #9da8c0;
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
             font-size: 14px;
         }
 
-        /* SCREENSHOTS */
         .screenshots {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
             margin-top: 25px;
         }
 
-        .screenshot-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 18px;
-            padding: 20px;
-        }
-
-        .screenshot-card img {
+        .screenshot img {
             width: 100%;
-            display: block;
-            border-radius: 10px;
-            margin-bottom: 15px;
+            border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .screenshot-card p {
-            color: #9da8c0;
-            font-size: 14px;
-        }
-
-        /* NOTE */
-        .note {
-            margin-top: 30px;
-            padding: 24px;
-            border-left: 3px solid #6c63ff;
-            background: rgba(108,99,255,0.07);
-            border-radius: 0 12px 12px 0;
-        }
-
-        .note strong {
-            color: white;
-        }
-
-        .note p {
-            color: #aeb8d0;
-            font-size: 14px;
-            margin-top: 7px;
-        }
-
-        /* SOURCES */
-        .sources {
-            margin-top: 55px;
-        }
-
-        .sources a {
             display: block;
-            color: #8290ff;
-            text-decoration: none;
-            margin: 8px 0;
-            font-size: 14px;
         }
 
-        .sources a:hover {
-            color: white;
+        .caption {
+            margin-top: 10px;
+            color: #8f9bb2;
+            font-size: 13px;
         }
 
-        /* FOOTER */
+        .note {
+            margin-top: 25px;
+            padding: 20px;
+            border-left: 3px solid #7188ff;
+            background: rgba(113,136,255,0.06);
+            color: #b9c3d7;
+            border-radius: 8px;
+        }
+
+        .source {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #8995aa;
+        }
+
+        .source a {
+            color: #8da3ff;
+        }
+
         footer {
             border-top: 1px solid rgba(255,255,255,0.08);
             text-align: center;
             padding: 30px 20px;
-            color: #68738b;
+            color: #707b91;
             font-size: 13px;
         }
 
-        /* MOBILE */
         @media (max-width: 800px) {
-
             nav {
                 flex-direction: column;
-                gap: 15px;
             }
 
             nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
                 gap: 12px;
             }
 
-            .hero {
-                padding-top: 70px;
-            }
-
-            .info-grid,
+            .steps,
             .screenshots {
                 grid-template-columns: 1fr;
+            }
+
+            main {
+                padding-top: 60px;
             }
         }
     </style>
@@ -277,288 +247,226 @@
 
 <body>
 
-<!-- HEADER -->
-
 <header>
-
     <nav>
-
-        <div class="logo">
-            When <span>Encryption</span> Fails
-        </div>
+        <div class="logo">When <span>Encryption</span> Fails</div>
 
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="concept.html">Concept</a></li>
-            <li><a href="risk.html">Risk</a></li>
             <li><a href="cases.html">Cases</a></li>
             <li><a href="prevention.html">Prevention</a></li>
             <li><a href="demo.html">Demo</a></li>
+            <li><a href="evidence.html">Evidence</a></li>
+            <li><a href="conclusion.html">Conclusion</a></li>
             <li><a href="references.html">References</a></li>
             <li><a href="about.html">About</a></li>
         </ul>
-
     </nav>
-
 </header>
 
+<main>
 
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="number">
-        04 / PRACTICAL DEMO
-    </div>
+    <div class="label">04 / Practical Demo</div>
 
     <h1>SHA-256 Test</h1>
 
     <p class="intro">
-        A simple practical test showing how a small change
-        in data can completely change its hash.
-    </p>
-
-</section>
-
-
-<main class="container">
-
-
-    <!-- INTERACTIVE DEMO -->
-
-    <h2 class="section-title">
-        Try it yourself
-    </h2>
-
-    <div class="demo-box">
-
-        <label for="inputText">
-            Enter some text
-        </label>
-
-        <input
-            type="text"
-            id="inputText"
-            placeholder="Type something here..."
-        >
-
-        <div class="hash" id="hashOutput">
-            Type something above...
-        </div>
-
-    </div>
-
-
-    <!-- EXPLANATION -->
-
-    <h2 class="section-title">
-        How does this work?
-    </h2>
-
-    <div class="info-grid">
-
-        <div class="info-card">
-
-            <h3>
-                01 — Input
-            </h3>
-
-            <p>
-                A piece of text is entered into the SHA-256
-                function.
-            </p>
-
-        </div>
-
-
-        <div class="info-card">
-
-            <h3>
-                02 — Hashing
-            </h3>
-
-            <p>
-                SHA-256 processes the input and creates a
-                fixed-length hash value.
-            </p>
-
-        </div>
-
-
-        <div class="info-card">
-
-            <h3>
-                03 — Result
-            </h3>
-
-            <p>
-                If the input changes, the resulting hash
-                also changes completely.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- MY TEST -->
-
-    <h2 class="section-title">
-        My Practical Test
-    </h2>
-
-    <p class="intro">
-        I used PowerShell to test SHA-256 with two almost
-        identical inputs. The only difference was one letter.
+        A simple practical test showing how a small change in data
+        can completely change its hash.
     </p>
 
 
-    <div class="screenshots">
+    <section class="card">
 
-
-        <div class="screenshot-card">
-
-            <img
-                src="sha256-first-test.png"
-                alt="First SHA-256 test in PowerShell"
-            >
-
-            <p>
-                <strong>Test 1:</strong>
-                I entered "Hello World" and generated its
-                SHA-256 hash.
-            </p>
-
-        </div>
-
-
-        <div class="screenshot-card">
-
-            <img
-                src="sha256-comparison.png"
-                alt="Comparison of two SHA-256 hashes"
-            >
-
-            <p>
-                <strong>Test 2:</strong>
-                I changed "World" to "world".
-                The resulting hash was completely different.
-            </p>
-
-        </div>
-
-
-    </div>
-
-
-    <!-- WHAT I LEARNED -->
-
-    <div class="note">
-
-        <strong>
-            What I noticed
-        </strong>
+        <h2>Try It Yourself</h2>
 
         <p>
-            Only one character was changed, but the whole
-            SHA-256 hash changed. This shows how sensitive
-            cryptographic hash functions are to changes in data.
+            Type something below. The page will calculate its SHA-256
+            hash using the browser's built-in cryptographic function.
         </p>
 
-    </div>
+        <div class="hash-box">
 
+            <input
+                type="text"
+                id="inputText"
+                placeholder="Type something here..."
+            >
 
-    <!-- WHY IT MATTERS -->
+            <div class="hash-output" id="hashOutput">
+                Type something above...
+            </div>
 
-    <h2 class="section-title">
-        Why is this useful?
-    </h2>
-
-    <div class="info-card">
-
-        <p>
-            Hashes can be used to check whether data has been
-            changed. They are commonly used for things such as
-            file integrity checks and password storage systems.
-        </p>
-
-    </div>
-
-
-    <!-- SOURCE -->
-
-    <section class="sources">
-
-        <h2 class="section-title">
-            Source
-        </h2>
-
-        <a
-            href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest"
-            target="_blank"
-        >
-            → MDN Web Docs — SubtleCrypto.digest()
-        </a>
+        </div>
 
     </section>
 
 
+    <section class="card">
+
+        <h2>How Does This Work?</h2>
+
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-number">01</div>
+                <h3>Input</h3>
+                <p>
+                    The user enters text into the input box.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">02</div>
+                <h3>Hashing</h3>
+                <p>
+                    SHA-256 processes the text and produces a fixed-length hash.
+                </p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">03</div>
+                <h3>Result</h3>
+                <p>
+                    Even a small change in the input produces a different hash.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>My Practical Test</h2>
+
+        <p>
+            I tested SHA-256 using PowerShell. First, I created a text file
+            containing "Hello World". I then changed the text to
+            "Hello world" and calculated the hash again.
+        </p>
+
+        <div class="screenshots">
+
+            <div class="screenshot">
+
+                <img
+                    src="sha256-first-test.png"
+                    alt="First SHA-256 test using Hello World"
+                >
+
+                <p class="caption">
+                    Test 1 — SHA-256 hash of "Hello World"
+                </p>
+
+            </div>
+
+            <div class="screenshot">
+
+                <img
+                    src="sha256-comparison.png"
+                    alt="Comparison of SHA-256 hashes"
+                >
+
+                <p class="caption">
+                    Test 2 — Comparing the hashes after changing one character
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="note">
+            Only one character was changed, but the whole SHA-256 hash changed.
+            This shows how sensitive cryptographic hash functions are to changes
+            in data.
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Why Is This Useful?</h2>
+
+        <p>
+            Hash functions can be used to detect changes in data.
+            They are commonly used for file integrity checks and are also
+            part of systems that securely store passwords.
+        </p>
+
+        <p class="source">
+            Source:
+            <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest"
+                target="_blank"
+            >
+                MDN Web Docs — SubtleCrypto.digest()
+            </a>
+        </p>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>AI Usage Declaration</h2>
+
+        <p>
+            AI tools were used during the development of this project to help
+            with brainstorming, explaining technical concepts, improving some
+            wording, and assisting with HTML, CSS and JavaScript code.
+            The final content was reviewed, edited and tested by the student.
+        </p>
+
+    </section>
+
 </main>
 
 
-<!-- FOOTER -->
-
 <footer>
-
-    When Encryption Fails · Information Systems & Cybersecurity
-
+    When Encryption Fails · Information Systems &amp; Cybersecurity
 </footer>
 
 
-<!-- JAVASCRIPT -->
-
 <script>
 
-    const input = document.getElementById("inputText");
-    const output = document.getElementById("hashOutput");
+const input = document.getElementById("inputText");
+const output = document.getElementById("hashOutput");
 
-    async function createHash(text) {
+async function createHash(text) {
 
-        const encoder = new TextEncoder();
+    const encoder = new TextEncoder();
+    const data = encoder.encode(text);
 
-        const data = encoder.encode(text);
+    const hashBuffer = await crypto.subtle.digest(
+        "SHA-256",
+        data
+    );
 
-        const hashBuffer =
-            await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(
+        new Uint8Array(hashBuffer)
+    );
 
-        const hashArray =
-            Array.from(new Uint8Array(hashBuffer));
+    return hashArray
+        .map(byte => byte.toString(16).padStart(2, "0"))
+        .join("");
+}
 
-        return hashArray
-            .map(byte =>
-                byte.toString(16).padStart(2, "0")
-            )
-            .join("");
+input.addEventListener("input", async function () {
+
+    if (input.value === "") {
+        output.textContent = "Type something above...";
+        return;
     }
 
+    output.textContent = await createHash(input.value);
 
-    input.addEventListener("input", async function () {
-
-        if (input.value === "") {
-
-            output.textContent =
-                "Type something above...";
-
-            return;
-        }
-
-        output.textContent =
-            await createHash(input.value);
-
-    });
+});
 
 </script>
-
 
 </body>
 </html>
