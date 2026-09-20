@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>References | When Encryption Fails</title>
 
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -20,500 +17,404 @@
             font-family: Arial, Helvetica, sans-serif;
             background: #070b14;
             color: #e8edf7;
-            line-height: 1.7;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            width: 500px;
-            height: 500px;
-            background: #2563eb;
-            filter: blur(180px);
-            opacity: 0.12;
-            top: -150px;
-            left: -150px;
-            z-index: -1;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            width: 450px;
-            height: 450px;
-            background: #9333ea;
-            filter: blur(180px);
-            opacity: 0.10;
-            bottom: -150px;
-            right: -150px;
-            z-index: -1;
+            line-height: 1.6;
         }
 
         header {
             position: sticky;
             top: 0;
-            z-index: 1000;
-
-            background: rgba(7,11,20,0.82);
-
-            backdrop-filter: blur(15px);
-
-            border-bottom:
-                1px solid rgba(255,255,255,0.08);
+            z-index: 100;
+            background: rgba(7, 11, 20, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .header {
-            max-width: 1150px;
+        nav {
+            max-width: 1200px;
             margin: auto;
-
             padding: 18px 25px;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            gap: 30px;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 38px;
-            height: 38px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 10px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #2563eb,
-                    #9333ea
-                );
+            gap: 25px;
         }
 
         .logo {
             font-size: 18px;
             font-weight: bold;
+            color: white;
+            white-space: nowrap;
         }
 
-        .tagline {
-            font-size: 11px;
-            color: #7f8ba3;
+        .logo span {
+            color: #6c8cff;
         }
 
-        nav {
+        nav ul {
+            list-style: none;
             display: flex;
-            gap: 22px;
             flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
         }
 
         nav a {
-            color: #aeb8ca;
+            color: #aeb8cc;
             text-decoration: none;
-            font-size: 13px;
-        }
-
-        nav a:hover {
-            color: #60a5fa;
-        }
-
-        main {
-            max-width: 850px;
-            margin: auto;
-
-            padding: 75px 25px 100px;
-        }
-
-        .category {
-            color: #60a5fa;
-
-            font-size: 11px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 2px;
-
-            font-weight: bold;
-        }
-
-        h1 {
-            font-size: 52px;
-
-            margin:
-                12px 0 20px;
-        }
-
-        .subtitle {
-            color: #8f9bb0;
-
-            font-size: 16px;
-
-            max-width: 650px;
-
-            margin-bottom: 45px;
-        }
-
-        .references {
-            display: grid;
-
-            gap: 15px;
-        }
-
-        .reference {
-            padding: 22px;
-
-            border-radius: 13px;
-
-            background:
-                rgba(255,255,255,0.035);
-
-            border:
-                1px solid rgba(255,255,255,0.08);
-
+            font-size: 14px;
             transition: 0.3s;
         }
 
-        .reference:hover {
-            transform: translateY(-3px);
-
-            border-color:
-                rgba(96,165,250,0.35);
+        nav a:hover {
+            color: white;
         }
 
-        .number {
-            color: #60a5fa;
+        main {
+            max-width: 1050px;
+            margin: auto;
+            padding: 90px 25px;
+        }
 
-            font-family: monospace;
+        .label {
+            color: #7d91ff;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
 
-            font-size: 12px;
+        h1 {
+            font-size: clamp(42px, 7vw, 76px);
+            line-height: 1;
+            margin-bottom: 25px;
+            background: linear-gradient(90deg, #ffffff, #8da3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-            margin-bottom: 8px;
+        .intro {
+            max-width: 720px;
+            color: #aeb8cc;
+            font-size: 18px;
+            margin-bottom: 55px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.035);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.2);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .reference {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .reference:last-child {
+            border-bottom: none;
         }
 
         .reference h3 {
             color: white;
-
+            margin-bottom: 7px;
             font-size: 17px;
-
-            margin-bottom: 5px;
         }
 
         .reference p {
-            color: #8f9bb0;
-
-            font-size: 13px;
-
-            margin-bottom: 8px;
-        }
-
-        .reference a {
-            color: #60a5fa;
-
-            font-size: 13px;
-
-            text-decoration: none;
-        }
-
-        .note {
-            margin-top: 35px;
-
-            padding: 18px 20px;
-
-            border-left: 3px solid #3b82f6;
-
-            background:
-                rgba(37,99,235,0.07);
-
-            border-radius: 8px;
-
-            color: #9eabc0;
-
+            color: #aeb8cc;
             font-size: 14px;
         }
 
+        .reference a {
+            color: #8da3ff;
+            text-decoration: none;
+            word-break: break-word;
+        }
+
+        .reference a:hover {
+            text-decoration: underline;
+        }
+
+        .ai-box {
+            margin-top: 20px;
+            padding: 22px;
+            border-left: 3px solid #7188ff;
+            background: rgba(113,136,255,0.06);
+            border-radius: 8px;
+        }
+
+        .ai-box p {
+            color: #b9c3d7;
+            font-size: 14px;
+        }
+
+        .note {
+            color: #8995aa;
+            font-size: 13px;
+            margin-top: 18px;
+        }
+
         footer {
-            border-top:
-                1px solid rgba(255,255,255,0.08);
-
+            border-top: 1px solid rgba(255,255,255,0.08);
             text-align: center;
-
-            padding: 35px;
-
-            color: #657188;
-
-            font-size: 12px;
+            padding: 30px 20px;
+            color: #707b91;
+            font-size: 13px;
         }
 
         @media (max-width: 800px) {
 
-            .header {
-                display: block;
-            }
-
             nav {
-                margin-top: 18px;
-
-                gap: 13px;
+                flex-direction: column;
             }
 
-            h1 {
-                font-size: 43px;
+            nav ul {
+                gap: 12px;
             }
 
+            main {
+                padding-top: 60px;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
 <header>
 
-    <div class="header">
+    <nav>
 
-        <div class="logo-area">
-
-            <div class="logo-icon">
-                🔐
-            </div>
-
-            <div>
-
-                <div class="logo">
-                    When Encryption Fails
-                </div>
-
-                <div class="tagline">
-                    A student blog about cryptographic failures
-                </div>
-
-            </div>
-
+        <div class="logo">
+            When <span>Encryption</span> Fails
         </div>
 
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="concept.html">Concept</a></li>
+            <li><a href="cases.html">Cases</a></li>
+            <li><a href="prevention.html">Prevention</a></li>
+            <li><a href="demo.html">Demo</a></li>
+            <li><a href="evidence.html">Evidence</a></li>
+            <li><a href="conclusion.html">Conclusion</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
 
-        <nav>
-
-            <a href="index.html">Introduction</a>
-            <a href="concept.html">Concept</a>
-            <a href="risk.html">Risk</a>
-            <a href="cases.html">Cases</a>
-            <a href="prevention.html">Prevention</a>
-            <a href="demo.html">Demo</a>
-            <a href="references.html">References</a>
-            <a href="about.html">About</a>
-
-        </nav>
-
-    </div>
+    </nav>
 
 </header>
 
 
 <main>
 
+    <div class="label">07 / Sources</div>
 
-    <div class="category">
-        06 / Sources
-    </div>
+    <h1>References</h1>
 
-
-    <h1>
-        References
-    </h1>
-
-
-    <p class="subtitle">
-
-        The main sources used while researching
-        cryptographic failures and cybersecurity.
-
+    <p class="intro">
+        The following sources were used to research the technical concepts,
+        real-world examples and practical demonstration used in this project.
     </p>
 
 
-    <div class="references">
+    <section class="card">
+
+        <h2>Technical &amp; Security Sources</h2>
 
 
         <div class="reference">
 
-            <div class="number">
-                REF 01
-            </div>
-
-            <h3>
-                OWASP — Cryptographic Failures
-            </h3>
+            <h3>1. OWASP — Cryptographic Failures</h3>
 
             <p>
-                OWASP Top 10:2025, A04.
+                OWASP Top 10 information about cryptographic failures,
+                including common problems with sensitive data protection.
             </p>
 
-            <a href="https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/"
-               target="_blank">
-
-                Open source →
-
-            </a>
+            <p>
+                <a
+                    href="https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/"
+                    target="_blank"
+                >
+                    https://top10.owasp.org/2025/A04_2025-Cryptographic_Failures/
+                </a>
+            </p>
 
         </div>
 
 
         <div class="reference">
 
-            <div class="number">
-                REF 02
-            </div>
-
-            <h3>
-                OWASP Top 10
-            </h3>
+            <h3>2. NIST — Computer Security Resource Center</h3>
 
             <p>
-                Overview of the major web application
-                security risks.
+                NIST resources and publications covering cryptography,
+                cybersecurity standards and security practices.
             </p>
 
-            <a href="https://top10.owasp.org/2025/"
-               target="_blank">
-
-                Open source →
-
-            </a>
+            <p>
+                <a
+                    href="https://csrc.nist.gov/"
+                    target="_blank"
+                >
+                    https://csrc.nist.gov/
+                </a>
+            </p>
 
         </div>
 
 
         <div class="reference">
 
-            <div class="number">
-                REF 03
-            </div>
-
-            <h3>
-                NIST Cybersecurity Resources
-            </h3>
+            <h3>3. Heartbleed</h3>
 
             <p>
-                Technical guidance and cybersecurity
-                standards.
+                Information about the Heartbleed vulnerability in OpenSSL
+                and its technical impact.
             </p>
 
-            <a href="https://csrc.nist.gov/"
-               target="_blank">
-
-                Open source →
-
-            </a>
+            <p>
+                <a
+                    href="https://heartbleed.com/"
+                    target="_blank"
+                >
+                    https://heartbleed.com/
+                </a>
+            </p>
 
         </div>
 
 
         <div class="reference">
 
-            <div class="number">
-                REF 04
-            </div>
-
-            <h3>
-                Heartbleed
-            </h3>
+            <h3>4. Debian Wiki — SSL Keys</h3>
 
             <p>
-                Information about the OpenSSL Heartbleed
-                vulnerability.
+                Documentation about the Debian OpenSSL random number
+                generation issue and affected cryptographic keys.
             </p>
 
-            <a href="https://heartbleed.com/"
-               target="_blank">
-
-                Open source →
-
-            </a>
+            <p>
+                <a
+                    href="https://wiki.debian.org/SSLkeys"
+                    target="_blank"
+                >
+                    https://wiki.debian.org/SSLkeys
+                </a>
+            </p>
 
         </div>
 
 
         <div class="reference">
 
-            <div class="number">
-                REF 05
-            </div>
-
-            <h3>
-                Federal Trade Commission — Equifax
-            </h3>
+            <h3>5. MDN Web Docs — SubtleCrypto.digest()</h3>
 
             <p>
-                Official information about the Equifax
-                security incident.
+                Technical documentation used for the JavaScript SHA-256
+                demonstration on the Demo page.
             </p>
 
-            <a href="https://www.ftc.gov/legal-library/browse/cases-proceedings/172-3057-equifax-inc"
-               target="_blank">
-
-                Open source →
-
-            </a>
+            <p>
+                <a
+                    href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest"
+                    target="_blank"
+                >
+                    https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest
+                </a>
+            </p>
 
         </div>
 
+    </section>
+
+
+    <section class="card">
+
+        <h2>Practical Demonstration</h2>
 
         <div class="reference">
 
-            <div class="number">
-                REF 06
-            </div>
-
-            <h3>
-                MDN Web Docs
-            </h3>
+            <h3>PowerShell SHA-256 Test</h3>
 
             <p>
-                Documentation used for the browser-based
-                hashing demonstration.
+                A local PowerShell test was performed as part of this project.
+                The text "Hello World" was hashed using SHA-256 and then
+                compared with the result after changing one character.
             </p>
-
-            <a href="https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/digest"
-               target="_blank">
-
-                Open source →
-
-            </a>
 
         </div>
 
+        <p class="note">
+            The screenshots from this test are included on the Demo page.
+        </p>
 
-    </div>
+    </section>
 
 
-    <div class="note">
+    <section class="card">
 
-        These sources were used for the background
-        information and demonstration included in this blog.
+        <h2>AI Usage Declaration</h2>
 
-    </div>
+        <div class="ai-box">
 
+            <p>
+                AI tools were used during the development of this project
+                as an assistance tool. AI was used for brainstorming,
+                explaining cybersecurity and cryptography concepts,
+                improving some wording, and assisting with HTML, CSS
+                and JavaScript code.
+            </p>
+
+            <br>
+
+            <p>
+                The student reviewed, edited and tested the final website
+                and its practical demonstration. AI-generated suggestions
+                were not treated as a replacement for external sources.
+                Technical information was checked against the sources
+                listed on this page where appropriate.
+            </p>
+
+            <br>
+
+            <p>
+                The final project content, structure, practical testing
+                and presentation were reviewed by the student.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="card">
+
+        <h2>Source Note</h2>
+
+        <p>
+            The references above were used to support the information
+            presented throughout the website. Links are provided so that
+            readers can access the original material.
+        </p>
+
+    </section>
 
 </main>
 
 
 <footer>
-
-    When Encryption Fails · Information Systems & Cybersecurity
-
+    When Encryption Fails · Information Systems &amp; Cybersecurity
 </footer>
-
 
 </body>
 </html>
